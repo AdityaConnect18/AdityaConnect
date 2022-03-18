@@ -1,0 +1,45 @@
+
+.Addtaskbtn{
+    background-color: #5065F6;
+    height: 44px;
+    width: 120px;
+    border-radius: 15px;
+    border: 1px solid #707070;
+    font-size: 20px;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.Mb30{
+    margin-bottom: 25px;
+}
+
+
+.Subtitle1{
+    display: inline-block;
+    font-weight: bolder;
+    margin: 20px 0px;
+}
+
+.Link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Items{
+    width: 95%;
+}
+
+.List{
+    margin-bottom: 20px;
+    box-shadow: -1px 1px 3px #EEEEEE;
+    border-radius: 10px;
+}
+
+.Entertask{
+    outline: none;
+    border: none;
+    font-weight: bold;
+    color: #000;
+}

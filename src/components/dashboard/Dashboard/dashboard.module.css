@@ -1,0 +1,67 @@
+.Dashboard{
+  padding-left: 50px;
+}
+.Cards{
+  padding:1px 10px;
+  display: flex;
+}
+
+.Heading{
+  font-style: 'Roboto', sans-serif;
+  margin-top: 70px;
+  font-size: 28px;
+  font-weight: 400;
+}
+
+  .Box{
+    margin: 30px 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.20);
+    display: flex;
+    width: 250px;
+    height: 100px;
+  }
+
+  .Icon{
+    flex: 30%;
+    padding-top: 35px;
+    padding-left: 25px;
+    color: white;
+    font-size: 30px;
+  }
+
+  .Content{
+    flex: 70%;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-family: "Times New Roman", Times, serif;
+  }
+
+.Box1,.Box2,.Box3,.Box4{
+      width: 100px;
+}
+
+.Box1{    
+background-color: #ff3300;
+  }
+
+  .Box2{
+    background-color: lightgreen;
+  }
+
+  .Box3{
+    background-color: #ff9900;
+  }
+
+  .Box4{
+    background-color: #66ffff;
+  }
+
+  .Leftbox {
+    float:left; 
+    width:30%;
+}
+.Rightbox{
+    float:right;
+    width: 70%;
+}

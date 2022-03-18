@@ -1,0 +1,50 @@
+.MainContainer{
+    padding-left: 50px;
+  }
+  
+  .Heading{
+      font-style: 'Roboto', sans-serif;
+      margin-top: 70px;
+      font-size: 28px;
+      font-weight: 400;
+    }
+
+.FlexBox{
+    display: flex;
+    height: 30px;
+    background-color: aqua;
+}
+
+
+.table {
+    font-style: 'Roboto', sans-serif;
+    border-collapse: collapse;
+    width: 90%;
+    background-color: white;
+    margin-top: 20px;
+    margin-bottom: 25px;
+  }
+  
+.table td, .table th {
+    border-top: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  
+.table tr:hover {background-color: #ddd;}
+  
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #FD752C;
+    color: white;
+  }
+
+.table caption{
+    background-color: white;
+    padding: 8px;
+    margin-bottom: 2px;
+}
+
+  

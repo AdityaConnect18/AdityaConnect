@@ -1,10 +1,13 @@
 import React from 'react';
 import './App.css';
-import SignInOutContainer from './containers';
+import Admin from './components/Admin'
+
+
+
 function App() {
   return (
     <div className="App">
-     <SignInOutContainer/>
+      <Admin/>
     </div>
   );
 }
