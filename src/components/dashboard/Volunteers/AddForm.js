@@ -1,9 +1,28 @@
 import React from 'react';
 import classes from './AddForm.module.css';
+import { NavLink } from 'react-router-dom';
 
 
 const AddForm = (props) => {
     return( 
+        <div className={classes.MainContainer}>
+            <div className={classes.Heading}>Volunteers</div>
+
+            <div className={classes.Buttons}>         
+                <NavLink 
+                exact
+                to="/volunteers"
+                className={classes.Button}>
+                <span>Volunteers</span>
+                </NavLink>
+                <NavLink 
+                exact
+                to="/volunteers/add"
+                className={classes.Button}>
+                <span>Add Volunteers</span>
+                </NavLink>
+            </div>
+
         <div className={classes.FormContainer}>
             <form >
 
@@ -57,6 +76,7 @@ const AddForm = (props) => {
                 <input type="submit" value="Submit"/>
             </form>
             </div>
+    </div>
     );
 }
 

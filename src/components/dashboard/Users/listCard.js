@@ -5,10 +5,10 @@ import classes from './listCard.module.css';
 const ListCard = (props) => {
     return(
             <div className={classes.Listbox}>
-                <p className={classes.Title}>Akhil Grandhi</p>
+                <p className={classes.Title}>{props.name}</p>
                 <div className={classes.Belowcontent}>
-                <p className={classes.College}>Aditya Engineering College</p>
-                <p className={classes.Date}>21-02-2022 07:09 PM</p>
+                <p className={classes.College}>{props.college}</p>
+                <p className={classes.Date}>{props.date}</p>
                 </div>
             </div>
     );

@@ -1,7 +1,7 @@
 .Listbox{
     font-family: 'Roboto', sans-serif;
-    width: 300px;
-    height: 45px;
+    width: 350px;
+    height: 40px;
     background-color: white;
     padding: 15px;
     border: 0.5px solid rgb(175, 158, 158);
@@ -13,26 +13,26 @@
 }
 
 .Title{
-    font-size: 16px;
-    font-weight: 400;
+    font-size: 14px;
+    font-weight: 500;
     text-transform: uppercase;
     margin: 0px 0px 0px 5px;
 }
 
-.Belowcontent{
-    display: flex;
-    flex-direction: row;
-}
+
 
 .College{
+    display: inline-block;
     font-size: 12px;
     margin-left: 5px;
+    margin-top: 2px;
+    padding-top: 5px;
 }
 
 .Date{
+    display: inline-block;
     font-size: 10px;
-    margin-left: 55px;
-    padding-top: 2px;
+    float: right;
 }
 
 

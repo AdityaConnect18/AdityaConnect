@@ -1,3 +1,20 @@
+.View{
+  background-color: #f5f5f5;
+  padding: 8px 45px 8px 0px;
+  text-align: right;
+  margin-top: 1px;
+}
+
+.ViewConent{
+  text-decoration: none;
+  color: #5e5e5e;
+}
+
+.ViewConent:hover{
+  text-decoration: none;
+  color: black;
+}
+
 .Dashboard{
   padding-left: 50px;
 }
@@ -57,11 +74,115 @@ background-color: #ff3300;
     background-color: #66ffff;
   }
 
-  .Leftbox {
-    float:left; 
-    width:30%;
+  .TwoBoxes{
+    width: 100%;
+    display: flex;
+  }
+
+  .LeftBox{
+     width: 60%;
+     margin-right: 60px;
+
+  }
+
+  .RightBox{
+      width: 25%;
+  }
+
+
+  
+
+.table1 {
+  font-style: 'Roboto', sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  background-color: white;
+  margin-top: 20px;
 }
-.Rightbox{
-    float:right;
-    width: 70%;
+
+.table1 td, .table1 th {
+  border-top: 1px solid #ddd;
+  padding: 8px;
 }
+
+
+.table1 tr:hover {background-color: #ddd;}
+
+.table1 th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #FD752C;
+  color: white;
+}
+
+.table1 caption{
+  background-color: white;
+  padding: 8px;
+  margin-bottom: 2px;
+}
+
+.scroll{
+  overflow: scroll;
+}
+
+.table2 {
+  font-style: 'Roboto', sans-serif;
+  border-collapse: collapse;
+  background-color: white;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.table2 td, .table2 th {
+  border-top: 1px solid #ddd;
+  padding: 8px;
+}
+
+
+.table2 tr:hover {background-color: #ddd;}
+
+.table2 th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #FD752C;
+  color: white;
+}
+
+.table2 caption{
+  background-color: white;
+  padding: 8px;
+  margin-bottom: 2px;
+}
+
+.table2 {
+  font-style: 'Roboto', sans-serif;
+  border-collapse: collapse;
+  background-color: white;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.table2 td, .table2 th {
+  border-top: 1px solid #ddd;
+  padding: 8px;
+}
+
+
+.table2 tr:hover {background-color: #ddd;}
+
+.table2 th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #FD752C;
+  color: white;
+}
+
+.table2 caption{
+  background-color: white;
+  padding: 8px;
+  margin-bottom: 2px;
+}
+

@@ -40,7 +40,7 @@ input[type=text], select, input[type=file],textarea{
     background-color: white;
     padding: 20px;
     width: 1000px;
-    margin-left: 20px;
+    margin: 40px 70px 40px 70px;
   }
 
   .Filter{
@@ -51,7 +51,7 @@ input[type=text], select, input[type=file],textarea{
   }
 
   .Buttons{
-    margin: 10px;
+    margin: 20px 0px 15px -5px;
   }
 
   .Button {
@@ -61,7 +61,7 @@ input[type=text], select, input[type=file],textarea{
     color: #FFFFFF;
     text-align: center;
     font-size: 12px;
-    padding: 5px;
+    padding: 8px;
     width: 120px;
     transition: all 0.5s;
     cursor: pointer;
@@ -94,6 +94,24 @@ input[type=text], select, input[type=file],textarea{
   .Button:hover span:after {
     opacity: 1;
     right: 0;
+  }
+
+  .Main{
+    display: flex;
+    width: 100%;
+
+  }
+
+  .LeftBox{
+    width: 50%;
+  }
+
+  .RightBox{
+    width: 50%;
+  }
+
+  .Element{
+    display: block;
   }
 
   

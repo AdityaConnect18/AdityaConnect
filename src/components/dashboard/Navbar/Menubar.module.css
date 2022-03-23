@@ -14,7 +14,7 @@
 }
 
 
-.Menubtns a{
+.SideStyle{
     padding: 5px;
     font-size: 15px;
     width: 100%;
@@ -22,6 +22,8 @@
     margin: 10px 0px;
     border: none;
     outline: none;
+    text-decoration: none;
+    color: #5e5e5e;
 }
 
 
@@ -37,7 +39,7 @@
     width: 100%;
 }
 
-.Sidetabs:hover{
+.SideStyle:hover{
     background-color: rgb(194, 189, 189);
     color: #fff;
 }

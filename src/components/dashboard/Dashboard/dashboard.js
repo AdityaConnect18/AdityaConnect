@@ -6,10 +6,46 @@ import {FaNewspaper} from 'react-icons/fa';
 import {AiFillMessage} from 'react-icons/ai';
 import {RiNotificationFill} from 'react-icons/ri';
 import VoluTable from './voluTable';
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+
 
 
 
 const DashBoard = () => {
+    
+    const [users, setUsers] = useState([
+        {
+          name: "Akhil",
+          idcard: "18A91A1222",
+          branch: "Information Technology",
+          college: "Aditya Engineering College",
+          course: "Engineering",
+          email: "18a91a1222@aec.edu.in",
+          number: "9876543210",
+          date: "21-02-2022 07:09 PM",
+        },
+        {
+          name: "Sai",
+          idcard: "18A91A1223",
+          branch: "Information Technology",
+          college: "Aditya College of Engineering",
+          course: "Engineering",
+          email: "18a91a1222@aec.edu.in",
+          number: "9876543210",
+          date: "21-02-2022 07:09 PM",
+        },
+        {
+          name: "Manoj",
+          idcard: "18A91A1224",
+          branch: "Computer Science",
+          college: "Aditya College of Engineering & Technology",
+          course: "Engineering",
+          email: "18a91a1222@aec.edu.in",
+          number: "9876543210",
+          date: "21-02-2022 07:09 PM",
+        },
+      ]);
     
 
     return(
@@ -55,9 +91,48 @@ const DashBoard = () => {
                 </div>
             </div>
             </div>
-            <div>  
-                <UsersTable/>
-                <VoluTable/>
+            <div className={classes.TwoBoxes}>
+                <div className={classes.LeftBox}>
+                <div> 
+                    <table className={classes.table1}>
+                    <caption>Recent Users</caption>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>College</th>
+                        <th>Date</th>
+                    </tr>                       
+                        {users.map((user,index) => (
+                            <UsersTable
+                                index={index}
+                                data={user}
+                            />
+                        ))}
+                    </table>
+                    <div className={classes.View}><NavLink className={classes.ViewConent} exact to="/users">ViewAll</NavLink></div>
+                    
+                    </div>
+                </div>  
+                <div className={classes.RightBox}>
+                <div>
+                    <table className={classes.table2}>
+                    <caption>Recent Volunteers</caption>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        
+                    </tr>
+                    
+                    {users.map((user,index) => (
+                            <VoluTable
+                                index={index}
+                                data={user}
+                            />
+                        ))}
+                        </table>
+                        <div className={classes.View}><NavLink className={classes.ViewConent} exact to="/volunteers">ViewAll</NavLink></div>
+                  </div>
+                </div>
            </div>
         </div>
     );

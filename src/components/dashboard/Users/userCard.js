@@ -16,10 +16,9 @@ import Button from 'react-bootstrap/Button';
 const UserCard = (props) => {
     return(
             <div className={classes.Userbox}>
-
                 <div className={classes.Mainbox}>
                     <CgProfile className={classes.MainIcon}/>
-                    <a className={classes.Maintitle}>Akhil Grandhi</a>
+                    <a className={classes.Maintitle}>{props.data.name}</a>
                 </div>
                 
                 <p className={classes.Sidetitle}>General Info</p>
@@ -28,22 +27,22 @@ const UserCard = (props) => {
                     <div className={classes.Menubtns}>
                         <div className={classes.Sidetabs}>
                             <FaIdBadge className={classes.Sideicons}/>
-                            <a>18A91A1222</a>
+                            <a>{props.data.idcard}</a>
                         </div>
 
                         <div className={classes.Sidetabs}>
                         <FaGraduationCap className={classes.Sideicons}/>
-                        <a>Information Technology</a>
+                        <a>{props.data.branch}</a>
                         </div>
 
                         <div className={classes.Sidetabs}>
                         <FaUniversity className={classes.Sideicons}/>
-                        <a>Aditya Engineering College</a>
+                        <a>{props.data.college}</a>
                         </div>
 
                         <div className={classes.Sidetabs}>
                         <FaFortAwesome className={classes.Sideicons}/>
-                        <a>Engineering</a>
+                        <a>{props.data.course}</a>
                         </div>
                     </div>
 
@@ -55,12 +54,12 @@ const UserCard = (props) => {
                 <div className={classes.Menubtns}>
                     <div className={classes.Sidetabs}>
                     <MdEmail className={classes.Sideicons}/>
-                    <a>18a91a1222@aec.edu.in</a>
+                    <a>{props.data.email}</a>
                     </div>
 
                     <div className={classes.Sidetabs}>
                     <MdWifiCalling3 className={classes.Sideicons}/>
-                    <a>9876543210</a>
+                    <a>{props.data.number}</a>
                     </div>
                 </div>
                 </div>

@@ -17,55 +17,55 @@ import Button from 'react-bootstrap/Button';
 
 const VUserCard = (props) => {
     return(
-            <div className={classes.Userbox}>
-
-                <div className={classes.Mainbox}>
-                    <CgProfile className={classes.MainIcon}/>
-                    <a className={classes.Maintitle}>Akhil Grandhi</a>
-                </div>
-                
-                <p className={classes.Sidetitle}>General Info</p>
-                <hr className={classes.Line} />
-                <div className={classes.General}>
-                    <div className={classes.Menubtns}>
-                        <div className={classes.Sidetabs}>
-                            <FaIdBadge className={classes.Sideicons}/>
-                            <a>18A91A1222</a>
-                        </div>
-
-                        <div className={classes.Sidetabs}>
-                        <FaGraduationCap className={classes.Sideicons}/>
-                        <a>Information Technology</a>
-                        </div>
-
-                        <div className={classes.Sidetabs}>
-                        <FaUniversity className={classes.Sideicons}/>
-                        <a>Aditya Engineering College</a>
-                        </div>
-
-                        <div className={classes.Sidetabs}>
-                        <FaFortAwesome className={classes.Sideicons}/>
-                        <a>Engineering</a>
-                        </div>
-                    </div>
-
+        <div className={classes.Userbox}>
+        <div className={classes.Mainbox}>
+            <CgProfile className={classes.MainIcon}/>
+            <a className={classes.Maintitle}>{props.data.name}</a>
+        </div>
+        
+        <p className={classes.Sidetitle}>General Info</p>
+        <hr className={classes.Line} />
+        <div className={classes.General}>
+            <div className={classes.Menubtns}>
+                <div className={classes.Sidetabs}>
+                    <FaIdBadge className={classes.Sideicons}/>
+                    <a>{props.data.idcard}</a>
                 </div>
 
-                <p className={classes.Sidetitle}>Contact Details</p>
-                <hr className={classes.Line} />
-                <div className={classes.Contact}>
-                <div className={classes.Menubtns}>
-                    <div className={classes.Sidetabs}>
-                    <MdEmail className={classes.Sideicons}/>
-                    <a>18a91a1222@aec.edu.in</a>
-                    </div>
+                <div className={classes.Sidetabs}>
+                <FaGraduationCap className={classes.Sideicons}/>
+                <a>{props.data.branch}</a>
+                </div>
 
-                    <div className={classes.Sidetabs}>
-                    <MdWifiCalling3 className={classes.Sideicons}/>
-                    <a>9876543210</a>
-                    </div>
+                <div className={classes.Sidetabs}>
+                <FaUniversity className={classes.Sideicons}/>
+                <a>{props.data.college}</a>
                 </div>
+
+                <div className={classes.Sidetabs}>
+                <FaFortAwesome className={classes.Sideicons}/>
+                <a>{props.data.course}</a>
                 </div>
+            </div>
+
+        </div>
+
+        <p className={classes.Sidetitle}>Contact Details</p>
+        <hr className={classes.Line} />
+        <div className={classes.Contact}>
+        <div className={classes.Menubtns}>
+            <div className={classes.Sidetabs}>
+            <MdEmail className={classes.Sideicons}/>
+            <a>{props.data.email}</a>
+            </div>
+
+            <div className={classes.Sidetabs}>
+            <MdWifiCalling3 className={classes.Sideicons}/>
+            <a>{props.data.number}</a>
+            </div>
+        </div>
+        </div>
+
                 <div className={classes.BelowButton}>
                     <Button className={classes.Edit}><MdModeEditOutline className={classes.Buttonicon1}/>Edit</Button>    
                     <Button className={classes.Update}><GoKey className={classes.Buttonicon2}/>Update Password</Button>

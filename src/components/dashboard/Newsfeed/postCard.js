@@ -1,10 +1,38 @@
 import React from 'react';
 import classes from './postCard.module.css'
-import Card from 'react-bootstrap/Card';
+import { NavLink } from 'react-router-dom'
 
 const PostCard = () => {
     return(
-        <div>
+        <div className={classes.NewsFeed}>
+        <div className={classes.Heading}>News Feed</div>
+        <div className={classes.Buttons}>
+        <NavLink 
+        exact
+        to="/news"
+        className={classes.Button}>
+        <span>Publish Post</span>
+        </NavLink>
+        <NavLink 
+        exact
+        to="/news/newsfeed"
+        className={classes.Button}>
+        <span>NewsFeed</span>
+        </NavLink>
+      </div>
+      <div className={classes.Filter}>
+        <form>
+          <label for="Category">Filter By</label>
+          <select name="Category">
+            <option value="campusnews">Campus News</option>
+            <option value="officecirculars">Office Circulars</option>
+            <option value="examinations">Examinations</option>
+            <option value="placements">Placements</option>
+            <option value="sports">Sports</option>
+            <option value="fests">Fests</option>
+          </select>
+        </form>
+      </div>
             <div className={classes.Allcards}>
             <div className={classes.Card}>
             <p className={classes.Title}>Examinations Schedule</p>
@@ -17,20 +45,9 @@ const PostCard = () => {
                 but also the leap into electronic typesetting, remaining essentially unchanged.</p>
                 <p className={classes.Published}>Published By: <b>Kalyan Chakravarthi</b> on 07/03/2022</p>
             </div>
-            {/* <Card className={classes.Maincard}>
-            <Card.Img variant="top" src="holder.js/100px180" />
-            <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
-                </Card.Text>
-            </Card.Body>
-            </Card> */}
-            
         </div>
         </div>
-
+    
         
     );
 }

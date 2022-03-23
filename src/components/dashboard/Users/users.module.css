@@ -16,7 +16,7 @@
 
   .Filter{
     width: 150px;
-    margin: 15px 0px 15px 20px;
+    margin: 15px 15px 10px 0px;
   }
 
   .Details{
@@ -25,14 +25,14 @@
   }
 
   .Listcards{
-    width: 348px;
-    height: 483px;
+    width: 400px;
+    height: 460px;
     overflow-y: scroll;
     overflow-x: hidden;
   }
 
   .UserCards{
-    margin-right: 60px;
+    margin-right: 50px;
   }
 
 
