@@ -8,7 +8,7 @@ import {RiNotificationFill} from 'react-icons/ri';
 import VoluTable from './voluTable';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-
+import Login from '../../LoginForm/login';  
 
 
 
@@ -134,6 +134,7 @@ const DashBoard = () => {
                   </div>
                 </div>
            </div>
+            <Login/>
         </div>
     );
 }
