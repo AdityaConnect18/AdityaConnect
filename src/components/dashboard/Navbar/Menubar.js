@@ -20,7 +20,7 @@ const Menubar = (props) => {
           <div className={classes.Sidetabs}>
             <NavLink
               exact
-              to="/"
+              to="/dashboard"
               className={classes.SideStyle}
               style={({ isActive }) => ({
                 color: isActive ? '#fff' : '#545e6f',
