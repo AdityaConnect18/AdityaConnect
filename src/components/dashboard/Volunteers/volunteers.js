@@ -4,42 +4,23 @@ import VListCard from "./vlistCard";
 import VUserCard from "./vuserCard";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { GetAdminsData } from "../../../SERVICES/service"
 
 const Volunteers = (props) => {
-  const [users, setUsers] = useState([
-    {
-      name: "Akhil",
-      idcard: "18A91A1222",
-      branch: "Information Technology",
-      college: "Aditya Engineering College",
-      course: "Engineering",
-      email: "18a91a1222@aec.edu.in",
-      number: "9876543210",
-      date: "21-02-2022 07:09 PM",
-    },
-    {
-      name: "Sai",
-      idcard: "18A91A1223",
-      branch: "Information Technology",
-      college: "Aditya College of Engineering",
-      course: "Engineering",
-      email: "18a91a1222@aec.edu.in",
-      number: "9876543210",
-      date: "21-02-2022 07:09 PM",
-    },
-    {
-      name: "Manoj",
-      idcard: "18A91A1224",
-      branch: "Computer Science",
-      college: "Aditya College of Engineering & Technology",
-      course: "Engineering",
-      email: "18a91a1222@aec.edu.in",
-      number: "9876543210",
-      date: "21-02-2022 07:09 PM",
-    },
-  ]);
+  const [admins, setadmins] = useState([{}]);
+  const [singleUser, setSingleUser] = useState([{}])
 
-  const [singleUser,setSingleUser] = useState(users[0])
+  React.useEffect(() => {
+    GetAdminsData()
+      .then((data) => {
+        console.log(data.data.data);
+        setadmins(data.data.data);
+        setSingleUser(data.data.data[0])
+      })
+      .catch((error) => console.error(error))
+  }, [])
+
+
 
   return (
     <div className={classes.MainContainer}>
@@ -100,20 +81,20 @@ const Volunteers = (props) => {
 
       <div className={classes.Details}>
         <div className={classes.UserCards}>
-          <VUserCard 
-          data={singleUser}
+          <VUserCard
+            data={singleUser}
           />
         </div>
 
         <div className={classes.Listcards}>
-          {users.map((userObj) => (
-            <div onClick={()=>setSingleUser(userObj)}>
-            <VListCard
-              id={userObj.idcard}
-              name={userObj.name}
-              college={userObj.college}
-              date={userObj.date}
-            />
+          {admins.map((userObj) => (
+            <div onClick={() => setSingleUser(userObj)}>
+              <VListCard
+                id={userObj.empId}
+                name={userObj.adminName}
+                college={userObj.college}
+                date={userObj.date}
+              />
             </div>
           ))}
         </div>

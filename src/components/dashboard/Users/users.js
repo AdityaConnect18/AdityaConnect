@@ -3,8 +3,10 @@ import classes from "./users.module.css";
 import ListCard from "./listCard";
 import UserCard from "./userCard";
 import { useState } from "react";
+import { GetUSersData } from "../../../SERVICES/service";
 
 const Users = (props) => {
+
   const [users, setUsers] = useState([
     {
       name: "Akhil",
@@ -38,9 +40,19 @@ const Users = (props) => {
     },
   ]);
 
-  const [singleUser,setSingleUser] = useState(users[0])
+  const [singleUser, setSingleUser] = useState(users[0])
 
+  React.useEffect(() => {
 
+    GetUSersData()
+      .then(data => {
+        console.log(data.data.users)
+        console.log(data.data.users[0].collegeId)
+        setUsers(data.data.users)
+        setSingleUser(data.data.users[0])
+      })
+      .catch(err => console.error(err))
+  }, [])
 
   return (
     <div className={classes.Users}>
@@ -95,21 +107,22 @@ const Users = (props) => {
             data={singleUser}
           />
         </div>
-        <div className={classes.Listcards}>
+        {users.length > 1 ? <div className={classes.Listcards}>
           {users.map((userObj) => (
-            <div onClick={()=>setSingleUser(userObj)}>
-            <ListCard
-              id={userObj.idcard}
-              name={userObj.name}
-              college={userObj.college}
-              date={userObj.date}
-            />
+            <div key={userObj._id} onClick={() => setSingleUser(userObj)}>
+              <ListCard
+                id={userObj.rollNumber}
+                name={userObj.fullName}
+                college={userObj.collegeId ? userObj.collegeId['collegeName'] : null}
+              // date={userObj.date}
+              />
             </div>
           ))}
-        </div>
-        
+        </div> : null}
+
+
       </div>
-      
+
     </div>
   );
 };

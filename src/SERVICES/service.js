@@ -10,7 +10,19 @@ export const GetCollegesData = () => {
     return API.get('/ccd/get-colleges');
 }
 
-export const GetCourses = async () => {
+export const GetCoursesData = async () => {
     return await API.get('/ccd/get-courses');
+}
+
+export const GetCategoriesData = async () => {
+    return await API.get('/ccd/get-category');
+}
+
+export const GetUSersData = async () => {
+    return await API.get('/users/get-users')
+}
+
+export const GetAdminsData = async () => {
+    return await API.get('/admin/get-admins')
 }
 
