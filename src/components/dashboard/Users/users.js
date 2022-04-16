@@ -17,9 +17,6 @@ const Users = (props) => {
   const [selectCourseValue, setSelectCourseValue] = React.useState("all");
   const [selectCollegeValue, setSelectCollegeValue] = React.useState("all");
   const [selectRoleValue, setSelectRoleValue] = React.useState("all");
-  // var selectedRoleValue;
-  // var selectCollegeValue;
-  // var selectCourseValue;
 
 
   React.useEffect(() => {
@@ -40,7 +37,7 @@ const Users = (props) => {
     } catch (error) {
       console.log(error)
     }
-  }, [])
+  }, [selectRoleValue, selectCourseValue, selectCollegeValue])
 
   const getColleges = () => {
     GetCollegesData()
@@ -58,12 +55,6 @@ const Users = (props) => {
       })
   };
 
-  const changeHandleRoleSelect = (role) => {
-    console.log(role)
-    setSelectRoleValue(role);
-    console.log(selectRoleValue)
-    filterUserDataMain();
-  }
 
   const filterUserDataMain = () => {
     console.log("role" + "==> " + selectRoleValue)
@@ -76,19 +67,31 @@ const Users = (props) => {
     setFilteredUsers(usersfiltered);
   }
 
+  const changeHandleRoleSelect = (role) => {
+    console.log(role)
+    setSelectRoleValue((selectRoleValue) => role);
+    console.log(selectRoleValue)
+    filterUserDataMain();
+  }
+
+
 
   const changeHandleCourseSelect = (course_id) => {
-
-    console.log(course_id)
-    var fc = colleges.filter(college => college.courseId._id === course_id);
-    setfilteredColleges(fc);
-    setSelectCourseValue(course_id);
+    if (course_id === 'all') {
+      setfilteredColleges(colleges)
+    }
+    else {
+      console.log(course_id)
+      var fc = colleges.filter(college => college.courseId._id === course_id);
+      setfilteredColleges(fc);
+    }
+    setSelectCourseValue((selecCourseValue) => course_id);
     filterUserDataMain();
 
   }
 
   const changeHandleCollegeSelect = (college_id) => {
-    setSelectCollegeValue(college_id);
+    setSelectCollegeValue((selectCollegeValue) => college_id);
     filterUserDataMain();
   }
 
