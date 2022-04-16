@@ -46,10 +46,25 @@ const Menubar = (props) => {
             </NavLink>
           </div>
 
-          <div className={classes.Sidetabs}>
+          {/* <div className={classes.Sidetabs}>
             <NavLink
               exact
               to="/users"
+              className={classes.SideStyle}
+              style={({ isActive }) => ({
+                color: isActive ? '#fff' : '#545e6f',
+                background: isActive ? '#FD752C' : '#fff',
+              })}
+            >
+              <FaUsers className={classes.Sideicons} />
+              Users
+            </NavLink>
+          </div> */}
+
+          <div className={classes.Sidetabs}>
+            <NavLink
+              exact
+              to="/new-users"
               className={classes.SideStyle}
               style={({ isActive }) => ({
                 color: isActive ? '#fff' : '#545e6f',

@@ -17,6 +17,7 @@ import Login from "../components/LoginForm/login"
 import Navbar from "../components/dashboard/Navbar/Navbar";
 import Menubar from "../components/dashboard/Navbar/Menubar";
 import classes from '../App.module.css';
+import NewUser from '../components/dashboard/Users/Newuser'
 
 const MainRoute = (props) => {
   // const AuthContext = useContext(authContext);
@@ -51,6 +52,7 @@ const MainRoute = (props) => {
           <Route path='/news' element={<NewsFeed />}></Route>
           <Route path='/news/newsfeed' element={<PostCard />}></Route>
           <Route path='/users' element={<Users />}></Route>
+          <Route path='/new-users' element={<NewUser />}></Route>
           <Route path='/volunteers' element={<Volunteers />}></Route>
           <Route path='/volunteers/add' element={<AddForm />}></Route>
           <Route path='/courses' element={<Courses />}></Route>

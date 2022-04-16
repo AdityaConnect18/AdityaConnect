@@ -32,20 +32,20 @@ const VUserCard = (props) => {
                         <a>{props.data.empId}</a>
                     </div>
 
-                    <div className={classes.Sidetabs}>
+                    {props.data.DeptId ? <div className={classes.Sidetabs}>
                         <FaGraduationCap className={classes.Sideicons} />
-                        <a>{props.data.branch}</a>
-                    </div>
+                        <a>{props.data.DeptId.deptName}</a>
+                    </div> : null}
 
-                    <div className={classes.Sidetabs}>
+                    {props.data.collegeId ? <div className={classes.Sidetabs}>
                         <FaUniversity className={classes.Sideicons} />
-                        <a>{props.data.college}</a>
-                    </div>
+                        <a>{props.data.collegeId.collegeName}</a>
+                    </div> : null}
 
-                    <div className={classes.Sidetabs}>
+                    {props.data.courseId ? <div className={classes.Sidetabs}>
                         <FaFortAwesome className={classes.Sideicons} />
-                        <a>{props.data.course}</a>
-                    </div>
+                        <a>{props.data.courseId.courseName}</a>
+                    </div> : null}
                 </div>
 
             </div>
@@ -61,7 +61,7 @@ const VUserCard = (props) => {
 
                     <div className={classes.Sidetabs}>
                         <MdWifiCalling3 className={classes.Sideicons} />
-                        <a>{props.data.number}</a>
+                        <a>{props.data.mobileNumber}</a>
                     </div>
                 </div>
             </div>

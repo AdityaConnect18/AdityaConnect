@@ -26,3 +26,7 @@ export const GetAdminsData = async () => {
     return await API.get('/admin/get-admins')
 }
 
+export const InsertAdminData = async (admin) => {
+    return await API.post('/admin/addAdmin', admin)
+}
+
