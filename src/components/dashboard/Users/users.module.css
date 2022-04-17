@@ -1,0 +1,42 @@
+.Users{
+  padding-left: 50px;
+}
+
+.Heading{
+    font-style: 'Roboto', sans-serif;
+    margin-top: 70px;
+    font-size: 28px;
+    font-weight: 400;
+  }
+  
+  .Filters{
+    display: flex;
+    width: 100%;
+  }
+
+  .Filter{
+    width: 150px;
+    margin: 15px 15px 10px 0px;
+  }
+
+  .Details{
+    width: 100%;
+    display: flex;
+  }
+
+  .Listcards{
+    width: 400px;
+    height: 460px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .UserCards{
+    margin-right: 50px;
+  }
+
+
+
+
+
+  

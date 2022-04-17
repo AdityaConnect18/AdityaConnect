@@ -1,0 +1,102 @@
+.Userbox{
+    font-family: 'Roboto', sans-serif;
+    width: 750px;
+    height: 430px;
+    background-color: white;
+    padding: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+    float: right;
+}
+
+
+.Title{
+    font-size: 28px;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 0px 0px 0px 5px;
+}
+
+.Mainbox{
+    font-size: 14px;
+    width: 100%;
+    border-radius: 10px;
+    margin: 5px 5px;
+    border: none;
+    outline: none;
+    font-style: 'Roboto', sans-serif;
+}
+
+.MainIcon{
+    display: inline;
+    padding-right: 4px;
+    position: relative;
+    margin-left: 5px;
+    font-size: 35px;
+    top: 6px;
+}
+
+.Maintitle{
+    font-style: 'Roboto', sans-serif;
+    font-size: 25px;
+    margin-left: 10px;
+}
+
+
+.Menubtns a{
+    padding: 5px;
+    font-size: 14px;
+    width: 100%;
+    border-radius: 10px;
+    margin: 10px 0px;
+    border: none;
+    outline: none;
+    font-style: 'Roboto', sans-serif;
+}
+
+
+.Sideicons{
+    display: inline;
+    padding-right: 4px;
+    position: relative;
+    top: 1;
+    margin-left: 70px;
+}
+
+.Sidetabs{
+    padding: 10px 10px;
+    width: 100%;
+}
+
+.Sidetitle{
+    font-style: 'Roboto', sans-serif;
+    font-size: 15px;
+    margin-left: 15px;
+}
+
+.Line{
+    width: 95%;
+    border: 1px solid rgb(230, 230, 230);
+	background-color: rgb(230, 230, 230);
+} 
+
+.Remove{
+    background-color: #d43f3a;
+    height: 30px;
+    width: 100px;
+    color: white; 
+    float: right;   
+    margin-right: 15px;
+    border: none;
+}
+
+.Remove:hover{
+    background-color: #d9534f;   
+}
+
+.Removeicon{
+    padding-right: 8px;
+}
+
+
+
+

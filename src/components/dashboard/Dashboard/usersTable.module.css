@@ -1,0 +1,36 @@
+
+
+.table1 {
+    font-style: 'Roboto', sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    background-color: white;
+    margin-top: 20px;
+  }
+  
+.table1 td, .table1 th {
+    border-top: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  
+.table1 tr:hover {background-color: #ddd;}
+  
+.table1 th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #FD752C;
+    color: white;
+  }
+
+  .table1 caption{
+    background-color: white;
+    padding: 8px;
+    margin-bottom: 2px;
+}
+
+  .scroll{
+    overflow: scroll;
+  }
+  

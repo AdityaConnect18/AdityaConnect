@@ -1,0 +1,77 @@
+.Content{
+    padding: 20px;
+}
+.About{
+    padding-top: 30px;
+}
+
+.Presentclass,.Classname,.Subjectcode{
+    margin-bottom: 15px;
+}
+
+.Presentclass{
+    font-size: 21px;
+    color: #222221;
+}
+
+.Classname{
+    font-size: 40px;
+}
+
+.Subjectcode{
+    font-size: 28px;
+    color: #888888;
+}
+
+.Title{
+    font-size: 30px;
+}
+
+.Subtitle{
+    font-size: 20px;
+    color: #888888;
+    margin-bottom: 15px;
+}
+
+.Icons{
+    display: flex;
+    justify-content: center;
+}
+
+.Icon{
+    font-size: 30px;
+    width: 40px;
+    height: 40px;
+    margin-top: 13px;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.Icon1{
+    line-height: 0.5;
+}
+
+.Lastdiv{
+    margin: 20px 0px 10px 20px;
+    text-align: left;
+}
+
+.Attendancebtn{
+    background-color: #EFEAFF;
+    border-radius: 15px;
+    color: #5065F6;
+    font-size: 20px;
+    border: 1px solid #5065F6;
+    outline: none;
+}
+
+.Attendancebtn:hover{
+    background-color: #EFEAFF;
+    color: #5065F6;
+    border: 1px solid #5065F6;
+    outline: none;
+}

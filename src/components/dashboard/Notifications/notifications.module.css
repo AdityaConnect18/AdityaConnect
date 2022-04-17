@@ -1,0 +1,53 @@
+.MainContainer{
+    padding-left: 50px;
+  }
+  
+  .Heading{
+      font-style: 'Roboto', sans-serif;
+      margin-top: 70px;
+      font-size: 28px;
+      font-weight: 400;
+    }
+
+.MessageBox{
+    font-family: 'Roboto', sans-serif;
+    width: 90%;
+    height: 125px;
+    background-color: white;
+    padding: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+    margin-top: 25px;
+    margin-left: 15px;
+}
+
+.MessageContent{
+    margin: 0px 0px 0px 20px;
+    font-size: 14px;
+    display: flex;
+}
+
+.Title{
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 0px 0px 0px 20px;
+}
+
+.Line{
+    width: 98%;
+    border: 1px solid rgb(230, 230, 230);
+	background-color: rgb(230, 230, 230);
+} 
+
+.Date{
+    margin-left: 650px;
+}
+
+.Message{
+    margin: 0px 0px 0px 20px;
+    font-size: 14px;
+}
+
+
+
+

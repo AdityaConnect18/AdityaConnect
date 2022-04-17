@@ -1,0 +1,46 @@
+.Sidenav{
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 52px;
+    left: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    box-shadow: 1px 1px #EEEEEE;
+    font-style: 'Roboto', sans-serif;
+    color: #5e5e5e;
+    overflow: hidden;
+}
+
+
+.SideStyle{
+    padding: 5px;
+    font-size: 15px;
+    width: 100%;
+    border-radius: 10px;
+    margin: 10px 0px;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    color: #5e5e5e;
+}
+
+
+.Sideicons{
+    display: inline;
+    padding-right: 4px;
+    position: relative;
+    top: 1;
+}
+
+.Sidetabs{
+    padding: 15px 10px;
+    width: 100%;
+}
+
+.SideStyle:hover{
+    background-color: rgb(194, 189, 189);
+    color: #fff;
+}
+

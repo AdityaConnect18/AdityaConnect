@@ -1,0 +1,87 @@
+.MainContainer{
+  padding-left: 50px;
+}
+
+.Heading{
+    font-style: 'Roboto', sans-serif;
+    margin-top: 70px;
+    font-size: 28px;
+    font-weight: 400;
+  }
+  
+  .Filters{
+    display: flex;
+    width: 100%;
+  }
+
+  .Filter{
+    width: 150px;
+    margin: 10px 15px 5px 0px;
+  }
+
+  .Details{
+    width: 100%;
+    display: flex;
+  }
+
+  .Listcards{
+    width: 400px;
+    height: 460px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .UserCards{
+    margin-right: 50px;
+  }
+
+  .Buttons{
+    margin: 20px 0px 15px -5px;
+  }
+
+  .Button {
+    border-radius: 4px;
+    background-color: #f4511e;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 12px;
+    padding: 8px;
+    width: 120px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    height: 40px;
+    font-weight: 400;
+    font-style: 'Roboto', sans-serif;
+  }
+  
+  .Button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .Button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .Button:hover span {
+    padding-right: 25px;
+  }
+  
+  .Button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+
+
+
+  

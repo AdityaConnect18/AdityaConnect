@@ -1,0 +1,60 @@
+.MainCon{
+    width: 95%;
+}
+
+.Head{
+    width: 100%;
+    text-align: center;
+    background-color: white;
+    margin: 0.5px 0px 0.5px 0px;
+}
+
+.DataTitle{
+    display: flex;
+    width: 100%;
+    background-color: #FD752C;
+    margin: 0.5px 0px 0.5px 0px;
+}
+
+.Data{
+    display: flex;
+    width: 100%;
+    background-color: white;
+    margin: 0.5px 0px 0.5px 0px;
+}
+
+.Td , .TdHead{
+    padding: 10px;
+}
+
+
+.BoxLeft{
+    width: 88%;
+    display: flex;
+}
+
+.BoxMiddle{
+    width: 6%;
+    text-align: right;
+}
+.BoxRight{
+    width: 6%;
+    text-align: right;
+}
+
+
+.Red{
+    color: #d43f3a;
+}
+
+.Red:hover{
+    color: #d9534f;   
+}
+
+.Green{
+    color: #04AA6D;
+}
+
+.Green:hover{
+    color: #4CAF50;   
+}

@@ -1,0 +1,63 @@
+.Container{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.40);
+    border-radius: 5px;
+    background-color: white;
+    margin: auto;
+    width: 25%;
+    height: 500px;
+    padding: 20px 50px 20px 50px;
+    margin-top: 100px;
+}
+
+.Logo{
+    margin-left: 40%;
+    width: 100px;
+    height: 80px;
+    display: block;
+}
+
+.Title{
+    font-style: 'Roboto', sans-serif;
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.Forget{
+    float: right;
+    font-style: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: grey;
+}
+
+.Forget:hover{
+    color: black;
+    cursor: pointer;
+}
+
+.Button{
+    margin-top: 25px;
+    width: 100%;
+}
+
+
+.Help{
+    padding-top: 2px;
+    margin-right: 10px;
+    color: grey;
+}
+
+.BelowContent{
+    font-style: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: grey;
+}
+
+.BelowTop{
+    font-style: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+}
