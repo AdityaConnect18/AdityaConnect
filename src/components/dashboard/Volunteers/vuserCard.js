@@ -67,9 +67,9 @@ const VUserCard = (props) => {
             </div>
 
             <div className={classes.BelowButton}>
-                <Button className={classes.Edit}><MdModeEditOutline className={classes.Buttonicon1} />Edit</Button>
+                <Button className={classes.Edit} onClick={props.edit}><MdModeEditOutline className={classes.Buttonicon1} />Edit</Button>
                 <Button className={classes.Update}><GoKey className={classes.Buttonicon2} />Update Password</Button>
-                <Button className={classes.Remove}><ImBin2 className={classes.Buttonicon3} />Remove</Button>
+                <Button className={classes.Remove} onClick={props.del}><ImBin2 className={classes.Buttonicon3} />Remove</Button>
             </div>
         </div>
     );

@@ -106,7 +106,7 @@ const NewsFeed = () => {
           <textarea
             id="subject"
             name="subject"
-            placeholder="Write something.."
+            placeholder="Write your message..."
           ></textarea>
           <label for="upload">Upload Your Document</label>
           <input type="file" id="upload" name="upload"></input>

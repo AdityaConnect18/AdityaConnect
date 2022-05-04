@@ -44,7 +44,7 @@ const AddForm = (props) => {
     const getColleges = () => {
         GetCollegesData()
             .then((data) => {
-                console.log(data.data.colleges);
+                //console.log(data.data.colleges);
                 setColleges(data.data.colleges)
                 let Engineering_colleges = data.data.colleges.filter(college => college.courseId.courseName === 'Engineering')
                 setFilteredColleges(Engineering_colleges)
@@ -56,7 +56,7 @@ const AddForm = (props) => {
     const getCourses = () => {
         GetCoursesData()
             .then((data) => {
-                console.log(data.data.result)
+                //console.log(data.data.result)
                 setCourses(data.data.result)
             })
             .catch((error) => { console.log(error) })
@@ -64,13 +64,13 @@ const AddForm = (props) => {
 
     const filterColleges = (course_Id) => {
         setAllValues({ ...allValues, courseId: course_Id })
-        console.log(course_Id)
+        //console.log(course_Id)
         let cols = colleges.filter(college => college.courseId._id === course_Id)
         setFilteredColleges(cols)
     }
 
     const filterDepartment = (college_Id) => {
-        console.log(college_Id)
+        //console.log(college_Id)
         setAllValues({ ...allValues, collegeId: college_Id })
         setDepts(colleges.filter(college => college._id === college_Id)[0].departments)
     }
@@ -78,10 +78,25 @@ const AddForm = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(allValues)
-        InsertAdminData(allValues)
+        if(!allValues.password===allValues.cpassword){
+            
+            alert("Password you entered is not matching")
+        }
+        else if((allValues.mobileNumber.match(/^\d+/)) && (parseInt(allValues.mobileNumber)<=6000000000)) 
+        {
+        alert("Invalid Mobile Number")
+        }
+        else if(allValues.DeptId==="" || allValues.collegeId==="" || allValues.courseId==="" || allValues.DeptId==="sample" || allValues.collegeId==="sample" || allValues.courseId==="sample" )
+        {
+            alert("Select Course, College, Department")
+        }
+        else{
+            InsertAdminData(allValues)
             .then(response => console.log(response))
             .catch(err => console.log(err))
-        setAllValues({ ...initState })
+            setAllValues({ ...initState })
+        }
+        
 
     }
 
@@ -106,21 +121,21 @@ const AddForm = (props) => {
                 <form onSubmit={handleSubmit}>
 
                     <label for="Category">Name</label>
-                    <input value={allValues.adminName} type="text" name="adminName" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
+                    <input value={allValues.adminName} type="text" name="adminName" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                     <label for="Category">Email</label>
-                    <input value={allValues.email} type="email" name="email" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
+                    <input value={allValues.email} type="email" name="email" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                     <label for="Category">Password</label>
-                    <input value={allValues.password} type="password" name="password" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
+                    <input value={allValues.password} minlength="6" maxlength="10" type="password" name="password" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                     <label for="Category">Confirm Password</label>
-                    <input value={allValues.cpassword} type="password" name="cpassword" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
+                    <input value={allValues.cpassword} minlength="6" maxlength="10" type="password" name="cpassword" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                     <label for="Category">ID</label>
-                    <input value={allValues.empId} type="text" name="empId" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
+                    <input value={allValues.empId} type="text" maxlength="8" name="empId" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                     <label for="Category">Mobile</label>
-                    <input value={allValues.mobileNumber} type="number" name="mobileNumber" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
+                    <input value={allValues.mobileNumber} type="text" minlength="10" maxlength="10" name="mobileNumber" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
 
                     <label for="Category">Select Course</label>
                     <form>
-                        <select value={allValues.courseId} name="course" onChange={(e) => filterColleges(e.target.value)}>
+                        <select value={allValues.courseId} name="course" required onChange={(e) => filterColleges(e.target.value)}>
                             <option value="sample">--Select your Course--</option>
                             {courses.map(course => (
                                 <option key={course.id} value={course._id}>{course.courseName}</option>
@@ -130,7 +145,7 @@ const AddForm = (props) => {
                     </form>
 
                     <label for="Category">Select College</label>
-                    <select value={allValues.collegeId} name="college" onChange={(e) => filterDepartment(e.target.value)}>
+                    <select value={allValues.collegeId} name="college" required onChange={(e) => filterDepartment(e.target.value)}>
                         <option value="sample">--Select your college--</option>
                         {filteredColleges.map(college => (
                             <option value={college._id}>{college.collegeName}</option>
@@ -138,7 +153,7 @@ const AddForm = (props) => {
                     </select>
 
                     <label for="Category">Select Department</label>
-                    <select value={allValues.DeptId} name="DeptId" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} >
+                    <select value={allValues.DeptId} name="DeptId" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} >
                         <option value="sample">--Select your Department--</option>
                         {depts.map(dept => (
                             <option value={dept._id}>{dept.deptName}</option>

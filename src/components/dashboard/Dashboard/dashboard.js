@@ -8,43 +8,54 @@ import { RiNotificationFill } from 'react-icons/ri';
 import VoluTable from './voluTable';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-
-
+import { GetAdminsData } from "../../../SERVICES/service"
+import { GetUSersData } from "../../../SERVICES/service";
 
 const DashBoard = () => {
 
-    const [users, setUsers] = useState([
-        {
-            name: "Akhil",
-            idcard: "18A91A1222",
-            branch: "Information Technology",
-            college: "Aditya Engineering College",
-            course: "Engineering",
-            email: "18a91a1222@aec.edu.in",
-            number: "9876543210",
-            date: "21-02-2022 07:09 PM",
-        },
-        {
-            name: "Sai",
-            idcard: "18A91A1223",
-            branch: "Information Technology",
-            college: "Aditya College of Engineering",
-            course: "Engineering",
-            email: "18a91a1222@aec.edu.in",
-            number: "9876543210",
-            date: "21-02-2022 07:09 PM",
-        },
-        {
-            name: "Manoj",
-            idcard: "18A91A1224",
-            branch: "Computer Science",
-            college: "Aditya College of Engineering & Technology",
-            course: "Engineering",
-            email: "18a91a1222@aec.edu.in",
-            number: "9876543210",
-            date: "21-02-2022 07:09 PM",
-        },
-    ]);
+    const [admins, setAdmins] = useState([{}]);
+    const [oneAdmin, setOneAdmin] = useState([{}])
+    const [twoAdmin, setTwoAdmin] = useState([{}])
+    const [threeAdmin, setThreeAdmin] = useState([{}])
+    const [fourAdmin, setFourAdmin] = useState([{}])
+    const [fiveAdmin, setFiveAdmin] = useState([{}])
+
+    const [users, setUsers] = useState([{}]);
+    const [oneUser, setOneUser] = useState([{}])
+    const [twoUser, setTwoUser] = useState([{}])
+    const [threeUser, setThreeUser] = useState([{}])
+    const [fourUser, setFourUser] = useState([{}])
+    const [fiveUser, setFiveUser] = useState([{}])
+
+    React.useEffect(() => {
+        GetUSersData()
+          .then((data) => {
+            //console.log(data.data.users);
+            setUsers(data.data.users);
+            setOneUser(data.data.users[0])
+            setTwoUser(data.data.users[1])
+            setThreeUser(data.data.users[2])
+            setFourUser(data.data.users[3])
+            setFiveUser(data.data.users[4])
+          })
+          .catch((error) => console.error(error))
+      }, [])
+
+
+      React.useEffect(() => {
+        GetAdminsData()
+          .then((data) => {
+            //console.log(data.data.data);
+            setAdmins(data.data.data);
+            setOneAdmin(data.data.data[0])
+            setTwoAdmin(data.data.data[1])
+            setThreeAdmin(data.data.data[2])
+            setFourAdmin(data.data.data[3])
+            setFiveAdmin(data.data.data[4])
+            console.log(oneAdmin)
+          })
+          .catch((error) => console.error(error))
+      }, [])
 
 
     return (
@@ -101,12 +112,29 @@ const DashBoard = () => {
                                 <th>College</th>
                                 <th>Date</th>
                             </tr>
-                            {users.map((user, index) => (
+                            
                                 <UsersTable
-                                    index={index}
-                                    data={user}
+                                    index={"1"}
+                                    data={oneUser}
                                 />
-                            ))}
+                                <UsersTable
+                                    index={"2"}
+                                    data={twoUser}
+                                />
+                                <UsersTable
+                                    index={"3"}
+                                    data={threeUser}
+                                />
+                            
+                                <UsersTable
+                                    index={"4"}
+                                    data={fourUser}
+                                />
+                                <UsersTable
+                                    index={"5"}
+                                    data={fiveUser}
+                                />
+                            
                         </table>
                         <div className={classes.View}><NavLink className={classes.ViewConent} exact to="/users">ViewAll</NavLink></div>
 
@@ -121,13 +149,30 @@ const DashBoard = () => {
                                 <th>Name</th>
 
                             </tr>
-
-                            {users.map((user, index) => (
+                                
+                             
                                 <VoluTable
-                                    index={index}
-                                    data={user}
+                                    index={"1"}
+                                    data={oneAdmin}
                                 />
-                            ))}
+                                <VoluTable
+                                    index={"2"}
+                                    data={twoAdmin}
+                                />
+                                <VoluTable
+                                    index={"3"}
+                                    data={threeAdmin}
+                                />
+                                <VoluTable
+                                    index={"4"}
+                                    data={fourAdmin}
+                                />
+                                <VoluTable
+                                    index={"5"}
+                                    data={fiveAdmin}
+                                />
+                                
+                            
                         </table>
                         <div className={classes.View}><NavLink className={classes.ViewConent} exact to="/volunteers">ViewAll</NavLink></div>
                     </div>
