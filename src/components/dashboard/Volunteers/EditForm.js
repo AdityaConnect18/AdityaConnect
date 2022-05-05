@@ -1,88 +1,90 @@
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './AddForm.module.css';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 
 
 const AddForm = (props) => {
     const navigate = useNavigate();
-    const {state} = useLocation();
-    console.log(state)
-    const [updateUser,setUpdateUser] = useState(state.user)
+    const { state } = useLocation();
+    const [updateUser, setUpdateUser] = useState(state.user)
 
-    const update = () =>{
+    const update = () => {
         // console.log(updateUser)
-        navigate('/volunteers', { state: {user : updateUser, user_index: state.user_index } });
+        navigate('/volunteers', { state: { user: updateUser, user_index: state.user_index } });
     }
 
-    const handleChange = (e) =>{
-        // console.log(e.target.name +"  "+e.target.value)
-        setUpdateUser({...updateUser,[e.target.name]:e.target.value})
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(updateUser)
+        // setUpdateUser({ ...updateUser, [e.target.name]: e.target.value })
     }
-    return( 
+    return (
         <div className={classes.MainContainer}>
             <div className={classes.Heading}>Volunteers</div>
 
-            <div className={classes.Buttons}>         
-                <NavLink 
-                exact
-                to="/volunteers"
-                className={classes.Button}>
-                <span>Volunteers</span>
+            <div className={classes.Buttons}>
+                <NavLink
+                    exact
+                    to="/volunteers"
+                    className={classes.Button}>
+                    <span>Volunteers</span>
                 </NavLink>
-                <NavLink 
-                exact
-                to="/volunteers/add"
-                className={classes.Button}>
-                <span>Add Volunteers</span>
+                <NavLink
+                    exact
+                    to="/volunteers/add"
+                    className={classes.Button}>
+                    <span>Add Volunteers</span>
                 </NavLink>
             </div>
 
-        <div className={classes.FormContainer}>
-            <form >
+            <div className={classes.FormContainer}>
 
-            <label for="Category">Name</label>
-            <input type="text" name="name" onChange={(e)=>handleChange(e)} value={updateUser.adminName}  />
-            <label for="Category">Email</label>
-            <input type="email" name="email" onChange={(e)=>handleChange(e)} value={updateUser.email}/>
-            <label for="Category">ID</label>
-            <input type="text" name="idcard" onChange={(e)=>handleChange(e)} value={updateUser.empId}/>
-            <label for="Category">Mobile</label>
-            <input type="number" name="number" onChange={(e)=>handleChange(e)} value={updateUser.mobileNumber}/>
 
-            <label for="Category">Select Category</label>
-                <select name="course" value={updateUser.courseId.courseName} onChange={(e)=>handleChange(e)}>
-                    <option value="all">All</option>
-                    <option value="engineering">Engineering</option>
-                    <option value="pharmacy">Pharmacy</option>  
-                    <option value="mca">Management & MCA</option>
-                    <option value="diploma">Diploma</option>
-                </select>
+                <form onSubmit={handleSubmit}>
 
-            <label for="Category">Select College</label>
-                <select name="college" value={updateUser.collegeId.collegeName} onChange={(e)=>handleChange(e)}>
-                    <option value="aec">Aditya Engineering College</option>
-                    <option value="acet">Aditya College of Engineering & Technology</option>
-                    <option value="acoe">Aditya College of Engineering</option>
-                </select>
+                    <label for="Category">Name</label>
+                    <input value={updateUser.adminName} type="text" name="adminName" required onChange={e => setUpdateUser({ ...updateUser, [e.target.name]: e.target.value })} />
+                    <label for="Category">Email</label>
+                    <input value={updateUser.email} type="email" name="email" required onChange={e => setUpdateUser({ ...updateUser, [e.target.name]: e.target.value })} />
+                    <label for="Category">Password</label>
+                    <input value={updateUser.password} minlength="6" maxlength="10" type="password" name="password" required onChange={e => setUpdateUser({ ...updateUser, [e.target.name]: e.target.value })} />
+                    <label for="Category">Confirm Password</label>
+                    <input value={updateUser.cpassword} minlength="6" maxlength="10" type="password" name="cpassword" required onChange={e => setUpdateUser({ ...updateUser, [e.target.name]: e.target.value })} />
+                    <label for="Category">ID</label>
+                    <input value={updateUser.empId} type="text" maxlength="8" name="empId" required onChange={e => setUpdateUser({ ...updateUser, [e.target.name]: e.target.value })} />
+                    <label for="Category">Mobile</label>
+                    <input value={updateUser.mobileNumber} type="text" minlength="10" maxlength="10" name="mobileNumber" onChange={e => setUpdateUser({ ...updateUser, [e.target.name]: e.target.value })} />
 
-             <label for="Category">Select Branch</label>
-                <select name="branch" value={updateUser.DeptId.deptName} onChange={(e)=>handleChange(e)}>
-                    <option value="civil">Civil Engineering</option>
-                    <option value="ece">Electrical and Electronics Engineering</option>
-                    <option value="mech">Mechanical Engineering</option>
-                    <option value="cse">Computer Science and Engineering</option>
-                    <option value="it">Information Technology</option>
-                    <option value="pt">Petroleum Technology</option>
-                    <option value="agri">Agricultural Engineering</option>
-                    <option value="mine">Mining Engineering</option>
-                    <option value="mtech">M.Tech</option>
-                    <option value="others">Others</option>
-                </select>
-                
-                <input type="button" onClick={(e)=>update(e)} value="Submit"/>
-            </form>
+                    {/* <label for="Category">Select Course</label>
+                    <form>
+                        <select value={updateUser.courseId} name="course" required onChange={(e) => filterColleges(e.target.value)}>
+                            <option value="sample">--Select your Course--</option>
+                            {courses.map(course => (
+                                <option key={course.id} value={course._id}>{course.courseName}</option>
+                            ))}
+
+                        </select>
+                    </form>
+
+                    <label for="Category">Select College</label>
+                    <select value={updateUser.collegeId} name="college" required onChange={(e) => filterDepartment(e.target.value)}>
+                        <option value="sample">--Select your college--</option>
+                        {filteredColleges.map(college => (
+                            <option value={college._id}>{college.collegeName}</option>
+                        ))}
+                    </select>
+
+                    <label for="Category">Select Department</label>
+                    <select value={updateUser.DeptId} name="DeptId" required onChange={e => setupdateUser({ ...updateUser, [e.target.name]: e.target.value })} >
+                        <option value="sample">--Select your Department--</option>
+                        {depts.map(dept => (
+                            <option value={dept._id}>{dept.deptName}</option>
+                        ))}
+                    </select> */}
+                    <input type="submit" value="Submit" />
+                </form>
             </div>
-    </div>
+        </div>
     );
 }
 

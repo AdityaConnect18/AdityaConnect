@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import classes from './AddForm.module.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { GetCollegesData, GetCoursesData, InsertAdminData } from "../../../SERVICES/service";
 
 
 const AddForm = (props) => {
+    const { state } = useLocation();
+    // console.log(state);
+    let user = undefined;
+    if (state && state.user) {
+        user = state.user;
+    }
 
     const [allValues, setAllValues] = useState({
-        mobileNumber: '',
-        adminName: '',
-        email: '',
+        _id: user?._id,
+        mobileNumber: user?.mobileNumber,
+        adminName: user?.adminName,
+        email: user?.email,
         password: '',
         cpassword: '',
-        empId: '',
-        courseId: '',
-        collegeId: '',
-        DeptId: '',
+        empId: user?.empId,
+        courseId: user?.courseId._id,
+        collegeId: user?.collegeId._id,
+        DeptId: user?.DeptId._id,
     });
 
     const initState = {
@@ -78,25 +85,23 @@ const AddForm = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(allValues)
-        if(!allValues.password===allValues.cpassword){
-            
+        if (!allValues.password === allValues.cpassword) {
+
             alert("Password you entered is not matching")
         }
-        else if((allValues.mobileNumber.match(/^\d+/)) && (parseInt(allValues.mobileNumber)<=6000000000)) 
-        {
-        alert("Invalid Mobile Number")
+        else if ((allValues.mobileNumber.match(/^\d+/)) && (parseInt(allValues.mobileNumber) <= 6000000000)) {
+            alert("Invalid Mobile Number")
         }
-        else if(allValues.DeptId==="" || allValues.collegeId==="" || allValues.courseId==="" || allValues.DeptId==="sample" || allValues.collegeId==="sample" || allValues.courseId==="sample" )
-        {
+        else if (allValues.DeptId === "" || allValues.collegeId === "" || allValues.courseId === "" || allValues.DeptId === "sample" || allValues.collegeId === "sample" || allValues.courseId === "sample") {
             alert("Select Course, College, Department")
         }
-        else{
+        else {
             InsertAdminData(allValues)
-            .then(response => console.log(response))
-            .catch(err => console.log(err))
+                .then(response => console.log(response))
+                .catch(err => console.log(err))
             setAllValues({ ...initState })
         }
-        
+
 
     }
 

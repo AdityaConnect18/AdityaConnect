@@ -22,46 +22,41 @@ const Volunteers = (props) => {
 
 
   const navigate = useNavigate();
-  const {state} = useLocation();  
-  const [userIndex,setUserIndex] = useState(0)
+  const { state } = useLocation();
+  const [userIndex, setUserIndex] = useState(0)
 
-  const testing = (user,index) =>{
+  const testing = (user, index) => {
     setSingleUser(user)
     setUserIndex(index)
   }
 
-  const deleteUser = () =>{
+  const deleteUser = () => {
     console.log(userIndex)
-    admins.splice(userIndex,1)
+    admins.splice(userIndex, 1)
     setSingleUser(admins[0])
   }
 
-  const editUser = () =>{
-    navigate('/volunteers/edit', { state: {user : singleUser, user_index: userIndex } });
+  const editUser = () => {
+    navigate('/volunteers/add', { state: { user: singleUser, user_index: userIndex } });
   }
 
   const updateUser = (state) => {
     console.log(state)
-    if(state==null){
+    if (state == null) {
 
     }
-    else{
+    else {
       let temp_state = [...admins];
       let temp_element = state.user;
       temp_state[state.user_index] = temp_element;
       setadmins(temp_state)
     }
-    
+
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     updateUser(state)
-  },[])
-
- 
-  
-
-
+  }, [])
 
 
   return (
@@ -87,16 +82,16 @@ const Volunteers = (props) => {
         </div>
 
         <div className={classes.Listcards}>
-          {admins.map((userObj,index) => (
-            <div onClick={(e)=>testing(userObj,index)} >
+          {admins.map((userObj, index) => (
+            <div onClick={(e) => testing(userObj, index)} >
               <VListCard
                 timeStamp={userObj.createdAt}
                 college={userObj.collegeId ? userObj.collegeId['collegeName'] : null}
                 admin={userObj}
               />
-            </div> 
+            </div>
           ))}
-          
+
         </div>
       </div>
     </div>
