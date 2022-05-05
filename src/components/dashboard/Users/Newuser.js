@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classes from "./users.module.css";
 import ListCard from "./listCard";
 import UserCard from "./userCard";
-import { GetUSersData, GetCollegesData, GetCoursesData } from "../../../SERVICES/service";
+import { GetUSersData, GetCollegesData, GetCoursesData, DeleteUser } from "../../../SERVICES/service";
 
 export default class Newuser extends Component {
 
@@ -49,6 +49,7 @@ export default class Newuser extends Component {
     getUsers = () => {
         GetUSersData()
             .then(data => {
+                console.log(data.data.users)
                 this.setState({
                     users: data.data.users,
                     filteredUsers: data.data.users,
@@ -61,9 +62,9 @@ export default class Newuser extends Component {
     filterData = () => {
         let { roleSelect, courseSelect, collegeSelect, users } = this.state;
         let usersfiltered = users
-            .filter(user => roleSelect === 'all' ? user.roleId.roleName.length > 1 : user.roleId.roleName === roleSelect)
-            .filter(user => courseSelect === 'all' ? user.courseId._id.length > 1 : user.courseId._id === courseSelect)
-            .filter(user => collegeSelect === 'all' ? user.collegeId._id.length > 1 : user.collegeId._id === collegeSelect)
+            .filter(user => roleSelect === 'all' ? user.roleId?.roleName.length > 1 : user.roleId?.roleName === roleSelect)
+            .filter(user => courseSelect === 'all' ? user.courseId?._id.length > 1 : user.courseId?._id === courseSelect)
+            .filter(user => collegeSelect === 'all' ? user.collegeId?._id.length > 1 : user.collegeId?._id === collegeSelect)
         this.setState({ filteredUsers: usersfiltered })
     }
 
@@ -97,6 +98,14 @@ export default class Newuser extends Component {
     displayData = (user) => {
         this.setState({ singleUser: user })
     }
+
+    deleteUser = (id) => {
+        console.log(id)
+        // DeleteUser(id)
+        //     .then((user) => { console.log(user) })
+        //     .catch((error) => { console.log(error) })
+    }
+
 
     render() {
         let { filteredUsers, singleUser, filteredColleges, courses } = this.state;
@@ -144,6 +153,7 @@ export default class Newuser extends Component {
                     <div className={classes.UserCards}>
                         <UserCard
                             data={singleUser}
+                            del={this.deleteUser}
                         />
                     </div>
                     {filteredUsers.length > 1 ? <div className={classes.Listcards}>

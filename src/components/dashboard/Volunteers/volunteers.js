@@ -4,7 +4,7 @@ import VListCard from "./vlistCard";
 import VUserCard from "./vuserCard";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { GetAdminsData } from "../../../SERVICES/service"
+import { GetAdminsData, DeleteVolunteer } from "../../../SERVICES/service"
 
 const Volunteers = (props) => {
   const [admins, setadmins] = useState([{}]);
@@ -31,13 +31,30 @@ const Volunteers = (props) => {
   }
 
   const deleteUser = () => {
+    if (admins.length === 1) {
+      alert("Alteast one volunteer is mandatory")
+      return
+    }
     console.log(userIndex)
+    console.log(admins[userIndex]._id)
+    DeleteVolunteer(admins[userIndex]._id)
+      .then((res) => { console.log(res) })
+      .catch((err) => { console.log(err) })
     admins.splice(userIndex, 1)
-    setSingleUser(admins[0])
+    if (userIndex !== 0) {
+      setSingleUser(admins[userIndex - 1])
+    }
+    else {
+      setSingleUser(admins[0])
+    }
   }
 
   const editUser = () => {
-    navigate('/volunteers/add', { state: { user: singleUser, user_index: userIndex } });
+    navigate('/volunteers/add', { state: { user: singleUser, operation: "editdetails", user_index: userIndex } });
+  }
+
+  const updatePassword = () => {
+    navigate('/volunteers/add', { state: { user: singleUser, operation: "updatePassword" } })
   }
 
   const updateUser = (state) => {
@@ -78,6 +95,7 @@ const Volunteers = (props) => {
             data={singleUser}
             del={deleteUser}
             edit={editUser}
+            password={updatePassword}
           />
         </div>
 

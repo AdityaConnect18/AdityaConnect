@@ -12,10 +12,8 @@ import { ImBin2 } from 'react-icons/im';
 import Button from 'react-bootstrap/Button';
 
 
-
-
 const UserCard = (props) => {
-    //console.log(props);
+    console.log(props);
     return (
 
         <div className={classes.Userbox}>
@@ -75,7 +73,8 @@ const UserCard = (props) => {
                 </div>
             </div>
 
-            <Button className={classes.Remove}><ImBin2 className={classes.Removeicon} />Remove</Button>
+            <Button className={classes.Remove}
+                onClick={props.del(props.data._id)} ><ImBin2 className={classes.Removeicon} />delete</Button>
 
         </div>
     );

@@ -29,33 +29,33 @@ const DashBoard = () => {
 
     React.useEffect(() => {
         GetUSersData()
-          .then((data) => {
-            //console.log(data.data.users);
-            setUsers(data.data.users);
-            setOneUser(data.data.users[0])
-            setTwoUser(data.data.users[1])
-            setThreeUser(data.data.users[2])
-            setFourUser(data.data.users[3])
-            setFiveUser(data.data.users[4])
-          })
-          .catch((error) => console.error(error))
-      }, [])
+            .then((data) => {
+                //console.log(data.data.users);
+                setUsers(data.data.users);
+                setOneUser(data.data.users[0])
+                setTwoUser(data.data.users[1])
+                setThreeUser(data.data.users[2])
+                setFourUser(data.data.users[3])
+                setFiveUser(data.data.users[4])
+            })
+            .catch((error) => console.error(error))
+    }, [])
 
 
-      React.useEffect(() => {
+    React.useEffect(() => {
         GetAdminsData()
-          .then((data) => {
-            //console.log(data.data.data);
-            setAdmins(data.data.data);
-            setOneAdmin(data.data.data[0])
-            setTwoAdmin(data.data.data[1])
-            setThreeAdmin(data.data.data[2])
-            setFourAdmin(data.data.data[3])
-            setFiveAdmin(data.data.data[4])
-            console.log(oneAdmin)
-          })
-          .catch((error) => console.error(error))
-      }, [])
+            .then((data) => {
+                console.log(data.data.data);
+                setAdmins(data.data.data);
+                setOneAdmin(data.data.data[0])
+                setTwoAdmin(data.data.data[1])
+                setThreeAdmin(data.data.data[2])
+                // setFourAdmin(data.data.data[3])
+                // setFiveAdmin(data.data.data[4])
+                console.log(oneAdmin)
+            })
+            .catch((error) => console.error(error))
+    }, [])
 
 
     return (
@@ -112,29 +112,29 @@ const DashBoard = () => {
                                 <th>College</th>
                                 <th>Date</th>
                             </tr>
-                            
-                                <UsersTable
-                                    index={"1"}
-                                    data={oneUser}
-                                />
-                                <UsersTable
-                                    index={"2"}
-                                    data={twoUser}
-                                />
-                                <UsersTable
-                                    index={"3"}
-                                    data={threeUser}
-                                />
-                            
-                                <UsersTable
-                                    index={"4"}
-                                    data={fourUser}
-                                />
-                                <UsersTable
-                                    index={"5"}
-                                    data={fiveUser}
-                                />
-                            
+
+                            <UsersTable
+                                index={"1"}
+                                data={oneUser}
+                            />
+                            <UsersTable
+                                index={"2"}
+                                data={twoUser}
+                            />
+                            <UsersTable
+                                index={"3"}
+                                data={threeUser}
+                            />
+
+                            {/* <UsersTable
+                                index={"4"}
+                                data={fourUser}
+                            />
+                            <UsersTable
+                                index={"5"}
+                                data={fiveUser}
+                            /> */}
+
                         </table>
                         <div className={classes.View}><NavLink className={classes.ViewConent} exact to="/users">ViewAll</NavLink></div>
 
@@ -149,30 +149,30 @@ const DashBoard = () => {
                                 <th>Name</th>
 
                             </tr>
-                                
-                             
-                                <VoluTable
-                                    index={"1"}
-                                    data={oneAdmin}
-                                />
-                                <VoluTable
-                                    index={"2"}
-                                    data={twoAdmin}
-                                />
-                                <VoluTable
-                                    index={"3"}
-                                    data={threeAdmin}
-                                />
-                                <VoluTable
-                                    index={"4"}
-                                    data={fourAdmin}
-                                />
-                                <VoluTable
-                                    index={"5"}
-                                    data={fiveAdmin}
-                                />
-                                
-                            
+
+
+                            <VoluTable
+                                index={"1"}
+                                data={oneAdmin}
+                            />
+                            <VoluTable
+                                index={"2"}
+                                data={twoAdmin}
+                            />
+                            <VoluTable
+                                index={"3"}
+                                data={threeAdmin}
+                            />
+                            <VoluTable
+                                index={"4"}
+                                data={fourAdmin}
+                            />
+                            <VoluTable
+                                index={"5"}
+                                data={fiveAdmin}
+                            />
+
+
                         </table>
                         <div className={classes.View}><NavLink className={classes.ViewConent} exact to="/volunteers">ViewAll</NavLink></div>
                     </div>

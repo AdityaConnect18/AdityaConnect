@@ -3,7 +3,7 @@ import classes from "./users.module.css";
 import ListCard from "./listCard";
 import UserCard from "./userCard";
 import { useState } from "react";
-import { GetUSersData, GetCollegesData, GetCoursesData } from "../../../SERVICES/service";
+import { GetUSersData, GetCollegesData, GetCoursesData, DeleteUser } from "../../../SERVICES/service";
 
 const Users = (props) => {
 
@@ -95,6 +95,13 @@ const Users = (props) => {
     filterUserDataMain();
   }
 
+  const deleteUser = (id) => {
+    console.log(id)
+    DeleteUser(id)
+      .then((user) => { console.log(user) })
+      .catch((error) => { console.log(error) })
+  }
+
 
   return (
     <div className={classes.Users}>
@@ -140,6 +147,7 @@ const Users = (props) => {
         <div className={classes.UserCards}>
           <UserCard
             data={singleUser}
+            del={deleteUser}
           />
         </div>
         {filteredUsers.length > 1 ? <div className={classes.Listcards}>

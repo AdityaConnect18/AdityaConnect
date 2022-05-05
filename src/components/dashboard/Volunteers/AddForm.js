@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import classes from './AddForm.module.css';
-import { NavLink, useLocation } from 'react-router-dom';
-import { GetCollegesData, GetCoursesData, InsertAdminData } from "../../../SERVICES/service";
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { GetCollegesData, GetCoursesData, InsertAdminData, GetRoles } from "../../../SERVICES/service";
+import { getRoles } from '@testing-library/react';
 
 
 const AddForm = (props) => {
     const { state } = useLocation();
+    const navigate = useNavigate();
     // console.log(state);
     let user = undefined;
+    let op = undefined;
     if (state && state.user) {
         user = state.user;
+        op = state.operation;
     }
 
     const [allValues, setAllValues] = useState({
@@ -23,6 +27,7 @@ const AddForm = (props) => {
         courseId: user?.courseId._id,
         collegeId: user?.collegeId._id,
         DeptId: user?.DeptId._id,
+        roleId: user?.roleId
     });
 
     const initState = {
@@ -41,17 +46,20 @@ const AddForm = (props) => {
     const [courses, setCourses] = React.useState([{}]);
     const [filteredColleges, setFilteredColleges] = React.useState([{}]);
     const [depts, setDepts] = React.useState([]);
+    const [roles, setRoles] = React.useState([]);
 
 
     useEffect(() => {
+        console.log("useEffect from AddForm")
         getColleges();
         getCourses();
+        getRoles();
     }, [])
 
     const getColleges = () => {
         GetCollegesData()
             .then((data) => {
-                //console.log(data.data.colleges);
+                console.log(data.data.colleges);
                 setColleges(data.data.colleges)
                 let Engineering_colleges = data.data.colleges.filter(college => college.courseId.courseName === 'Engineering')
                 setFilteredColleges(Engineering_colleges)
@@ -68,6 +76,15 @@ const AddForm = (props) => {
             })
             .catch((error) => { console.log(error) })
     };
+
+    const getRoles = () => {
+        GetRoles()
+            .then((data) => {
+                console.log(data.data.data)
+                setRoles(data.data.data)
+            })
+            .catch((error) => { console.log(error) })
+    }
 
     const filterColleges = (course_Id) => {
         setAllValues({ ...allValues, courseId: course_Id })
@@ -97,7 +114,10 @@ const AddForm = (props) => {
         }
         else {
             InsertAdminData(allValues)
-                .then(response => console.log(response))
+                .then(response => {
+                    navigate('/volunteers')
+                    console.log(response)
+                })
                 .catch(err => console.log(err))
             setAllValues({ ...initState })
         }
@@ -121,52 +141,68 @@ const AddForm = (props) => {
                     <span>Add Volunteers</span>
                 </NavLink>
             </div>
+            {op === "editdetails" ?
+                <div className={classes.FormContainer}>
+                    <form onSubmit={handleSubmit}>
 
-            <div className={classes.FormContainer}>
-                <form onSubmit={handleSubmit}>
+                        <label for="Category">Name</label>
+                        <input value={allValues.adminName} type="text" name="adminName" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
+                        <label for="Category">Email</label>
+                        <input value={allValues.email} type="email" name="email" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
+                        <label for="Category">ID</label>
+                        <input value={allValues.empId} type="text" maxlength="8" name="empId" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
+                        <label for="Category">Mobile</label>
+                        <input value={allValues.mobileNumber} type="text" minlength="10" maxlength="10" name="mobileNumber" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
 
-                    <label for="Category">Name</label>
-                    <input value={allValues.adminName} type="text" name="adminName" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
-                    <label for="Category">Email</label>
-                    <input value={allValues.email} type="email" name="email" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
-                    <label for="Category">Password</label>
-                    <input value={allValues.password} minlength="6" maxlength="10" type="password" name="password" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
-                    <label for="Category">Confirm Password</label>
-                    <input value={allValues.cpassword} minlength="6" maxlength="10" type="password" name="cpassword" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
-                    <label for="Category">ID</label>
-                    <input value={allValues.empId} type="text" maxlength="8" name="empId" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
-                    <label for="Category">Mobile</label>
-                    <input value={allValues.mobileNumber} type="text" minlength="10" maxlength="10" name="mobileNumber" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
-
-                    <label for="Category">Select Course</label>
-                    <form>
-                        <select value={allValues.courseId} name="course" required onChange={(e) => filterColleges(e.target.value)}>
-                            <option value="sample">--Select your Course--</option>
-                            {courses.map(course => (
-                                <option key={course.id} value={course._id}>{course.courseName}</option>
+                        <label for="Category">Select role</label>
+                        <select value={allValues.roleId} name="roleId" required onChange={(e) => setAllValues({ ...allValues, [e.target.name]: e.target.value })}>
+                            <option value="sample">--Select role--</option>
+                            {roles.map(role => (
+                                <option value={role._id}>{role.roleName}</option>
                             ))}
-
                         </select>
+
+                        <label for="Category">Select Course</label>
+                        <form>
+                            <select value={allValues.courseId} name="course" required onChange={(e) => filterColleges(e.target.value)}>
+                                <option value="sample">--Select your Course--</option>
+                                {courses.map(course => (
+                                    <option key={course.id} value={course._id}>{course.courseName}</option>
+                                ))}
+
+                            </select>
+                        </form>
+
+
+                        <label for="Category">Select College</label>
+                        <select value={allValues.collegeId} name="college" required onChange={(e) => filterDepartment(e.target.value)}>
+                            <option value="sample">--Select your college--</option>
+                            {filteredColleges.map(college => (
+                                <option value={college._id}>{college.collegeName}</option>
+                            ))}
+                        </select>
+
+                        <label for="Category">Select Department</label>
+                        <select value={allValues.DeptId} name="DeptId" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} >
+                            <option value="sample">--Select your Department--</option>
+                            {depts.map(dept => (
+                                <option value={dept._id}>{dept.deptName}</option>
+                            ))}
+                        </select>
+                        <input type="submit" value="Submit" />
                     </form>
-
-                    <label for="Category">Select College</label>
-                    <select value={allValues.collegeId} name="college" required onChange={(e) => filterDepartment(e.target.value)}>
-                        <option value="sample">--Select your college--</option>
-                        {filteredColleges.map(college => (
-                            <option value={college._id}>{college.collegeName}</option>
-                        ))}
-                    </select>
-
-                    <label for="Category">Select Department</label>
-                    <select value={allValues.DeptId} name="DeptId" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} >
-                        <option value="sample">--Select your Department--</option>
-                        {depts.map(dept => (
-                            <option value={dept._id}>{dept.deptName}</option>
-                        ))}
-                    </select>
-                    <input type="submit" value="Submit" />
-                </form>
-            </div>
+                </div>
+                :
+                <div className={classes.FormContainer}>
+                    <form onSubmit={handleSubmit}>
+                        <label for="Category">Password</label>
+                        <input value={allValues.password} minlength="6" maxlength="10" type="password" name="password" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
+                        <label for="Category">Confirm Password</label>
+                        <input value={allValues.cpassword} minlength="6" maxlength="10" type="password" name="cpassword" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
+                        <input type="submit" value="Submit" />
+                    </form>
+                </div>
+            }
         </div>
     );
 }

@@ -16,6 +16,7 @@ import Button from 'react-bootstrap/Button';
 
 
 const VUserCard = (props) => {
+    console.log(props)
     return (
         <div className={classes.Userbox}>
             <div className={classes.Mainbox}>
@@ -68,7 +69,7 @@ const VUserCard = (props) => {
 
             <div className={classes.BelowButton}>
                 <Button className={classes.Edit} onClick={props.edit}><MdModeEditOutline className={classes.Buttonicon1} />Edit</Button>
-                <Button className={classes.Update}><GoKey className={classes.Buttonicon2} />Update Password</Button>
+                <Button className={classes.Update} onClick={props.password}><GoKey className={classes.Buttonicon2} />Update Password</Button>
                 <Button className={classes.Remove} onClick={props.del}><ImBin2 className={classes.Buttonicon3} />Remove</Button>
             </div>
         </div>

@@ -30,3 +30,16 @@ export const InsertAdminData = async (admin) => {
     return await API.post('/admin/addAdmin', admin)
 }
 
+export const GetRoles = async () => {
+    return await API.get('/admin/get-roles');
+}
+
+export const DeleteVolunteer = async (id) => {
+    console.log(id)
+    return await API.delete(`/admin/remove-volunteer/${id}`);
+}
+
+export const DeleteUser = async (id) => {
+    console.log(id)
+    return await API.delete(`/users/remove-user/${id}`);
+}
