@@ -13,7 +13,6 @@ const Volunteers = (props) => {
   React.useEffect(() => {
     GetAdminsData()
       .then((data) => {
-        console.log(data.data.data);
         setadmins(data.data.data);
         setSingleUser(data.data.data[0])
       })
@@ -35,8 +34,6 @@ const Volunteers = (props) => {
       alert("Alteast one volunteer is mandatory")
       return
     }
-    console.log(userIndex)
-    console.log(admins[userIndex]._id)
     DeleteVolunteer(admins[userIndex]._id)
       .then((res) => { console.log(res) })
       .catch((err) => { console.log(err) })
@@ -58,7 +55,6 @@ const Volunteers = (props) => {
   }
 
   const updateUser = (state) => {
-    console.log(state)
     if (state == null) {
 
     }

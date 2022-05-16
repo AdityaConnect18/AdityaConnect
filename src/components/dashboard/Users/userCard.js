@@ -74,7 +74,7 @@ const UserCard = (props) => {
             </div>
 
             <Button className={classes.Remove}
-                onClick={props.del(props.data._id)} ><ImBin2 className={classes.Removeicon} />delete</Button>
+                onClick={props.del(props.data._id)} ><ImBin2 className={classes.Removeicon} />Remove</Button>
 
         </div>
     );

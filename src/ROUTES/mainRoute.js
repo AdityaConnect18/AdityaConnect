@@ -1,5 +1,4 @@
 import React from "react";
-// eslint-disable-next-line no-unused-vars
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import DashBoard from '../components/dashboard/Dashboard/dashboard';
 import NewsFeed from '../components/dashboard/Newsfeed/newsfeed';
@@ -18,7 +17,7 @@ import Navbar from "../components/dashboard/Navbar/Navbar";
 import Menubar from "../components/dashboard/Navbar/Menubar";
 import classes from '../App.module.css';
 import NewUser from '../components/dashboard/Users/Newuser'
-import EditForm from '../components/dashboard/Volunteers/EditForm'
+
 
 const MainRoute = (props) => {
   // const AuthContext = useContext(authContext);
@@ -38,7 +37,7 @@ const MainRoute = (props) => {
 
   function RequireAuth({ children }) {
     var payLoad = localStorage.getItem('payLoad');
-    console.log("Inside RequireAuth")
+    // console.log("Inside RequireAuth")
     return payLoad ? <BigBoardLayout><Outlet /></BigBoardLayout> : <Navigate to="/" />
 
   }
@@ -56,7 +55,6 @@ const MainRoute = (props) => {
           <Route path='/new-users' element={<NewUser />}></Route>
           <Route path='/volunteers' element={<Volunteers />}></Route>
           <Route path='/volunteers/add' element={<AddForm />}></Route>
-          <Route exact path='/volunteers/edit' element={<EditForm/>}></Route>
           <Route path='/courses' element={<Courses />}></Route>
           <Route path='/channels' element={<Channels />}></Route>
           <Route path='/messages' element={<Messages />}></Route>

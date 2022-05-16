@@ -1,5 +1,4 @@
 import React from "react";
-import PostCard from "./postCard";
 import classes from "./newsfeed.module.css";
 import { MdOutlineEditNote } from "react-icons/md";
 import { NavLink } from "react-router-dom";
@@ -48,6 +47,39 @@ const NewsFeed = () => {
   };
 
 
+  const [allValues, setAllValues] = useState({
+    title: '',
+    message: '',
+    Category:'',
+    selectedFile: null
+  });
+
+  const initState = {
+      title: '',
+      message: '',
+      Category:'',
+      selectedFile: null
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(allValues)
+    console.log(users)
+    if (allValues.Category === "sample") {  
+      alert("Selected Category")
+    }
+    else{
+        // InsertAdminData(allValues)
+        //     .then(response => {
+        //         navigate('/volunteers')
+        //         console.log(response)
+        //     })
+        //     .catch(err => console.log(err))
+        setAllValues({ ...initState })
+      }
+  }
+
+
   return (
 
     <div className={classes.NewsFeed}>
@@ -62,9 +94,10 @@ const NewsFeed = () => {
       </div>
 
       <div className={classes.FormContainer}>
-        <form>
+        <form onSubmit={handleSubmit} >
           <label for="Category">Select Category</label>
-          <select name="Category">
+          <select name="Category" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} required >
+            <option value="sample">--Select Category--</option>
             <option value="campusnews">Campus News</option>
             <option value="officecirculars">Office Circulars</option>
             <option value="examinations">Examinations</option>
@@ -101,15 +134,27 @@ const NewsFeed = () => {
           </div>
           <br />
           <label>Title</label>
-          <input type="text" name="firstname" placeholder="Enter Title" />
+          <input 
+            type="text" 
+            name="title" 
+            placeholder="Enter Title" 
+            onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} 
+            required/>
           <label>Message</label>
           <textarea
             id="subject"
-            name="subject"
+            name="message"
             placeholder="Write your message..."
+            onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })}
+            required
           ></textarea>
           <label for="upload">Upload Your Document</label>
-          <input type="file" id="upload" name="upload"></input>
+          <input 
+            type="file" 
+            id="upload" 
+            name="selectedFile" 
+            onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.files[0]})} 
+            required ></input>
           <input type="submit" value="Submit" />
         </form>
       </div>

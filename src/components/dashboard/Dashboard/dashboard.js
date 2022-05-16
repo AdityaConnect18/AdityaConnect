@@ -14,29 +14,21 @@ import { GetUSersData } from "../../../SERVICES/service";
 const DashBoard = () => {
 
     const [admins, setAdmins] = useState([{}]);
-    const [oneAdmin, setOneAdmin] = useState([{}])
-    const [twoAdmin, setTwoAdmin] = useState([{}])
-    const [threeAdmin, setThreeAdmin] = useState([{}])
-    const [fourAdmin, setFourAdmin] = useState([{}])
-    const [fiveAdmin, setFiveAdmin] = useState([{}])
-
     const [users, setUsers] = useState([{}]);
-    const [oneUser, setOneUser] = useState([{}])
-    const [twoUser, setTwoUser] = useState([{}])
-    const [threeUser, setThreeUser] = useState([{}])
-    const [fourUser, setFourUser] = useState([{}])
-    const [fiveUser, setFiveUser] = useState([{}])
+    const [fiveUsers,setFiveUsers] = useState([{}])
+    const [fiveAdmins,setFiveAdmins] = useState([{}])
 
     React.useEffect(() => {
         GetUSersData()
             .then((data) => {
-                //console.log(data.data.users);
-                setUsers(data.data.users);
-                setOneUser(data.data.users[0])
-                setTwoUser(data.data.users[1])
-                setThreeUser(data.data.users[2])
-                setFourUser(data.data.users[3])
-                setFiveUser(data.data.users[4])
+                if(Object.keys(data.data.users).length>=5)
+                {
+                    setFiveUsers(Array.prototype.slice.call(data.data.users, 5))
+
+                }
+                else{
+                    setFiveUsers(data.data.users)
+                }
             })
             .catch((error) => console.error(error))
     }, [])
@@ -45,14 +37,14 @@ const DashBoard = () => {
     React.useEffect(() => {
         GetAdminsData()
             .then((data) => {
-                console.log(data.data.data);
-                setAdmins(data.data.data);
-                setOneAdmin(data.data.data[0])
-                setTwoAdmin(data.data.data[1])
-                setThreeAdmin(data.data.data[2])
-                // setFourAdmin(data.data.data[3])
-                // setFiveAdmin(data.data.data[4])
-                console.log(oneAdmin)
+                if(Object.keys(data.data.data).length>=5)
+                {
+                    setFiveAdmins(Array.prototype.slice.call(data.data.data, 5))
+                }
+                else{
+                    setFiveAdmins(data.data.data)
+                }
+
             })
             .catch((error) => console.error(error))
     }, [])
@@ -112,29 +104,13 @@ const DashBoard = () => {
                                 <th>College</th>
                                 <th>Date</th>
                             </tr>
-
-                            <UsersTable
-                                index={"1"}
-                                data={oneUser}
-                            />
-                            <UsersTable
-                                index={"2"}
-                                data={twoUser}
-                            />
-                            <UsersTable
-                                index={"3"}
-                                data={threeUser}
-                            />
-
-                            {/* <UsersTable
-                                index={"4"}
-                                data={fourUser}
-                            />
-                            <UsersTable
-                                index={"5"}
-                                data={fiveUser}
-                            /> */}
-
+                            
+                            {fiveUsers.map((userObj, index) => (
+                                <UsersTable
+                                    index={index+1}
+                                    data={userObj}
+                                />
+                            ))}
                         </table>
                         <div className={classes.View}><NavLink className={classes.ViewConent} exact to="/users">ViewAll</NavLink></div>
 
@@ -150,29 +126,12 @@ const DashBoard = () => {
 
                             </tr>
 
-
-                            <VoluTable
-                                index={"1"}
-                                data={oneAdmin}
-                            />
-                            <VoluTable
-                                index={"2"}
-                                data={twoAdmin}
-                            />
-                            <VoluTable
-                                index={"3"}
-                                data={threeAdmin}
-                            />
-                            <VoluTable
-                                index={"4"}
-                                data={fourAdmin}
-                            />
-                            <VoluTable
-                                index={"5"}
-                                data={fiveAdmin}
-                            />
-
-
+                            {fiveAdmins.map((adminObj, index) => (
+                                <VoluTable
+                                    index={index+1}
+                                    data={adminObj}
+                                />
+                            ))}
                         </table>
                         <div className={classes.View}><NavLink className={classes.ViewConent} exact to="/volunteers">ViewAll</NavLink></div>
                     </div>

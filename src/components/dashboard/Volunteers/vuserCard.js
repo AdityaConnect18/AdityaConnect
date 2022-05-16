@@ -12,11 +12,7 @@ import { GoKey } from 'react-icons/go';
 import { ImBin2 } from 'react-icons/im';
 import Button from 'react-bootstrap/Button';
 
-
-
-
 const VUserCard = (props) => {
-    console.log(props)
     return (
         <div className={classes.Userbox}>
             <div className={classes.Mainbox}>
