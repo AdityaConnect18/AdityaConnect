@@ -93,13 +93,15 @@ const AuthState = (props) => {
     }
   };
 
-  // Logout
-  const logout = () => {
-    dispatch({
-      type: AUTH_ERROR,
-    });
+  
+  const signOut = async () => {
+    try {
+      await localStorage.removeItem('userToken');
+    } catch (e) {
+      console.log(e);
+    }
+    dispatch({ type: 'LOGOUT' });
   };
-
   return (
     <authContext.Provider
       value={{
@@ -109,8 +111,9 @@ const AuthState = (props) => {
         payLoad: state.userToken,
         loginUser,
         loadUser,
-        logout,
+        signOut,
         changePassword,
+  //      loginUserDetails,
       }}
     >
       {props.children}

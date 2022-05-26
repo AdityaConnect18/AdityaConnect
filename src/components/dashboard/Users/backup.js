@@ -4,7 +4,7 @@ import ListCard from "./listCard";
 import UserCard from "./userCard";
 import { GetUSersData, GetCollegesData, GetCoursesData, DeleteUser } from "../../../SERVICES/service";
 
-export default class Newuser extends Component {
+export default class Users extends Component {
 
     constructor() {
         super();
@@ -17,7 +17,7 @@ export default class Newuser extends Component {
             filteredColleges: [],
             roleSelect: 'all',
             courseSelect: 'all',
-            collegeSelect: 'all'
+            collegeSelect: 'all', 
         }
     }
 
@@ -49,12 +49,12 @@ export default class Newuser extends Component {
     getUsers = () => {
         GetUSersData()
             .then(data => {
-                console.log(data.data.users)
                 this.setState({
                     users: data.data.users,
                     filteredUsers: data.data.users,
                     singleUser: data.data.users[0]
                 })
+                console.log(this.state.filteredUsers)
             })
             .catch(err => console.error(err))
     }
@@ -70,7 +70,6 @@ export default class Newuser extends Component {
 
     changeHandleRoleSelect = (role) => {
         this.setState({ roleSelect: role }, () => {
-            console.log(this.state.roleSelect)
             // call filterData
             this.filterData();
         })
@@ -78,9 +77,7 @@ export default class Newuser extends Component {
 
     changeHandleCourseSelect = (course) => {
         let { colleges } = this.state;
-        console.log(colleges)
         this.setState({ courseSelect: course }, () => {
-            console.log(this.state.courseSelect)
             let cols = colleges.filter(college => course === 'all' ? college.courseId._id.length > 1 : college.courseId._id === course)
             this.setState({ filteredColleges: cols })
             // call filterData
@@ -90,21 +87,37 @@ export default class Newuser extends Component {
 
     changeHandleCollegeSelect = (college) => {
         this.setState({ collegeSelect: college }, () => {
-            console.log(this.state.collegeSelect)
             this.filterData();
         })
     }
 
     displayData = (user) => {
-        this.setState({ singleUser: user })
+        this.setState({ singleUser: user})
+
     }
 
     deleteUser = (id) => {
         console.log(id)
-        // DeleteUser(id)
-        //     .then((user) => { console.log(user) })
-        //     .catch((error) => { console.log(error) })
     }
+
+
+
+    // deleteUser = (userIndex) => {
+    //     if (this.state.filteredUsers.length === 1) {
+    //       alert("Alteast one volunteer is mandatory")
+    //       return
+    //     }
+    //     DeleteUser(this.state.filteredUsers[userIndex]._id)
+    //       .then((res) => { console.log(res) })
+    //       .catch((err) => { console.log(err) })
+    //       this.state.filteredUsers.splice(userIndex, 1)
+    //     if (userIndex !== 0) {
+    //       this.setstate({singleUser: this.state.filteredUsers[userIndex - 1]})
+    //     }
+    //     else {
+    //         this.setstate({singleUser: this.state.filteredUsers[0]})
+    //     }
+    //   }
 
 
     render() {
@@ -153,7 +166,7 @@ export default class Newuser extends Component {
                     <div className={classes.UserCards}>
                         <UserCard
                             data={singleUser}
-                            del={this.deleteUser}
+                            del={this.deleteUser()}
                         />
                     </div>
                     {filteredUsers.length > 1 ? <div className={classes.Listcards}>
@@ -164,7 +177,6 @@ export default class Newuser extends Component {
                                     name={userObj.fullName}
                                     college={userObj.collegeId ? userObj.collegeId['collegeName'] : null}
                                     timeStamp={userObj.createdAt}
-                                // date={userObj.date}
                                 />
                             </div>
                         ))}

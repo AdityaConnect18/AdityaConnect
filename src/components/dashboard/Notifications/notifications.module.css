@@ -2,6 +2,9 @@
     padding-left: 50px;
   }
   
+.Content{
+    margin-top: 20px;
+}
   .Heading{
       font-style: 'Roboto', sans-serif;
       margin-top: 70px;

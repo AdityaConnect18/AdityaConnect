@@ -6,7 +6,11 @@ const Notifications = () => {
     return(
         <div className={classes.MainContainer}>
             <div className={classes.Heading}>Notifications</div>
-            <Bar/>  
+            <div className={classes.Content}>
+            <Bar/>
+            </div>
+              
+            <center><h1>Comming Soon</h1></center>
         </div>
     );
 }

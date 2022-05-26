@@ -111,7 +111,7 @@ const AddForm = (props) => {
         else if (allValues.DeptId === "" || allValues.collegeId === "" || allValues.courseId === "" || allValues.roleId === "" 
         || allValues.DeptId === "sample" || allValues.collegeId === "sample" || allValues.courseId === "sample"  || allValues.roleId === "sample"
         || allValues.DeptId === undefined || allValues.collegeId === undefined || allValues.courseId === undefined || allValues.roleId === undefined ) {
-            alert("Select Course, College, Department")
+            alert("Select Role, Course, College, Department")
         }
         else {
             InsertAdminData(allValues)

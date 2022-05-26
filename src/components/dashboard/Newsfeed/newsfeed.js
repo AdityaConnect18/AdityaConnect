@@ -2,69 +2,104 @@ import React from "react";
 import classes from "./newsfeed.module.css";
 import { MdOutlineEditNote } from "react-icons/md";
 import { NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { GetCollegesData, GetCategoriesData } from '../../../SERVICES/service';
 
-const userData = [
-  { name: "Engineering", value: "eng" },
-  { name: "Pharmacy" },
-  { name: "Diploma" },
-  { name: "Management & MCA" },
-  { name: "Aditya Engineering College (Engineering)" },
-  { name: "Aditya College of Engineering & Technology (Engineering)" },
-  { name: "Aditya College of Engineering (Engineering)" },
-  { name: "Aditya Engineering College (Diploma)" },
-  { name: "Aditya College of Engineering & Technology (Diploma)" },
-  { name: "Aditya College of Engineering (Diploma)" },
-  { name: "Aditya Engineering College (Management & MCA)" },
-  { name: "Aditya College of Engineering & Technology (Management & MCA)" },
-  { name: "Aditya Global Business School (Management & MCA)" },
-  { name: "Aditya Institute of P.G. Studies (Management & MCA)" },
-  { name: "Aditya Pharmacy College (Pharmacy)" },
-  { name: "Aditya College of Pharmacy (Pharmacy)" },
-];
+// const userData = [
+//   { name: "Engineering", value: "eng" },
+//   { name: "Pharmacy" },
+//   { name: "Diploma" },
+//   { name: "Management & MCA" },
+//   { name: "Aditya Engineering College (Engineering)" },
+//   { name: "Aditya College of Engineering & Technology (Engineering)" },
+//   { name: "Aditya College of Engineering (Engineering)" },
+//   { name: "Aditya Engineering College (Diploma)" },
+//   { name: "Aditya College of Engineering & Technology (Diploma)" },
+//   { name: "Aditya College of Engineering (Diploma)" },
+//   { name: "Aditya Engineering College (Management & MCA)" },
+//   { name: "Aditya College of Engineering & Technology (Management & MCA)" },
+//   { name: "Aditya Global Business School (Management & MCA)" },
+//   { name: "Aditya Institute of P.G. Studies (Management & MCA)" },
+//   { name: "Aditya Pharmacy College (Pharmacy)" },
+//   { name: "Aditya College of Pharmacy (Pharmacy)" },
+// ];
+
 
 const NewsFeed = () => {
 
-  const [users, setUsers] = useState([]);
+  const [colleges, setColleges] = React.useState([{}]);
+const [categories, setCategories] = React.useState([{}]);
 
-  useEffect(() => {
-    setUsers(userData);
-  }, []);
+React.useEffect(() => {
+  try {
+      getColleges();
+      getCategories();
+  } catch (error) {
+      console.log(error)
+  }
+}, [])
 
-  const handleChange = (e) => {
-    const { name, checked } = e.target;
-    if (name === "allSelect") {
-      let tempUser = users.map((user) => {
-        return { ...user, isChecked: checked };
-      });
-      setUsers(tempUser);
-    } else {
-      let tempUser = users.map((user) =>
-        user.name === name ? { ...user, isChecked: checked } : user
-      );
-      setUsers(tempUser);
-    }
-  };
+const getColleges = () => {
+  GetCollegesData()
+      .then((data) => {
+          setColleges(data.data.colleges)
+      })
+}
+
+const getCategories = () => {
+  GetCategoriesData()
+      .then(data => {
+          setCategories(data.data.result)
+      })
+}
+
+// console.log(colleges)
+//  const [users, setUsers] = useState([]);
+
+//   useEffect(() => {
+//     setUsers(userData);
+//   }, []);
+
+  // const handleChange = (e) => {
+  //   const { name, checked } = e.target;
+  //   if (name === "allSelect") {
+  //     let tempUser = users.map((user) => {
+  //       return { ...user, isChecked: checked };
+  //     });
+  //     setUsers(tempUser);
+  //   } else {
+  //     let tempUser = users.map((user) =>
+  //       user.name === name ? { ...user, isChecked: checked } : user
+  //     );
+  //     setUsers(tempUser);
+  //   }
+  // };
+
+  const handleCheck = (e) => {
+
+  }
 
 
   const [allValues, setAllValues] = useState({
     title: '',
     message: '',
-    Category:'',
+    category:'',
+    channels: [],
     selectedFile: null
   });
 
   const initState = {
       title: '',
       message: '',
-      Category:'',
+      channels: '',
+      category:'',
       selectedFile: null
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(allValues)
-    console.log(users)
+    // console.log(users)
     if (allValues.Category === "sample") {  
       alert("Selected Category")
     }
@@ -95,23 +130,20 @@ const NewsFeed = () => {
 
       <div className={classes.FormContainer}>
         <form onSubmit={handleSubmit} >
-          <label for="Category">Select Category</label>
-          <select name="Category" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} required >
+          <label for="category">Select Category</label>
+          <select name="category" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} required >
             <option value="sample">--Select Category--</option>
-            <option value="campusnews">Campus News</option>
-            <option value="officecirculars">Office Circulars</option>
-            <option value="examinations">Examinations</option>
-            <option value="placements">Placements</option>
-            <option value="sports">Sports</option>
-            <option value="fests">Fests</option>
+            {categories.length > 1 ? categories.map(category => (
+              <option value={category._id}>{category.categoryName}</option>
+               )) : null}
           </select>
 
-          <label for="Category">Select News Channels</label> &emsp;
+          <label for="channels">Select News Channels</label> &emsp;
           <input
            type="checkbox"
            name="allSelect"
-           checked={!users.some((user) => user?.isChecked !== true)}
-           onChange={handleChange}
+          //  checked={!users.some((user) => user?.isChecked !== true)}
+          //  onChange={handleChange}
           />
           &ensp;
           <label for="all">All</label> &ensp;
@@ -119,15 +151,16 @@ const NewsFeed = () => {
 
           <div className={classes.Main}>
             <div>
-                {users.map((user, index) => (
+                {colleges.map((college) => (
                   <div className={classes.Element} >
                     <input
                       type="checkbox"
-                      name={user.name}
-                      checked={user?.isChecked || false}
-                      onChange={handleChange}
+                      name="channels"
+                      value={college._id}
+                      // checked={user?.isChecked || false}
+                      // onChange={handleChange}
                     />
-                    <label>{user.name}</label>
+                    <label>{college.collegeName}    ({college.courseId?.courseName})</label>
                   </div>
                 ))}        
             </div>

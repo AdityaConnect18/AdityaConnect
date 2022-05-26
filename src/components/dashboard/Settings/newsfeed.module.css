@@ -1,0 +1,117 @@
+input[type=text], select, input[type=file],textarea{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+  }
+  
+  input[type=submit] {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+
+  .NewsFeed{
+      padding-left: 50px;
+  
+  }
+
+  .Heading{
+    font-style: 'Roboto', sans-serif;
+    margin-top: 70px;
+    font-size: 28px;
+    font-weight: 400;
+  }
+  
+  .FormContainer {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.40);
+    border-radius: 5px;
+    background-color: white;
+    padding: 20px;
+    width: 1000px;
+    margin: 40px 70px 40px 70px;
+  }
+
+  .Filter{
+    width: 150px;
+    margin: 20px;
+    position: relative;
+    right: 0;
+  }
+
+  .Buttons{
+    margin: 20px 0px 15px -5px;
+  }
+
+  .Button {
+    border-radius: 4px;
+    background-color: #f4511e;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 12px;
+    padding: 8px;
+    width: 120px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    height: 40px;
+    font-weight: 400;
+    font-style: 'Roboto', sans-serif;
+  }
+  
+  .Button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .Button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .Button:hover span {
+    padding-right: 25px;
+  }
+  
+  .Button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+  .Main{
+    display: flex;
+    width: 100%;
+
+  }
+
+  .LeftBox{
+    width: 50%;
+  }
+
+  .RightBox{
+    width: 50%;
+  }
+
+  .Element{
+    display: block;
+  }
+
+  

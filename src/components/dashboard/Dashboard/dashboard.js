@@ -4,39 +4,62 @@ import UsersTable from './usersTable'
 import { ImUsers } from 'react-icons/im';
 import { FaNewspaper } from 'react-icons/fa';
 import { AiFillMessage } from 'react-icons/ai';
-import { RiNotificationFill } from 'react-icons/ri';
+// import { RiNotificationFill } from 'react-icons/ri';
+import { RiAdminFill } from 'react-icons/ri';
 import VoluTable from './voluTable';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { GetAdminsData } from "../../../SERVICES/service"
-import { GetUSersData } from "../../../SERVICES/service";
+import { GetUSersData, GetAdminsData, GetMessages, GetPosts } from "../../../SERVICES/service";
+
 
 const DashBoard = () => {
 
-    const [admins, setAdmins] = useState([{}]);
-    const [users, setUsers] = useState([{}]);
+    const [adminsCount, setAdminsCount] = useState();
+    const [usersCount, setUsersCount] = useState();
+    const [messagesCount, setMessagesCount] = useState();
+    const [postsDataCount, setPostsDataCount] = useState();
     const [fiveUsers,setFiveUsers] = useState([{}])
     const [fiveAdmins,setFiveAdmins] = useState([{}])
+    
+  
+      React.useEffect(() => {
+        GetPosts()
+          .then((data) => {
+            setPostsDataCount(Object.keys(data.data.data).length);
+          })
+          .catch((error) => console.error(error))
+      }, [])
+  
+
+    React.useEffect(() => {
+        GetMessages()
+          .then((data) => {
+            setMessagesCount(Object.keys(data.data.data).length);
+          })
+          .catch((error) => console.error(error))
+      }, [])
 
     React.useEffect(() => {
         GetUSersData()
             .then((data) => {
+                setUsersCount(Object.keys(data.data.users).length)
                 if(Object.keys(data.data.users).length>=5)
                 {
-                    setFiveUsers(Array.prototype.slice.call(data.data.users, 5))
-
+                    
+                    setFiveUsers(data.data.users.slice(0,5))
                 }
                 else{
+                    
                     setFiveUsers(data.data.users)
                 }
             })
             .catch((error) => console.error(error))
     }, [])
 
-
     React.useEffect(() => {
         GetAdminsData()
             .then((data) => {
+                setAdminsCount(Object.keys(data.data.data).length)
                 if(Object.keys(data.data.data).length>=5)
                 {
                     setFiveAdmins(Array.prototype.slice.call(data.data.data, 5))
@@ -59,7 +82,7 @@ const DashBoard = () => {
                         <ImUsers className={classes.Icon} />
                     </div>
                     <div className={classes.Content}>
-                        <p>8040</p>
+                        <p>{usersCount}</p>
                         <p>Total Users</p>
                     </div>
                 </div>
@@ -68,7 +91,7 @@ const DashBoard = () => {
                         <FaNewspaper className={classes.Icon} />
                     </div>
                     <div className={classes.Content}>
-                        <p>1145</p>
+                        <p>{postsDataCount}</p>
                         <p>News Published</p>
                     </div>
                 </div>
@@ -78,18 +101,18 @@ const DashBoard = () => {
                         <AiFillMessage className={classes.Icon} />
                     </div>
                     <div className={classes.Content}>
-                        <p>107</p>
+                        <p>{messagesCount}</p>
                         <p>New Messages</p>
                     </div>
                 </div>
 
                 <div className={classes.Box}>
                     <div className={classes.Box4}>
-                        <RiNotificationFill className={classes.Icon} />
+                        <RiAdminFill className={classes.Icon} />
                     </div>
                     <div className={classes.Content}>
-                        <p>40</p>
-                        <p>Notifications</p>
+                        <p>{adminsCount}</p>
+                        <p>Total Admins</p>
                     </div>
                 </div>
             </div>
@@ -132,6 +155,7 @@ const DashBoard = () => {
                                     data={adminObj}
                                 />
                             ))}
+                            
                         </table>
                         <div className={classes.View}><NavLink className={classes.ViewConent} exact to="/volunteers">ViewAll</NavLink></div>
                     </div>

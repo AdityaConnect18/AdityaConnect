@@ -1,8 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from "react-router-dom";
+import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import DashBoard from '../components/dashboard/Dashboard/dashboard';
 import NewsFeed from '../components/dashboard/Newsfeed/newsfeed';
-import Users from '../components/dashboard/Users/users';
+import Users from '../components/dashboard/Users/Users';
 import Volunteers from '../components/dashboard/Volunteers/volunteers';
 import Courses from '../components/dashboard/Courses/courses';
 import Channels from '../components/dashboard/Channels/channels';
@@ -12,11 +12,12 @@ import Settings from '../components/dashboard/Settings/settings';
 import PostCard from "../components/dashboard/Newsfeed/postCard";
 import AddForm from "../components/dashboard/Volunteers/AddForm";
 import Login from "../components/LoginForm/login"
+import MyPostCard from "../components/dashboard/Settings/mypostCard";
 // import authContext from "../CONTEXT/Auth/authContext";
 import Navbar from "../components/dashboard/Navbar/Navbar";
 import Menubar from "../components/dashboard/Navbar/Menubar";
 import classes from '../App.module.css';
-import NewUser from '../components/dashboard/Users/Newuser'
+
 
 
 const MainRoute = (props) => {
@@ -52,7 +53,6 @@ const MainRoute = (props) => {
           <Route path='/news' element={<NewsFeed />}></Route>
           <Route path='/news/newsfeed' element={<PostCard />}></Route>
           <Route path='/users' element={<Users />}></Route>
-          <Route path='/new-users' element={<NewUser />}></Route>
           <Route path='/volunteers' element={<Volunteers />}></Route>
           <Route path='/volunteers/add' element={<AddForm />}></Route>
           <Route path='/courses' element={<Courses />}></Route>
@@ -60,6 +60,7 @@ const MainRoute = (props) => {
           <Route path='/messages' element={<Messages />}></Route>
           <Route path='/notifications' element={<Notifications />}></Route>
           <Route path='/settings' element={<Settings />}></Route>
+          <Route path='/settings/myposts' element={<MyPostCard />}></Route>
         </Route>
         <Route path='/' element={<Login />}></Route>
       </Routes>

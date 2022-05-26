@@ -1,0 +1,110 @@
+select{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+  }
+
+  .Filter{
+    width: 150px;
+    margin: 5px;
+    position: relative;
+    right: 0;
+  }
+  
+.NewsFeed{
+    padding-left: 50px;
+
+}
+
+.Heading{
+  font-style: 'Roboto', sans-serif;
+  margin-top: 70px;
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.Content{
+    padding: 5px 10px 5px 10px;
+    text-align: left;
+}
+.Card{
+    width: 55%;
+    font-family: "Times New Roman", Times, serif;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+    padding: 3px;
+    background-color: white;
+    margin-left: 195px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.Img{
+    padding-top: 5px;
+    width: 98%;
+    height: 440px;
+}
+
+.Title{
+    font-family: 'Roboto', sans-serif;
+    margin: 10px 0px;
+    font-size: 28px;
+    font-weight: 200;
+    
+}
+
+.Line{
+    width: 95%;
+    border: 1px solid rgb(230, 230, 230);
+	background-color: rgb(230, 230, 230);
+} 
+
+.Buttons{
+    margin: 15px 0px 25px 0px;
+  }
+
+  .Button {
+    border-radius: 4px;
+    background-color: #f4511e;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 12px;
+    padding: 8px;
+    width: 120px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    height: 40px;
+    font-weight: 400;
+    font-style: 'Roboto', sans-serif;
+  }
+  
+  .Button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .Button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .Button:hover span {
+    padding-right: 25px;
+  }
+  
+  .Button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }

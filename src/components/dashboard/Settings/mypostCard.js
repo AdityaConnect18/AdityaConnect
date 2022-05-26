@@ -5,7 +5,7 @@ import {useState} from "react";
 import {GetPosts} from "../../../SERVICES/service"
 import Card from "./card"
 
-const PostCard = () => {
+const MyPostCard = () => {
 
   const [postsData, setPostsData] = useState([{}]);
   
@@ -16,21 +16,23 @@ const PostCard = () => {
           })
           .catch((error) => console.error(error))
       }, [])
-   
 
+  console.log(postsData)
+
+  
     return(
         <div className={classes.NewsFeed}>
-            <div className={classes.Heading}>News Feed</div>
+            <div className={classes.Heading}>My Posts</div>
             <div className={classes.Buttons}>
             <NavLink 
             exact
-            to="/news"
+            to="/settings"
             className={classes.Button}>
             <span>Publish Post</span>
             </NavLink>
             <NavLink 
             exact
-            to="/news/newsfeed"
+            to="/settings/myposts"
             className={classes.Button}>
             <span>NewsFeed</span>
             </NavLink>
@@ -54,7 +56,6 @@ const PostCard = () => {
               Title={onePost.postTitle}
               msg={onePost.postMessage}
               timeStamp={onePost.createdAt}
-              postedBy = {onePost.postedBy?.adminName}
               />
           ))}
        
@@ -63,4 +64,4 @@ const PostCard = () => {
         
     );
 }
-export default PostCard;
+export default MyPostCard;

@@ -6,6 +6,14 @@ export const Login = (user) => {
     return API.post('/admin/login', user);
 }
 
+export const GetPosts = () => {
+    return API.get('/admin/get-posts');
+}
+
+export const GetMessages = () => {
+    return API.get('/admin/get-messages');
+}
+
 export const GetCollegesData = () => {
     return API.get('/ccd/get-colleges');
 }
@@ -42,4 +50,9 @@ export const DeleteVolunteer = async (id) => {
 export const DeleteUser = async (id) => {
     console.log(id)
     return await API.delete(`/users/remove-user/${id}`);
+}
+
+export const FindAdminById = async (id) => {
+    console.log(id)
+    return await API.get(`/admin/get-admin/${id}`);
 }
