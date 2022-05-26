@@ -2,24 +2,30 @@ import React from 'react';
 import classes from './postCard.module.css'
 import { NavLink } from 'react-router-dom'
 import {useState} from "react";
-import {GetPosts} from "../../../SERVICES/service"
+import {GetAdminPosts} from "../../../SERVICES/service"
 import Card from "./card"
 
 const MyPostCard = () => {
 
+  function parseJwt(token) {
+    if (token) {
+      return JSON.parse(atob(token.split('.')[1]));
+    }
+  }
+
+  React.useEffect(() => {
+  let token = localStorage.getItem("payLoad")
+  let userDetails = parseJwt(token)
+    GetAdminPosts(userDetails._id)
+      .then((data) => {
+        console.log(data)
+        setPostsData(data.data.posts);
+      })
+      .catch((error) => console.error(error))
+  }, [])
+
   const [postsData, setPostsData] = useState([{}]);
-  
-      React.useEffect(() => {
-        GetPosts()
-          .then((data) => {
-            setPostsData(data.data.data);
-          })
-          .catch((error) => console.error(error))
-      }, [])
-
-  console.log(postsData)
-
-  
+    
     return(
         <div className={classes.NewsFeed}>
             <div className={classes.Heading}>My Posts</div>
@@ -56,6 +62,7 @@ const MyPostCard = () => {
               Title={onePost.postTitle}
               msg={onePost.postMessage}
               timeStamp={onePost.createdAt}
+              postedBy = {onePost.postedBy?.adminName}
               />
           ))}
        

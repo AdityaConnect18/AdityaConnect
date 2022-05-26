@@ -56,3 +56,13 @@ export const FindAdminById = async (id) => {
     console.log(id)
     return await API.get(`/admin/get-admin/${id}`);
 }
+
+export const GetAdminPosts = async (id) => {
+    console.log(id)
+    return await API.get(`/admin/get-admin-posts/${id}`);
+}
+
+export const SubmitPost = async (data) => {
+    console.log(data)
+    return await API.post(`/admin/publishpost`, data);
+}
