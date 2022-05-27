@@ -3,117 +3,179 @@ import classes from "./newsfeed.module.css";
 import { MdOutlineEditNote } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import { GetCollegesData, GetCategoriesData } from '../../../SERVICES/service';
-
-// const userData = [
-//   { name: "Engineering", value: "eng" },
-//   { name: "Pharmacy" },
-//   { name: "Diploma" },
-//   { name: "Management & MCA" },
-//   { name: "Aditya Engineering College (Engineering)" },
-//   { name: "Aditya College of Engineering & Technology (Engineering)" },
-//   { name: "Aditya College of Engineering (Engineering)" },
-//   { name: "Aditya Engineering College (Diploma)" },
-//   { name: "Aditya College of Engineering & Technology (Diploma)" },
-//   { name: "Aditya College of Engineering (Diploma)" },
-//   { name: "Aditya Engineering College (Management & MCA)" },
-//   { name: "Aditya College of Engineering & Technology (Management & MCA)" },
-//   { name: "Aditya Global Business School (Management & MCA)" },
-//   { name: "Aditya Institute of P.G. Studies (Management & MCA)" },
-//   { name: "Aditya Pharmacy College (Pharmacy)" },
-//   { name: "Aditya College of Pharmacy (Pharmacy)" },
-// ];
+import { GetCollegesData, GetCategoriesData, GetCoursesData, SubmitPost } from '../../../SERVICES/service';
 
 
-const NewsFeed = () => {
-
+const NewsFeed = (props) => {
+  let { userDetails } = props;
   const [colleges, setColleges] = React.useState([{}]);
-const [categories, setCategories] = React.useState([{}]);
-
-React.useEffect(() => {
-  try {
-      getColleges();
-      getCategories();
-  } catch (error) {
-      console.log(error)
-  }
-}, [])
-
-const getColleges = () => {
-  GetCollegesData()
-      .then((data) => {
-          setColleges(data.data.colleges)
-      })
-}
-
-const getCategories = () => {
-  GetCategoriesData()
-      .then(data => {
-          setCategories(data.data.result)
-      })
-}
-
-// console.log(colleges)
-//  const [users, setUsers] = useState([]);
-
-//   useEffect(() => {
-//     setUsers(userData);
-//   }, []);
-
-  // const handleChange = (e) => {
-  //   const { name, checked } = e.target;
-  //   if (name === "allSelect") {
-  //     let tempUser = users.map((user) => {
-  //       return { ...user, isChecked: checked };
-  //     });
-  //     setUsers(tempUser);
-  //   } else {
-  //     let tempUser = users.map((user) =>
-  //       user.name === name ? { ...user, isChecked: checked } : user
-  //     );
-  //     setUsers(tempUser);
-  //   }
-  // };
-
-  const handleCheck = (e) => {
-
-  }
-
+  const [categories, setCategories] = React.useState([{}]);
+  const [collegeDict, setCollegeDict] = React.useState({});
+  const [courses, setCourses] = React.useState([]);
+  const [coursesDict, setCoursesDict] = React.useState({});
+  const [allCheck, setAllCheck] = React.useState(false)
 
   const [allValues, setAllValues] = useState({
-    title: '',
-    message: '',
-    category:'',
-    channels: [],
-    selectedFile: null
+    postTitle: '',
+    postMessage: '',
+    categoryId: '',
+    channelList: [],
+    selectedFile: null,
+    postedBy: userDetails?._id
   });
 
   const initState = {
-      title: '',
-      message: '',
-      channels: '',
-      category:'',
-      selectedFile: null
+    postTitle: '',
+    postMessage: '',
+    categoryId: '',
+    channelList: [],
+    selectedFile: null,
+    postedBy: userDetails?._id
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(allValues)
-    // console.log(users)
-    if (allValues.Category === "sample") {  
-      alert("Selected Category")
+  React.useEffect(() => {
+    try {
+      getColleges();
+      getCategories();
+      getCourses();
+    } catch (error) {
+      console.log(error)
     }
-    else{
-        // InsertAdminData(allValues)
-        //     .then(response => {
-        //         navigate('/volunteers')
-        //         console.log(response)
-        //     })
-        //     .catch(err => console.log(err))
-        setAllValues({ ...initState })
-      }
+  }, [])
+
+  const getColleges = () => {
+    GetCollegesData()
+      .then((data) => {
+        setColleges(data.data.colleges)
+        let dict = {}
+        data.data.colleges.forEach(college => {
+          dict[college._id] = false;
+        })
+        setCollegeDict(dict)
+      })
   }
 
+  const getCategories = () => {
+    GetCategoriesData()
+      .then(data => {
+        setCategories(data.data.result)
+      })
+  }
+
+  const getCourses = () => {
+    GetCoursesData()
+      .then(data => {
+        setCourses(data.data.result)
+        let dict = {}
+        data.data.result.forEach(course => {
+          dict[course._id] = false;
+        })
+        setCoursesDict(dict)
+      })
+  }
+
+
+  const handleCheck = (e) => {
+    if (collegeDict[e.target.value] === true) {
+      setAllCheck(false)
+    }
+    setCollegeDict({
+      ...collegeDict,
+      [e.target.value]: !collegeDict[e.target.value]
+    })
+
+  }
+
+  const handleCourseCheck = (e) => {
+    if (coursesDict[e.target.value] === true) {
+      setAllCheck(false)
+    }
+    setCoursesDict({
+      ...coursesDict,
+      [e.target.value]: !coursesDict[e.target.value]
+    })
+
+    let collegeIdsOfCourse = colleges
+      .filter(college => college.courseId?._id === e.target.value)
+      .map(college => college._id)
+    let trueDict = {}
+    collegeIdsOfCourse.forEach(collegeId => {
+      trueDict[collegeId] = !collegeDict[collegeId]
+    })
+    setCollegeDict({
+      ...collegeDict,
+      ...trueDict
+    })
+    console.log(coursesDict)
+
+  }
+
+  const handlAllCheck = () => {
+    if (allCheck) { // make eveything false
+      let falseDict = {}
+      let falseDict2 = {}
+      Object.keys(coursesDict).forEach(key => {
+        falseDict[key] = false
+      })
+      setCoursesDict({
+        ...coursesDict,
+        ...falseDict
+      })
+
+      Object.keys(collegeDict).forEach(key => {
+        falseDict2[key] = false
+      })
+      setCollegeDict({
+        ...collegeDict,
+        ...falseDict2
+      })
+    }
+    else { // make everything true
+      console.log("in else")
+      let trueDict = {}
+      let trueDict2 = {}
+      Object.keys(coursesDict).forEach(key => {
+        trueDict[key] = true
+      })
+      setCoursesDict({
+        ...coursesDict,
+        ...trueDict
+      })
+
+      Object.keys(collegeDict).forEach(key => {
+        trueDict2[key] = true
+      })
+      setCollegeDict({
+        ...collegeDict,
+        ...trueDict2
+      })
+    }
+    setAllCheck(prevCheck => !prevCheck)
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    let channelIds = [];
+    Object.keys(collegeDict).forEach(collegeId => {
+      if (collegeDict[collegeId] === true) {
+        channelIds.push(collegeId)
+      }
+    })
+    let requestObject = {
+      ...allValues,
+      channelList: channelIds
+    }
+    try {
+      let postRes = await SubmitPost(requestObject)
+      console.log(postRes)
+    } catch (error) {
+      console.log(error.message)
+    }
+    setAllValues({
+      ...allValues,
+      ...initState
+    })
+  }
 
   return (
 
@@ -131,63 +193,86 @@ const getCategories = () => {
       <div className={classes.FormContainer}>
         <form onSubmit={handleSubmit} >
           <label for="category">Select Category</label>
-          <select name="category" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} required >
+          <select name="categoryId" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} required >
             <option value="sample">--Select Category--</option>
             {categories.length > 1 ? categories.map(category => (
               <option value={category._id}>{category.categoryName}</option>
-               )) : null}
+            )) : null}
           </select>
 
           <label for="channels">Select News Channels</label> &emsp;
           <input
-           type="checkbox"
-           name="allSelect"
-          //  checked={!users.some((user) => user?.isChecked !== true)}
-          //  onChange={handleChange}
+            type="checkbox"
+            onChange={handlAllCheck}
+            checked={allCheck}
           />
           &ensp;
           <label for="all">All</label> &ensp;
           <MdOutlineEditNote />
 
+          <br />
+          <br />
           <div className={classes.Main}>
             <div>
-                {colleges.map((college) => (
-                  <div className={classes.Element} >
-                    <input
-                      type="checkbox"
-                      name="channels"
-                      value={college._id}
-                      // checked={user?.isChecked || false}
-                      // onChange={handleChange}
-                    />
-                    <label>{college.collegeName}    ({college.courseId?.courseName})</label>
-                  </div>
-                ))}        
+              {courses.map((course) => (
+                <span>
+                  <input
+                    type="checkbox"
+                    name="channels"
+                    value={course._id}
+                    onClick={handleCourseCheck}
+                    checked={coursesDict[course._id]}
+                  />
+                  <label>{course.courseName}</label>
+                </span>
+              ))}
             </div>
           </div>
+
           <br />
-          <label>Title</label>
-          <input 
-            type="text" 
-            name="title" 
-            placeholder="Enter Title" 
-            onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} 
-            required/>
-          <label>Message</label>
-          <textarea
-            id="subject"
-            name="message"
-            placeholder="Write your message..."
-            onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })}
-            required
-          ></textarea>
-          <label for="upload">Upload Your Document</label>
-          <input 
-            type="file" 
-            id="upload" 
-            name="selectedFile" 
-            onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.files[0]})} 
-            required ></input>
+          <div className={classes.Main}>
+            <div>
+              {colleges.map((college) => (
+                <div className={classes.Element} >
+                  <input
+                    type="checkbox"
+                    name="channels"
+                    value={college._id}
+                    checked={collegeDict[college._id]}
+                    onClick={handleCheck}
+                  />
+                  <label>{college.collegeName}    ({college.courseId?.courseName})</label>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <br />
+
+          <div>
+            <label>Title</label>
+            <input
+              type="text"
+              name="postTitle"
+              placeholder="Enter Title"
+              onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })}
+              required />
+            <label>Message</label>
+            <textarea
+              id="subject"
+              name="postMessage"
+              placeholder="Write your message..."
+              onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })}
+              required
+            ></textarea>
+            <label for="upload">Upload Your Document</label>
+            <input
+              type="file"
+              id="upload"
+              name="selectedFile"
+              onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.files[0] })}
+              required ></input>
+          </div>
           <input type="submit" value="Submit" />
         </form>
       </div>

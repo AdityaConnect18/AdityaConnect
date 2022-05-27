@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import DashBoard from '../components/dashboard/Dashboard/dashboard';
 import NewsFeed from '../components/dashboard/Newsfeed/newsfeed';
-import Users from '../components/dashboard/Users/Users';
+import Users from '../components/dashboard/Users/users';
 import Volunteers from '../components/dashboard/Volunteers/volunteers';
 import Courses from '../components/dashboard/Courses/courses';
 import Channels from '../components/dashboard/Channels/channels';
@@ -22,12 +22,13 @@ import classes from '../App.module.css';
 
 const MainRoute = (props) => {
   // const AuthContext = useContext(authContext);
-
+  let { userDetails } = props;
+  console.log("Main Route Page", userDetails)
 
   function BigBoardLayout({ children }) {
     return (
       <div>
-        <Navbar />
+        <Navbar userDetails={userDetails} />
         <Menubar />
         <div className={classes.Right}>
           {children}
@@ -50,7 +51,7 @@ const MainRoute = (props) => {
       <Routes>
         <Route element={<RequireAuth />}>
           <Route path='/dashboard' element={<DashBoard />}></Route>
-          <Route path='/news' element={<NewsFeed />}></Route>
+          <Route path='/news' element={<NewsFeed userDetails={userDetails} />}></Route>
           <Route path='/news/newsfeed' element={<PostCard />}></Route>
           <Route path='/users' element={<Users />}></Route>
           <Route path='/volunteers' element={<Volunteers />}></Route>

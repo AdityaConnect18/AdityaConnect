@@ -11,7 +11,11 @@ import { AiFillSetting } from 'react-icons/ai'
 import { RiLogoutBoxRFill } from 'react-icons/ri'
 import classes from './Menubar.module.css'
 import { NavLink } from 'react-router-dom'
+import authContext from '../../../CONTEXT/Auth/authContext'
 const Menubar = (props) => {
+
+  const { signOut } = React.useContext(authContext);
+
   return (
     <div>
       <div className={classes.Sidenav}>
@@ -45,21 +49,6 @@ const Menubar = (props) => {
               News Feed
             </NavLink>
           </div>
-
-          {/* <div className={classes.Sidetabs}>
-            <NavLink
-              exact
-              to="/users"
-              className={classes.SideStyle}
-              style={({ isActive }) => ({
-                color: isActive ? '#fff' : '#545e6f',
-                background: isActive ? '#FD752C' : '#fff',
-              })}
-            >
-              <FaUsers className={classes.Sideicons} />
-              Users
-            </NavLink>
-          </div> */}
 
           <div className={classes.Sidetabs}>
             <NavLink
@@ -166,10 +155,11 @@ const Menubar = (props) => {
             </NavLink>
           </div>
 
-          <div className={classes.Sidetabs}>
+          <div onPress={() => signOut()} className={classes.Sidetabs}>
             <NavLink
+              onClick={() => signOut()}
               exact
-              to="/logout"
+              to="/"
               className={classes.SideStyle}
               style={({ isActive }) => ({
                 color: isActive ? '#fff' : '#545e6f',

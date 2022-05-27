@@ -93,10 +93,10 @@ const AuthState = (props) => {
     }
   };
 
-  
   const signOut = async () => {
     try {
-      await localStorage.removeItem('userToken');
+      console.log("logging off user")
+      await localStorage.removeItem('payLoad');
     } catch (e) {
       console.log(e);
     }
@@ -113,7 +113,7 @@ const AuthState = (props) => {
         loadUser,
         signOut,
         changePassword,
-  //      loginUserDetails,
+        //      loginUserDetails,
       }}
     >
       {props.children}
