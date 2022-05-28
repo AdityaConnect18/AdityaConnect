@@ -5,8 +5,8 @@ const api = axios.create({
   baseURL: `${API}`,
   headers: {
     Accept: 'application/json',
-    "Content-Type": "application/json",
-    //"x-access-token": localStorage.getItem("token"),
+    // Accept: 'multipart/form-data',
+    // 'Content-Type': 'multipart/form-data'
   },
 });
 

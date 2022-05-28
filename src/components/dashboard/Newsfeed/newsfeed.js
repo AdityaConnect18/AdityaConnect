@@ -1,12 +1,13 @@
 import React from "react";
 import classes from "./newsfeed.module.css";
 import { MdOutlineEditNote } from "react-icons/md";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { GetCollegesData, GetCategoriesData, GetCoursesData, SubmitPost } from '../../../SERVICES/service';
 
 
 const NewsFeed = (props) => {
+  const navigate = useNavigate();
   let { userDetails } = props;
   const [colleges, setColleges] = React.useState([{}]);
   const [categories, setCategories] = React.useState([{}]);
@@ -14,6 +15,7 @@ const NewsFeed = (props) => {
   const [courses, setCourses] = React.useState([]);
   const [coursesDict, setCoursesDict] = React.useState({});
   const [allCheck, setAllCheck] = React.useState(false)
+  const [file, setFile] = React.useState({});
 
   const [allValues, setAllValues] = useState({
     postTitle: '',
@@ -153,6 +155,11 @@ const NewsFeed = (props) => {
     setAllCheck(prevCheck => !prevCheck)
   }
 
+  const handleFileSubmit = (e) => {
+    setFile(e.target.files[0])
+    console.log(e.target.files[0])
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     let channelIds = [];
@@ -165,11 +172,23 @@ const NewsFeed = (props) => {
       ...allValues,
       channelList: channelIds
     }
+    requestObject.selectedFile = file
+    const formData = new FormData()
+    formData.append("categoryId", requestObject.categoryId)
+    formData.append("postTitle", requestObject.postTitle)
+    formData.append("postMessage", requestObject.postMessage)
+    formData.append("selectedFile", requestObject.selectedFile)
+    formData.append("postedBy", requestObject.postedBy)
+    formData.append("channelList", requestObject.channelList)
     try {
-      let postRes = await SubmitPost(requestObject)
+      let postRes = await SubmitPost(formData)
       console.log(postRes)
+      if (postRes.data !== undefined) {
+        navigate('/news/newsfeed')
+      }
     } catch (error) {
       console.log(error.message)
+      alert(error.message)
     }
     setAllValues({
       ...allValues,
@@ -270,7 +289,8 @@ const NewsFeed = (props) => {
               type="file"
               id="upload"
               name="selectedFile"
-              onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.files[0] })}
+              accept="image/*"
+              onChange={handleFileSubmit}
               required ></input>
           </div>
           <input type="submit" value="Submit" />

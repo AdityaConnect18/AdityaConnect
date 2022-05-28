@@ -22,6 +22,7 @@ export default function Login(props) {
 
   React.useEffect(() => {
     if (localStorage.getItem('payLoad')) {
+
       navigate('/dashboard');
     }
   })
@@ -42,23 +43,23 @@ export default function Login(props) {
   return (
     <>
       <div className={classes.Container}>
-      <img className={classes.Logo} src={logo} />
-      <center>
-      <div className={classes.Title}>Aditya Connect</div>
-      </center>
+        <img className={classes.Logo} src={logo} />
+        <center>
+          <div className={classes.Title}>Aditya Connect</div>
+        </center>
         <p><b>Login Form</b></p>
-        <form onSubmit={onSubmit}>          
+        <form onSubmit={onSubmit}>
           <label htmlFor="Category">Email</label>
           <input type="email" name="userId" value={userId} onChange={onChange} />
           <label htmlFor="Password">Password</label>
           <input type="password" name="password" value={password} onChange={onChange} />
           <a className={classes.Forget}>Forget Password ?</a>
           <center>
-              <input className={classes.Button} type="submit" value="Submit" />
+            <input className={classes.Button} type="submit" value="Submit" />
           </center>
         </form>
         <hr />
-        <p className={classes.BelowTop}><MdLiveHelp className={classes.Help}/>Help & Support</p>
+        <p className={classes.BelowTop}><MdLiveHelp className={classes.Help} />Help & Support</p>
         <p className={classes.BelowContent}>For help to use this application, you can contact Campusnet Team.</p>
       </div>
     </>
