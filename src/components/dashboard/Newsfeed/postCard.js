@@ -35,19 +35,7 @@ const PostCard = () => {
           <span>NewsFeed</span>
         </NavLink>
       </div>
-      <div className={classes.Filter}>
-        <form>
-          <label for="Category">Filter By</label>
-          <select name="Category">
-            <option value="campusnews">Campus News</option>
-            <option value="officecirculars">Office Circulars</option>
-            <option value="examinations">Examinations</option>
-            <option value="placements">Placements</option>
-            <option value="sports">Sports</option>
-            <option value="fests">Fests</option>
-          </select>
-        </form>
-      </div>
+        
       {postsData.map((onePost, index) => (
         <Card
           index={index}

@@ -108,3 +108,78 @@ select{
     opacity: 1;
     right: 0;
   }
+
+  .DownloadIcon{
+    font-size: 26px;
+    padding: 8px;
+    margin-right: 10px;
+  }
+
+  .DownloadIcon:hover {
+    color: grey;
+  }
+
+
+  .Remove{
+    background-color: #d43f3a;
+    height: 35px;
+    width: 100px;
+    color: white; 
+    float: right;   
+    margin-right: 15px;
+    border: none;
+    font-size: 14px;
+}
+
+.Remove:hover{
+    background-color: #d9534f;   
+}
+
+.Edit{
+    background-color: #2e6da4;
+    height: 35px;
+    width: 100px;
+    color: white; 
+    float: right;   
+    margin-right: 15px;
+    border: none;
+    font-size: 14px;
+    padding-bottom: 5px;
+}
+
+.Edit:hover{
+    background-color: #337ab7;   
+}
+
+.Update{
+    background-color: #eea236;
+    height: 35px;
+    width: 200px;
+    color: white; 
+    float: right;   
+    margin-right: 15px;
+    border: none;
+    font-size: 14px;
+}
+
+.Update:hover{
+    background-color: #f0ad4e;;   
+}
+
+.Buttonicon1{
+    padding-right: 8px;
+    font-size: 18px;;
+}
+
+
+
+.Buttonicon3{
+    padding-right: 8px;
+    font-size: 16px;
+}
+
+.BelowButton{
+    display: flex;
+    margin-left: 55%;
+    margin-bottom: 10px;
+}

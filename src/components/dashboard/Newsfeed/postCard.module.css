@@ -108,3 +108,13 @@ select{
     opacity: 1;
     right: 0;
   }
+
+  .DownloadIcon{
+    margin-left: 90%;
+    font-size: 26px;
+    
+  }
+
+  .DownloadIcon:hover {
+    color: grey;
+  }

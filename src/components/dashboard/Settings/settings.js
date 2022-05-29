@@ -36,7 +36,7 @@ const Settings = () => {
           <span>MyPosts</span>
         </NavLink>
       </div>
-    <AdminCard data={adminData}    />
+    <AdminCard data={adminData}  />
     </div>
   );
 }

@@ -1,12 +1,12 @@
 import React from 'react';
 import classes from './postCard.module.css'
-import { NavLink } from 'react-router-dom'
 import { useState } from "react";
-import { GetAdminPosts } from "../../../SERVICES/service"
+import { GetAdminPosts, DeletePost } from "../../../SERVICES/service"
 import Card from "./card"
+import { NavLink, useNavigate } from "react-router-dom";
 
-const MyPostCard = () => {
-
+const MyPostCard = (props) => {
+  const [postsData, setPostsData] = useState([{}]);
   function parseJwt(token) {
     if (token) {
       return JSON.parse(atob(token.split('.')[1]));
@@ -23,7 +23,24 @@ const MyPostCard = () => {
       .catch((error) => console.error(error))
   }, [])
 
-  const [postsData, setPostsData] = useState([{}]);
+  const navigate = useNavigate();
+  const [postIndex, setPostIndex] = useState(0)
+
+
+  const deletePost = (index) => {
+    setPostIndex(index)
+    DeletePost(postsData[postIndex]._id)
+      .then((res) => { console.log(res) })
+      .catch((err) => { console.log(err) })
+    postsData.splice(postIndex, 1)
+  }
+
+  const editPost = (postEditData) => {
+    navigate('/settings/myposts/editpost', { state: { post: postEditData, post_index: postIndex } });
+  }
+
+  
+  // console.log(singlePost)
 
   return (
     <div className={classes.NewsFeed}>
@@ -33,30 +50,19 @@ const MyPostCard = () => {
           exact
           to="/settings"
           className={classes.Button}>
-          <span>Publish Post</span>
+          <span>MyProfile</span>
         </NavLink>
         <NavLink
           exact
           to="/settings/myposts"
           className={classes.Button}>
-          <span>NewsFeed</span>
+          <span>MyPosts</span>
         </NavLink>
       </div>
-      <div className={classes.Filter}>
-        <form>
-          <label for="Category">Filter By</label>
-          <select name="Category">
-            <option value="campusnews">Campus News</option>
-            <option value="officecirculars">Office Circulars</option>
-            <option value="examinations">Examinations</option>
-            <option value="placements">Placements</option>
-            <option value="sports">Sports</option>
-            <option value="fests">Fests</option>
-          </select>
-        </form>
-      </div>
+    
       {postsData.map((onePost, index) => (
         <Card
+          data={onePost}
           key={index}
           index={index}
           Title={onePost.postTitle}
@@ -64,6 +70,8 @@ const MyPostCard = () => {
           timeStamp={onePost.createdAt}
           postedBy={onePost.postedBy?.adminName}
           mediaUrl={onePost.mediaId}
+          del={deletePost}
+          edit={editPost}
         />
       ))}
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import DashBoard from '../components/dashboard/Dashboard/dashboard';
 import NewsFeed from '../components/dashboard/Newsfeed/newsfeed';
-import Users from '../components/dashboard/Users/users';
+import Users from '../components/dashboard/Users/Users';
 import Volunteers from '../components/dashboard/Volunteers/volunteers';
 import Courses from '../components/dashboard/Courses/courses';
 import Channels from '../components/dashboard/Channels/channels';
@@ -16,6 +16,7 @@ import MyPostCard from "../components/dashboard/Settings/mypostCard";
 // import authContext from "../CONTEXT/Auth/authContext";
 import Navbar from "../components/dashboard/Navbar/Navbar";
 import Menubar from "../components/dashboard/Navbar/Menubar";
+import EditPost from "../components/dashboard/Settings/updatePost";
 import classes from '../App.module.css';
 
 
@@ -62,6 +63,7 @@ const MainRoute = (props) => {
           <Route path='/notifications' element={<Notifications />}></Route>
           <Route path='/settings' element={<Settings />}></Route>
           <Route path='/settings/myposts' element={<MyPostCard />}></Route>
+          <Route path='/settings/myposts/editpost' element={<EditPost />}></Route>
         </Route>
         <Route path='/' element={<Login />}></Route>
       </Routes>

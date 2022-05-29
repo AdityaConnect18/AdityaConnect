@@ -24,7 +24,7 @@ const Volunteers = (props) => {
   const { state } = useLocation();
   const [userIndex, setUserIndex] = useState(0)
 
-  const testing = (user, index) => {
+  const updateUserData = (user, index) => {
     setSingleUser(user)
     setUserIndex(index)
   }
@@ -97,7 +97,7 @@ const Volunteers = (props) => {
 
         <div className={classes.Listcards}>
           {admins.map((userObj, index) => (
-            <div onClick={(e) => testing(userObj, index)} >
+            <div onClick={(e) => updateUserData(userObj, index)} >
               <VListCard
                 timeStamp={userObj.createdAt}
                 college={userObj.collegeId ? userObj.collegeId['collegeName'] : null}
