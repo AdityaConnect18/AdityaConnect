@@ -23,7 +23,6 @@ const Menubar = (props) => {
         <div className={classes.Menubtns}>
           <div className={classes.Sidetabs}>
             <NavLink
-              exact
               to="/dashboard"
               className={classes.SideStyle}
               style={({ isActive }) => ({
@@ -37,7 +36,6 @@ const Menubar = (props) => {
 
           <div className={classes.Sidetabs}>
             <NavLink
-              exact
               to="/news"
               className={classes.SideStyle}
               style={({ isActive }) => ({
@@ -52,7 +50,6 @@ const Menubar = (props) => {
 
           <div className={classes.Sidetabs}>
             <NavLink
-              exact
               to="/users"
               className={classes.SideStyle}
               style={({ isActive }) => ({
@@ -67,7 +64,6 @@ const Menubar = (props) => {
 
           <div className={classes.Sidetabs}>
             <NavLink
-              exact
               to="/volunteers"
               className={classes.SideStyle}
               style={({ isActive }) => ({
@@ -82,7 +78,6 @@ const Menubar = (props) => {
 
           <div className={classes.Sidetabs}>
             <NavLink
-              exact
               to="/courses"
               className={classes.SideStyle}
               style={({ isActive }) => ({
@@ -97,7 +92,6 @@ const Menubar = (props) => {
 
           <div className={classes.Sidetabs}>
             <NavLink
-              exact
               to="/channels"
               className={classes.SideStyle}
               style={({ isActive }) => ({
@@ -112,7 +106,6 @@ const Menubar = (props) => {
 
           <div className={classes.Sidetabs}>
             <NavLink
-              exact
               to="/messages"
               className={classes.SideStyle}
               style={({ isActive }) => ({
@@ -127,7 +120,6 @@ const Menubar = (props) => {
 
           <div className={classes.Sidetabs}>
             <NavLink
-              exact
               to="/notifications"
               className={classes.SideStyle}
               style={({ isActive }) => ({
@@ -142,7 +134,6 @@ const Menubar = (props) => {
 
           <div className={classes.Sidetabs}>
             <NavLink
-              exact
               to="/settings"
               className={classes.SideStyle}
               style={({ isActive }) => ({
@@ -155,10 +146,9 @@ const Menubar = (props) => {
             </NavLink>
           </div>
 
-          <div onPress={() => signOut()} className={classes.Sidetabs}>
+          <div onClick={() => signOut()} className={classes.Sidetabs}>
             <NavLink
               onClick={() => signOut()}
-              exact
               to="/"
               className={classes.SideStyle}
               style={({ isActive }) => ({

@@ -7,7 +7,8 @@ import logo from '../dashboard/Assests/logo.png';
 
 export default function Login(props) {
 
-  const { loginUser } = React.useContext(authContext);
+  const { payLoad, loginUser } = React.useContext(authContext)
+  console.log(payLoad)
   // const AuthContext = React.useContext(authContext);
   const navigate = useNavigate();
   const [user, setUser] = React.useState({
@@ -22,7 +23,6 @@ export default function Login(props) {
 
   React.useEffect(() => {
     if (localStorage.getItem('payLoad')) {
-
       navigate('/dashboard');
     }
   })

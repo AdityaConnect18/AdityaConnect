@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate, Outlet } from "react-router-dom";
 import DashBoard from '../components/dashboard/Dashboard/dashboard';
 import NewsFeed from '../components/dashboard/Newsfeed/newsfeed';
-import Users from '../components/dashboard/Users/Users';
+import Users from '../components/dashboard/Users/users';
 import Volunteers from '../components/dashboard/Volunteers/volunteers';
 import Courses from '../components/dashboard/Courses/courses';
 import Channels from '../components/dashboard/Channels/channels';
@@ -18,13 +18,24 @@ import Navbar from "../components/dashboard/Navbar/Navbar";
 import Menubar from "../components/dashboard/Navbar/Menubar";
 import EditPost from "../components/dashboard/Settings/updatePost";
 import classes from '../App.module.css';
+import authContext from '../CONTEXT/Auth/authContext'
 
 
 
-const MainRoute = (props) => {
-  // const AuthContext = useContext(authContext);
-  let { userDetails } = props;
-  console.log("Main Route Page", userDetails)
+const MainRoute = () => {
+
+  const { payLoad } = React.useContext(authContext);
+
+  let userDetails = undefined;
+  if (payLoad) {
+    userDetails = JSON.parse(atob(payLoad.split('.')[1]))
+  }
+  else {
+    let userPayLoad = localStorage.getItem('payLoad')
+    if (userPayLoad) {
+      userDetails = JSON.parse(atob(userPayLoad.split('.')[1]))
+    }
+  }
 
   function BigBoardLayout({ children }) {
     return (
@@ -44,8 +55,6 @@ const MainRoute = (props) => {
     return payLoad ? <BigBoardLayout><Outlet /></BigBoardLayout> : <Navigate to="/" />
 
   }
-
-
 
   return (
     <div>
