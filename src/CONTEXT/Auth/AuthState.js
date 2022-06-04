@@ -70,6 +70,7 @@ const AuthState = (props) => {
     const res = await Login(formData);
     if (!res.data.token) {
       alert(res.data.message)
+      return
     }
     localStorage.setItem('payLoad', res.data.token);
     console.log(res);
