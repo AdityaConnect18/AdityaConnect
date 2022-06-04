@@ -8,7 +8,7 @@ import logo from '../dashboard/Assests/logo.png';
 export default function Login(props) {
 
   const { payLoad, loginUser } = React.useContext(authContext)
-  console.log(payLoad)
+  // console.log(payLoad)
   // const AuthContext = React.useContext(authContext);
   const navigate = useNavigate();
   const [user, setUser] = React.useState({
@@ -53,7 +53,7 @@ export default function Login(props) {
           <input type="email" name="userId" value={userId} onChange={onChange} />
           <label htmlFor="Password">Password</label>
           <input type="password" name="password" value={password} onChange={onChange} />
-          <a className={classes.Forget}>Forget Password ?</a>
+          {/* <a className={classes.Forget}>Forget Password ?</a> */}
           <center>
             <input className={classes.Button} type="submit" value="Submit" />
           </center>

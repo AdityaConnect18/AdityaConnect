@@ -5,14 +5,26 @@ import VUserCard from "./vuserCard";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { GetAdminsData, DeleteVolunteer } from "../../../SERVICES/service"
+import ClockLoader from "react-spinners/ClockLoader";
+import { css } from "@emotion/react";
 
 const Volunteers = (props) => {
   const [admins, setadmins] = useState([{}]);
   const [singleUser, setSingleUser] = useState([{}])
+  const [loading, setLoading] = useState(true);
+  const [color, setColor] = useState("#FD752C");
+
+  const override = css`
+    display: block;
+    margin: auto 0;
+    top: 170px;
+    left: 45%;
+    `;
 
   React.useEffect(() => {
     GetAdminsData()
       .then((data) => {
+        setLoading(!loading)
         setadmins(data.data.data);
         setSingleUser(data.data.data[0])
       })
@@ -84,7 +96,9 @@ const Volunteers = (props) => {
           <span>Add Volunteers</span>
         </NavLink>
       </div>
-
+      {
+        (loading)? <ClockLoader css={override} color={color} loading={loading} size={100}  />
+            :
       <div className={classes.Details}>
         <div className={classes.UserCards}>
           <VUserCard
@@ -108,6 +122,7 @@ const Volunteers = (props) => {
 
         </div>
       </div>
+      }
     </div>
   );
 };

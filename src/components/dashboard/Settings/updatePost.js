@@ -3,7 +3,7 @@ import classes from "./newsfeed.module.css";
 import { MdOutlineEditNote } from "react-icons/md";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { GetCollegesData, GetCategoriesData, GetCoursesData, SubmitPost } from '../../../SERVICES/service';
+import { GetCollegesData, GetCategoriesData, GetCoursesData, UpdatePost } from '../../../SERVICES/service';
 
 
 const EditPost = (props) => {
@@ -21,10 +21,7 @@ const EditPost = (props) => {
   var fileName; 
     if (state && state.post) {
         post = state.post;
-        // console.log("Insode Post")
-        // console.log(post)
         fileName = post.mediaId.split("---")[1]
-        // console.log(fileName)
     }
 
   const [allValues, setAllValues] = useState({
@@ -37,7 +34,6 @@ const EditPost = (props) => {
     postedBy: post?.postedBy._id
   });
 
-  console.log(allValues)
 
   const initState = {
     postTitle: '',
@@ -178,6 +174,7 @@ const EditPost = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    
     let channelIds = [];
     Object.keys(collegeDict).forEach(collegeId => {
       if (collegeDict[collegeId] === true) {
@@ -196,8 +193,11 @@ const EditPost = (props) => {
     formData.append("selectedFile", requestObject.selectedFile)
     formData.append("postedBy", requestObject.postedBy)
     formData.append("channelList", requestObject.channelList)
+    console.log("FormData")
+    console.log(formData)
     try {
-      let postRes = await SubmitPost(formData)
+      let postRes = await UpdatePost(formData)
+      console.log("posreq")
       console.log(postRes)
       if (postRes.data !== undefined) {
         navigate('/settings/myposts')

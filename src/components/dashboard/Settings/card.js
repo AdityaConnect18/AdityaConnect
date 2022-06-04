@@ -4,6 +4,7 @@ import { GrCloudDownload } from 'react-icons/gr';
 import Button from 'react-bootstrap/Button';
 import { MdModeEditOutline } from 'react-icons/md';
 import { ImBin2 } from 'react-icons/im';
+import { FcLike } from 'react-icons/fc';
 
 const Card = (props) => {
     
@@ -36,8 +37,13 @@ const Card = (props) => {
                 <p className={classes.Content}>{props.msg}</p>
                 <p className={classes.Published}>Published By: <b>{props.postedBy}</b> on {time}</p>
                 <div className={classes.BelowButton}>
+                        <FcLike
+                        className={classes.IconLike}
+                        onClick={downloadHandle}
+                        />
+                         <p className={classes.LikeCount}>{props.likes}</p>
                     <GrCloudDownload 
-                    className={classes.DownloadIcon}
+                    className={classes.IconDownload}
                     onClick={downloadHandle}
                     />
                     <Button className={classes.Edit} onClick={(e) => props.edit(props.data) }><MdModeEditOutline className={classes.Buttonicon1} />Edit</Button>

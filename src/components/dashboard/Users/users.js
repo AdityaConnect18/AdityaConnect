@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import classes from "./users.module.css";
 import ListCard from "./listCard";
 import UserCard from "./userCard";
-import { GetUSersData, GetCollegesData, GetCoursesData, DeleteUser } from "../../../SERVICES/service";
+import { GetUSersData, GetCollegesData, GetCoursesData } from "../../../SERVICES/service";
+// import { DeleteUser } from "../../../SERVICES/service";
 
 export default class Users extends Component {
 
@@ -99,12 +100,12 @@ export default class Users extends Component {
         this.setState({ singleUser: user })
     }
 
-    deleteUser = (id) => {
-        console.log(id)
+    //deleteUser = (id) => {
+        //console.log(id)
         // DeleteUser(id)
         //     .then((user) => { console.log(user) })
         //     .catch((error) => { console.log(error) })
-    }
+    //}
 
 
     render() {

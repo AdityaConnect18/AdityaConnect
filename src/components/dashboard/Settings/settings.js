@@ -4,9 +4,21 @@ import { NavLink } from "react-router-dom";
 import { useState} from "react";
 import AdminCard from "./adminCard";
 import {FindAdminById} from "../../../SERVICES/service"
+import ClockLoader from "react-spinners/ClockLoader";
+import { css } from "@emotion/react";
 
 const Settings = () => {
+
   const [adminData, setAdminData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [color, setColor] = useState("#FD752C");
+  const override = css`
+    display: block;
+    margin: auto 0;
+    top: 220px;
+    left: 45%;
+    `;
+
   function parseJwt(token) {
     if (token) {
       return JSON.parse(atob(token.split('.')[1]));
@@ -19,6 +31,7 @@ const Settings = () => {
     
     FindAdminById(userDetails._id)
       .then((data) => {
+        setLoading(!loading)
         setAdminData(data.data.data[0]);
       })
       .catch((error) => console.error(error))
@@ -36,7 +49,11 @@ const Settings = () => {
           <span>MyPosts</span>
         </NavLink>
       </div>
-    <AdminCard data={adminData}  />
+      {
+            (loading)? <ClockLoader css={override} color={color} loading={loading} size={100}  />
+            :  
+            <AdminCard data={adminData}  />
+      }
     </div>
   );
 }

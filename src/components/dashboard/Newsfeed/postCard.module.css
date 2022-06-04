@@ -109,12 +109,26 @@ select{
     right: 0;
   }
 
-  .DownloadIcon{
-    margin-left: 90%;
+  .IconLike{
     font-size: 26px;
-    
+    margin: 10px;
+    margin-left: 5%;
   }
 
-  .DownloadIcon:hover {
-    color: grey;
+  .IconDownload{
+    font-size: 26px;
+    margin: 10px;
+    margin-left: 75%;
   }
+
+  .Flex{
+    display: flex;
+  }
+
+  .LikeCount{
+    font-size: 16px;
+  }
+
+  
+  
+  

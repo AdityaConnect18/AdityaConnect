@@ -69,7 +69,7 @@ export const SubmitPost = async (data) => {
 
 export const UpdatePost = async (data) => {
     console.log(data)
-    return await API.post(`/admin/update-post`, data);
+    return await API.post("/admin/update-post", data);
 }
 
 export const DeletePost = async (id) => {

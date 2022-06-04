@@ -7,6 +7,7 @@ import { FaUniversity } from 'react-icons/fa';
 import { FaFortAwesome } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { MdWifiCalling3 } from 'react-icons/md';
+import { MdOutlineAdminPanelSettings } from 'react-icons/md';
 
 const AdminCard = (props) => {
     return (
@@ -44,6 +45,12 @@ const AdminCard = (props) => {
                         props.data.courseId ? <div className={classes.Sidetabs}>
                             <FaFortAwesome className={classes.Sideicons} />
                             <a>{props.data.courseId.courseName}</a>
+                        </div> : null
+                    }
+                    {
+                        props.data.courseId ? <div className={classes.Sidetabs}>
+                            <MdOutlineAdminPanelSettings className={classes.Sideicons} />
+                            <a>{props.data.designation}</a>
                         </div> : null
                     }
                 </div>

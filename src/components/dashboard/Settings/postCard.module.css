@@ -109,15 +109,23 @@ select{
     right: 0;
   }
 
-  .DownloadIcon{
-    font-size: 26px;
+  .IconDownload{
+    font-size: 24px;
     padding: 8px;
     margin-right: 10px;
   }
 
-  .DownloadIcon:hover {
-    color: grey;
+  .IconLike{
+    font-size: 26px;
+    padding: 5px;
+    margin-right: 3px;
   }
+
+  .LikeCount{
+    font-size: 16px;
+    margin: 10px 10px 0px 0px;
+  }
+  
 
 
   .Remove{
@@ -171,8 +179,6 @@ select{
     font-size: 18px;;
 }
 
-
-
 .Buttonicon3{
     padding-right: 8px;
     font-size: 16px;
@@ -180,6 +186,6 @@ select{
 
 .BelowButton{
     display: flex;
-    margin-left: 55%;
+    margin-left: 45%;
     margin-bottom: 10px;
 }

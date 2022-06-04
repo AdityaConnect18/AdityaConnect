@@ -4,6 +4,8 @@ import { MdOutlineEditNote } from "react-icons/md";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { GetCollegesData, GetCategoriesData, GetCoursesData, SubmitPost } from '../../../SERVICES/service';
+import ClockLoader from "react-spinners/ClockLoader";
+import { css } from "@emotion/react";
 
 
 const NewsFeed = (props) => {
@@ -16,7 +18,9 @@ const NewsFeed = (props) => {
   const [coursesDict, setCoursesDict] = React.useState({});
   const [allCheck, setAllCheck] = React.useState(false)
   const [file, setFile] = React.useState({});
-
+  const [loading, setLoading] = useState(true);
+  const [color, setColor] = useState("#FD752C");
+  
   const [allValues, setAllValues] = useState({
     postTitle: '',
     postMessage: '',
@@ -35,6 +39,13 @@ const NewsFeed = (props) => {
     postedBy: userDetails?._id
   }
 
+  const override = css`
+  display: block;
+  margin: auto 0;
+  top: 140px;
+  left: 45%;
+  `;
+
   React.useEffect(() => {
     try {
       getColleges();
@@ -48,6 +59,7 @@ const NewsFeed = (props) => {
   const getColleges = () => {
     GetCollegesData()
       .then((data) => {
+        setLoading(!loading)
         setColleges(data.data.colleges)
         let dict = {}
         data.data.colleges.forEach(college => {
@@ -162,6 +174,7 @@ const NewsFeed = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(!loading)
     let channelIds = [];
     Object.keys(collegeDict).forEach(collegeId => {
       if (collegeDict[collegeId] === true) {
@@ -184,9 +197,10 @@ const NewsFeed = (props) => {
       let postRes = await SubmitPost(formData)
       console.log(postRes)
       if (postRes.data !== undefined) {
+        setLoading(!loading)
         navigate('/news/newsfeed')
       }
-    } catch (error) {
+    } catch (error) { 
       console.log(error.message)
       alert(error.message)
     }
@@ -195,20 +209,20 @@ const NewsFeed = (props) => {
       ...initState
     })
   }
-
   return (
-
     <div className={classes.NewsFeed}>
       <div className={classes.Heading}>News Feed</div>
       <div className={classes.Buttons}>
         <NavLink exact to="/news" className={classes.Button}>
           <span>Publish Post</span>
         </NavLink>
-        <NavLink exact to="/news/newsfeed" className={classes.Button}>
+        <NavLink exact to="/news/newsfeed" className={classes.Button} >
           <span>NewsFeed</span>
         </NavLink>
       </div>
-
+      {
+      (loading)? <ClockLoader   css={override} color={color} loading={loading} size={100}  />
+      :
       <div className={classes.FormContainer}>
         <form onSubmit={handleSubmit} >
           <label for="category">Select Category</label>
@@ -296,6 +310,7 @@ const NewsFeed = (props) => {
           <input type="submit" value="Submit" />
         </form>
       </div>
+      }
     </div>
   );
 };

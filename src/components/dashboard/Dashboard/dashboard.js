@@ -10,6 +10,8 @@ import VoluTable from './voluTable';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { GetUSersData, GetAdminsData, GetMessages, GetPosts } from "../../../SERVICES/service";
+import ClockLoader from "react-spinners/ClockLoader";
+import { css } from "@emotion/react";
 
 
 const DashBoard = () => {
@@ -20,7 +22,15 @@ const DashBoard = () => {
     const [postsDataCount, setPostsDataCount] = useState();
     const [fiveUsers, setFiveUsers] = useState([{}])
     const [fiveAdmins, setFiveAdmins] = useState([{}])
+    const [loading, setLoading] = useState(true);
+    const [color, setColor] = useState("#FD752C");
 
+    const override = css`
+    display: block;
+    margin: auto 0;
+    top: 220px;
+    left: 45%;
+    `;
 
     React.useEffect(() => {
         GetPosts()
@@ -42,6 +52,7 @@ const DashBoard = () => {
     React.useEffect(() => {
         GetUSersData()
             .then((data) => {
+                setLoading(!loading)
                 setUsersCount(Object.keys(data.data.users).length)
                 if (Object.keys(data.data.users).length >= 5) {
 
@@ -72,6 +83,10 @@ const DashBoard = () => {
 
 
     return (
+        <div>
+        {
+            (loading)? <ClockLoader css={override} color={color} loading={loading} size={100}  />
+            :
         <div className={classes.Dashboard}>
             <div className={classes.Heading}>Overview of Aditya Connect</div>
             <div className={classes.Cards}>
@@ -170,6 +185,8 @@ const DashBoard = () => {
                 </div>
             </div>
 
+        </div>
+        }
         </div>
     );
 }

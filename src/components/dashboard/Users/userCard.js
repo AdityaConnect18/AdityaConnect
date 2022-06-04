@@ -8,8 +8,8 @@ import { FaUniversity } from 'react-icons/fa';
 import { FaFortAwesome } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { MdWifiCalling3 } from 'react-icons/md';
-import { ImBin2 } from 'react-icons/im';
-import Button from 'react-bootstrap/Button';
+// import { ImBin2 } from 'react-icons/im';
+// import Button from 'react-bootstrap/Button';
 
 
 const UserCard = (props) => {
@@ -73,8 +73,8 @@ const UserCard = (props) => {
                 </div>
             </div>
 
-            <Button className={classes.Remove}
-                onClick={props.del(props.data._id)} ><ImBin2 className={classes.Removeicon} />Remove</Button>
+            {/* <Button className={classes.Remove}
+                onClick={props.del(props.data._id)} ><ImBin2 className={classes.Removeicon} />Remove</Button> */}
 
         </div>
     );

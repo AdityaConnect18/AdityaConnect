@@ -4,13 +4,18 @@ import { GetCollegesData, GetCoursesData } from '../../../SERVICES/service';
 import Bar1 from './Bar/bar1';
 import Bar2 from './Bar/bar2';
 import Bar3 from './Bar/bar3';
+import ClockLoader from "react-spinners/ClockLoader";
+import { css } from "@emotion/react";
+import { useState } from "react";
 
 const Courses = () => {
 
-    const [colleges, setColleges] = React.useState([{}]);
-    const [courses, setCourses] = React.useState([{}]);
-    const [selectColleges, setSelectColleges] = React.useState([{}]);
-    const [selectDept, setSelectDept] = React.useState([{}]);
+    const [colleges, setColleges] = useState([{}]);
+    const [courses, setCourses] = useState([{}]);
+    const [selectColleges, setSelectColleges] = useState([{}]);
+    const [selectDept, setSelectDept] = useState([{}]);
+    const [loading, setLoading] = useState(true);
+    const [color, setColor] = useState("#FD752C");
 
     React.useEffect(() => {
         try {
@@ -21,9 +26,17 @@ const Courses = () => {
         }
     }, [])
 
+    const override = css`
+    display: block;
+    margin: auto 0;
+    top: 220px;
+    left: 45%;
+    `;
+
     const getColleges = () => {
         GetCollegesData()
             .then((data) => {
+                setLoading(!loading)
                 setColleges(data.data.colleges)
                 var engineeringColleges = data.data.colleges.filter(college => college.courseId.courseName === "Engineering")
                 setSelectColleges(engineeringColleges)
@@ -58,15 +71,21 @@ const Courses = () => {
     }
 
     return (
-        <div className={classes.MainContainer}>
-            <div className={classes.Heading}>Courses Offered</div>
-            
-            <Bar1 data={courses} filterColleges={filterColleges}  />
+        <div>
             {
-                selectColleges.length > 1 ? <Secondtable /> : null
-            }
-            {
-                selectDept.length > 1 ? <ThirdTable /> : null
+            (loading)? <ClockLoader   css={override} color={color} loading={loading} size={100}  />
+            :
+            <div className={classes.MainContainer}>
+                <div className={classes.Heading}>Courses Offered</div>
+                
+                <Bar1 data={courses} filterColleges={filterColleges}  />
+                {
+                    selectColleges.length > 1 ? <Secondtable /> : null
+                }
+                {
+                    selectDept.length > 1 ? <ThirdTable /> : null
+                }
+            </div>
             }
         </div>
     );

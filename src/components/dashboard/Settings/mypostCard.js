@@ -4,9 +4,14 @@ import { useState } from "react";
 import { GetAdminPosts, DeletePost } from "../../../SERVICES/service"
 import Card from "./card"
 import { NavLink, useNavigate } from "react-router-dom";
+import ClockLoader from "react-spinners/ClockLoader";
+import { css } from "@emotion/react";
 
 const MyPostCard = (props) => {
   const [postsData, setPostsData] = useState([{}]);
+  const [loading, setLoading] = useState(true);
+  const [color, setColor] = useState("#FD752C");
+
   function parseJwt(token) {
     if (token) {
       return JSON.parse(atob(token.split('.')[1]));
@@ -19,6 +24,7 @@ const MyPostCard = (props) => {
     GetAdminPosts(userDetails._id)
       .then((data) => {
         setPostsData(data.data.posts);
+        setLoading(!loading)
       })
       .catch((error) => console.error(error))
   }, [])
@@ -38,6 +44,13 @@ const MyPostCard = (props) => {
   const editPost = (postEditData) => {
     navigate('/settings/myposts/editpost', { state: { post: postEditData, post_index: postIndex } });
   }
+
+  const override = css`
+  display: block;
+  margin: auto 0;
+  top: 140px;
+  left: 45%;
+  `;
 
   
   // console.log(singlePost)
@@ -59,8 +72,11 @@ const MyPostCard = (props) => {
           <span>MyPosts</span>
         </NavLink>
       </div>
-    
-      {postsData.map((onePost, index) => (
+
+      {
+      (loading)? <ClockLoader   css={override} color={color} loading={loading} size={100}  />
+      :
+      postsData.map((onePost, index) => (
         <Card
           data={onePost}
           key={index}
@@ -70,6 +86,7 @@ const MyPostCard = (props) => {
           timeStamp={onePost.createdAt}
           postedBy={onePost.postedBy?.adminName}
           mediaUrl={onePost.mediaId}
+          likes={onePost.likedUsersList? onePost.likedUsersList?.length : 0}
           del={deletePost}
           edit={editPost}
         />

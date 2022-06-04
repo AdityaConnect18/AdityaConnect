@@ -20,6 +20,7 @@ const AddForm = (props) => {
         mobileNumber: user?.mobileNumber,
         adminName: user?.adminName,
         email: user?.email,
+        designation:user?.designation,
         password: '',
         cpassword: '',
         empId: user?.empId,
@@ -33,6 +34,7 @@ const AddForm = (props) => {
         mobileNumber: '',
         adminName: '',
         email: '',
+        designation:'',
         password: '',
         cpassword: '',
         empId: '',
@@ -149,10 +151,11 @@ const AddForm = (props) => {
                         <label for="Category">Email</label>
                         <input value={allValues.email} type="email" name="email" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                         <label for="Category">ID</label>
-                        <input value={allValues.empId} type="text" maxlength="8" name="empId" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
+                        <input value={allValues.empId} type="text" maxlength="10" minlength="10" name="empId" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                         <label for="Category">Mobile</label>
                         <input value={allValues.mobileNumber} type="text" minlength="10" maxlength="10" name="mobileNumber" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
-
+                        <label for="Category">Designation</label>
+                        <input value={allValues.designation} type="text" name="designation" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                         <label for="Category">Select role</label>
                         <select value={allValues.roleId} name="roleId" required onChange={(e) => setAllValues({ ...allValues, [e.target.name]: e.target.value })}>
                             <option value="sample">--Select role--</option>
@@ -213,10 +216,11 @@ const AddForm = (props) => {
                         <label for="Category">Email</label>
                         <input value={allValues.email} type="email" name="email" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                         <label for="Category">ID</label>
-                        <input value={allValues.empId} type="text" maxlength="8" name="empId" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
+                        <input value={allValues.empId} type="text" maxlength="10" minlength="10" name="empId" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                         <label for="Category">Mobile</label>
                         <input value={allValues.mobileNumber} type="text" minlength="10" maxlength="10" name="mobileNumber" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
-                        
+                        <label for="Category">Designation</label>
+                        <input value={allValues.designation} type="text" name="designation" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                         <label for="Category">Password</label>
                         <input value={allValues.password} minlength="6" maxlength="10" type="password" name="password" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                         <label for="Category">Confirm Password</label>
