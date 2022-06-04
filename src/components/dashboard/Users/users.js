@@ -130,8 +130,8 @@ export default class Users extends Component {
                             <label for="Category">Filter By Course</label>
                             <select name="course" onChange={e => this.changeHandleCourseSelect(e.target.value)}>
                                 <option value="all">All</option>
-                                {courses.length > 1 ? courses.map(course => (
-                                    <option value={course._id}>{course.courseName}</option>
+                                {courses.length > 1 ? courses.map((course, index) => (
+                                    <option key={index} value={course._id}>{course.courseName}</option>
                                 )) : null}
                             </select>
                         </form>
@@ -141,8 +141,8 @@ export default class Users extends Component {
                             <label for="Category">Filter By</label>
                             <select name="Category" onChange={e => this.changeHandleCollegeSelect(e.target.value)}>
                                 <option value="all">All</option>
-                                {filteredColleges.length > 1 ? filteredColleges.map(college => (
-                                    <option value={college._id}>{college.collegeName}</option>
+                                {filteredColleges.length > 1 ? filteredColleges.map((college, index) => (
+                                    <option key={index} value={college._id}>{college.collegeName}</option>
                                 )) : null}
                             </select>
                         </form>

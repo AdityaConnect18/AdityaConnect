@@ -68,6 +68,10 @@ const AuthState = (props) => {
   const loginUser = async (formData) => {
     console.log(formData);
     const res = await Login(formData);
+    if (!res.data.token) {
+      alert(res.data.message)
+      return
+    }
     localStorage.setItem('payLoad', res.data.token);
     console.log(res);
     dispatch({
@@ -102,6 +106,8 @@ const AuthState = (props) => {
     }
     dispatch({ type: 'LOGOUT' });
   };
+
+
   return (
     <authContext.Provider
       value={{

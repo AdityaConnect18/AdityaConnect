@@ -18,38 +18,37 @@ const DashBoard = () => {
     const [usersCount, setUsersCount] = useState();
     const [messagesCount, setMessagesCount] = useState();
     const [postsDataCount, setPostsDataCount] = useState();
-    const [fiveUsers,setFiveUsers] = useState([{}])
-    const [fiveAdmins,setFiveAdmins] = useState([{}])
-    
-  
-      React.useEffect(() => {
+    const [fiveUsers, setFiveUsers] = useState([{}])
+    const [fiveAdmins, setFiveAdmins] = useState([{}])
+
+
+    React.useEffect(() => {
         GetPosts()
-          .then((data) => {
-            setPostsDataCount(Object.keys(data.data.data).length);
-          })
-          .catch((error) => console.error(error))
-      }, [])
-  
+            .then((data) => {
+                setPostsDataCount(Object.keys(data.data.data).length);
+            })
+            .catch((error) => console.error(error))
+    }, [])
+
 
     React.useEffect(() => {
         GetMessages()
-          .then((data) => {
-            setMessagesCount(Object.keys(data.data.data).length);
-          })
-          .catch((error) => console.error(error))
-      }, [])
+            .then((data) => {
+                setMessagesCount(Object.keys(data.data.data).length);
+            })
+            .catch((error) => console.error(error))
+    }, [])
 
     React.useEffect(() => {
         GetUSersData()
             .then((data) => {
                 setUsersCount(Object.keys(data.data.users).length)
-                if(Object.keys(data.data.users).length>=5)
-                {
-                    
-                    setFiveUsers(data.data.users.slice(0,5))
+                if (Object.keys(data.data.users).length >= 5) {
+
+                    setFiveUsers(data.data.users.slice(0, 5))
                 }
-                else{
-                    
+                else {
+
                     setFiveUsers(data.data.users)
                 }
             })
@@ -60,11 +59,10 @@ const DashBoard = () => {
         GetAdminsData()
             .then((data) => {
                 setAdminsCount(Object.keys(data.data.data).length)
-                if(Object.keys(data.data.data).length>=5)
-                {
+                if (Object.keys(data.data.data).length >= 5) {
                     setFiveAdmins(Array.prototype.slice.call(data.data.data, 5))
                 }
-                else{
+                else {
                     setFiveAdmins(data.data.data)
                 }
 
@@ -121,21 +119,26 @@ const DashBoard = () => {
                     <div>
                         <table className={classes.table1}>
                             <caption>Recent Users</caption>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>College</th>
-                                <th>Date</th>
-                            </tr>
-                            
-                            {fiveUsers.map((userObj, index) => (
-                                <UsersTable
-                                    index={index+1}
-                                    data={userObj}
-                                />
-                            ))}
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>College</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {fiveUsers.map((userObj, index) => (
+                                    <UsersTable
+                                        key={index}
+                                        index={index + 1}
+                                        data={userObj}
+                                    />
+                                ))}
+                            </tbody>
                         </table>
-                        <div className={classes.View}><NavLink className={classes.ViewConent} exact to="/users">ViewAll</NavLink></div>
+                        <div className={classes.View}><NavLink className={classes.ViewConent} to="/users">ViewAll</NavLink></div>
 
                     </div>
                 </div>
@@ -143,21 +146,26 @@ const DashBoard = () => {
                     <div>
                         <table className={classes.table2}>
                             <caption>Recent Volunteers</caption>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
 
-                            </tr>
+                                </tr>
+                            </thead>
 
-                            {fiveAdmins.map((adminObj, index) => (
-                                <VoluTable
-                                    index={index+1}
-                                    data={adminObj}
-                                />
-                            ))}
-                            
+                            <tbody>
+                                {fiveAdmins.map((adminObj, index) => (
+                                    <VoluTable
+                                        key={index}
+                                        index={index + 1}
+                                        data={adminObj}
+                                    />
+                                ))}
+                            </tbody>
+
                         </table>
-                        <div className={classes.View}><NavLink className={classes.ViewConent} exact to="/volunteers">ViewAll</NavLink></div>
+                        <div className={classes.View}><NavLink className={classes.ViewConent} to="/volunteers">ViewAll</NavLink></div>
                     </div>
                 </div>
             </div>
