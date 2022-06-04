@@ -21,9 +21,8 @@
 }
 
 .MessageContent{
-    margin: 0px 0px 0px 20px;
+    margin: 0px 0px 0px 0px;
     font-size: 14px;
-    display: flex;
 }
 
 .Title{
@@ -39,13 +38,20 @@
 	background-color: rgb(230, 230, 230);
 } 
 
-.Date{
-    margin-left: 620px;
+.RightAlign{
+    float: right;
+    padding-right: 20px;
 }
 
 .Message{
-    margin: 0px 0px 0px 20px;
+    clear: left;
+    padding-left: 20px;
     font-size: 14px;
+}
+
+.LeftAlign{
+    float: left;
+    padding-left: 20px;
 }
 
 

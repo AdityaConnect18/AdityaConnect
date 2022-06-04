@@ -21,10 +21,10 @@ const EditPost = (props) => {
   var fileName; 
     if (state && state.post) {
         post = state.post;
-        console.log("Insode Post")
-        console.log(post)
+        // console.log("Insode Post")
+        // console.log(post)
         fileName = post.mediaId.split("---")[1]
-        console.log(fileName)
+        // console.log(fileName)
     }
 
   const [allValues, setAllValues] = useState({
@@ -200,7 +200,7 @@ const EditPost = (props) => {
       let postRes = await SubmitPost(formData)
       console.log(postRes)
       if (postRes.data !== undefined) {
-        navigate('/news/newsfeed')
+        navigate('/settings/myposts')
       }
     } catch (error) {
       console.log(error.message)

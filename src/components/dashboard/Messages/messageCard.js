@@ -8,11 +8,12 @@ const MessageCard = (props) => {
     return (
         <div className={classes.MessageBox}>
             {/* <div className={classes.Title}>Title</div> */}
-            <hr className={classes.Line} />
+            
             <div className={classes.MessageContent}>
-                <p>From: <i>{props.postedBy}</i> <span>({props.email})</span></p>
-                <p className={classes.Date}>{time}</p>
+                <p className={classes.LeftAlign}>From: <i>{props.postedBy}</i> <span>({props.email})</span></p>
+                <p className={classes.RightAlign}>{time}</p>
             </div>
+            <hr className={classes.Line} />
             <div className={classes.Message}>
                 {props.msg}
             </div>
