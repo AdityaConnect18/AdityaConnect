@@ -108,7 +108,6 @@ const AddForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(allValues);
     if (allValues.adminName.trim().length === 0) {
       alert("Please enter valid Name");
     } else if (allValues.empId.trim().length === 0) {
