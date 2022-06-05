@@ -1,19 +1,18 @@
-import React from 'react'
-import { AiFillDashboard } from 'react-icons/ai'
-import { BsNewspaper } from 'react-icons/bs'
-import { FaUsers } from 'react-icons/fa'
-import { MdVolunteerActivism } from 'react-icons/md'
-import { FaSchool } from 'react-icons/fa'
-import { GrAnnounce } from 'react-icons/gr'
-import { RiMessageFill } from 'react-icons/ri'
-import { MdNotifications } from 'react-icons/md'
-import { AiFillSetting } from 'react-icons/ai'
-import { RiLogoutBoxRFill } from 'react-icons/ri'
-import classes from './Menubar.module.css'
-import { NavLink } from 'react-router-dom'
-import authContext from '../../../CONTEXT/Auth/authContext'
+import React from "react";
+import { AiFillDashboard } from "react-icons/ai";
+import { BsNewspaper } from "react-icons/bs";
+import { FaUsers } from "react-icons/fa";
+import { MdVolunteerActivism } from "react-icons/md";
+import { FaSchool } from "react-icons/fa";
+import { GrAnnounce } from "react-icons/gr";
+import { RiMessageFill } from "react-icons/ri";
+import { MdNotifications } from "react-icons/md";
+import { AiFillSetting } from "react-icons/ai";
+import { RiLogoutBoxRFill } from "react-icons/ri";
+import classes from "./Menubar.module.css";
+import { NavLink } from "react-router-dom";
+import authContext from "../../../CONTEXT/Auth/authContext";
 const Menubar = (props) => {
-
   const { signOut } = React.useContext(authContext);
 
   return (
@@ -26,8 +25,8 @@ const Menubar = (props) => {
               to="/dashboard"
               className={classes.SideStyle}
               style={({ isActive }) => ({
-                color: isActive ? '#fff' : '#545e6f',
-                background: isActive ? '#FD752C' : '#fff',
+                color: isActive ? "#fff" : "#545e6f",
+                background: isActive ? "#FD752C" : "#fff",
               })}
             >
               <AiFillDashboard className={classes.Sideicons} /> DashBoard
@@ -39,8 +38,8 @@ const Menubar = (props) => {
               to="/news"
               className={classes.SideStyle}
               style={({ isActive }) => ({
-                color: isActive ? '#fff' : '#545e6f',
-                background: isActive ? '#FD752C' : '#fff',
+                color: isActive ? "#fff" : "#545e6f",
+                background: isActive ? "#FD752C" : "#fff",
               })}
             >
               <BsNewspaper className={classes.Sideicons} />
@@ -53,8 +52,8 @@ const Menubar = (props) => {
               to="/users"
               className={classes.SideStyle}
               style={({ isActive }) => ({
-                color: isActive ? '#fff' : '#545e6f',
-                background: isActive ? '#FD752C' : '#fff',
+                color: isActive ? "#fff" : "#545e6f",
+                background: isActive ? "#FD752C" : "#fff",
               })}
             >
               <FaUsers className={classes.Sideicons} />
@@ -67,8 +66,8 @@ const Menubar = (props) => {
               to="/volunteers"
               className={classes.SideStyle}
               style={({ isActive }) => ({
-                color: isActive ? '#fff' : '#545e6f',
-                background: isActive ? '#FD752C' : '#fff',
+                color: isActive ? "#fff" : "#545e6f",
+                background: isActive ? "#FD752C" : "#fff",
               })}
             >
               <MdVolunteerActivism className={classes.Sideicons} />
@@ -81,8 +80,8 @@ const Menubar = (props) => {
               to="/courses"
               className={classes.SideStyle}
               style={({ isActive }) => ({
-                color: isActive ? '#fff' : '#545e6f',
-                background: isActive ? '#FD752C' : '#fff',
+                color: isActive ? "#fff" : "#545e6f",
+                background: isActive ? "#FD752C" : "#fff",
               })}
             >
               <FaSchool className={classes.Sideicons} />
@@ -95,8 +94,8 @@ const Menubar = (props) => {
               to="/channels"
               className={classes.SideStyle}
               style={({ isActive }) => ({
-                color: isActive ? '#fff' : '#545e6f',
-                background: isActive ? '#FD752C' : '#fff',
+                color: isActive ? "#fff" : "#545e6f",
+                background: isActive ? "#FD752C" : "#fff",
               })}
             >
               <GrAnnounce className={classes.Sideicons} />
@@ -109,8 +108,8 @@ const Menubar = (props) => {
               to="/messages"
               className={classes.SideStyle}
               style={({ isActive }) => ({
-                color: isActive ? '#fff' : '#545e6f',
-                background: isActive ? '#FD752C' : '#fff',
+                color: isActive ? "#fff" : "#545e6f",
+                background: isActive ? "#FD752C" : "#fff",
               })}
             >
               <RiMessageFill className={classes.Sideicons} />
@@ -123,8 +122,8 @@ const Menubar = (props) => {
               to="/notifications"
               className={classes.SideStyle}
               style={({ isActive }) => ({
-                color: isActive ? '#fff' : '#545e6f',
-                background: isActive ? '#FD752C' : '#fff',
+                color: isActive ? "#fff" : "#545e6f",
+                background: isActive ? "#FD752C" : "#fff",
               })}
             >
               <MdNotifications className={classes.Sideicons} />
@@ -137,8 +136,8 @@ const Menubar = (props) => {
               to="/settings"
               className={classes.SideStyle}
               style={({ isActive }) => ({
-                color: isActive ? '#fff' : '#545e6f',
-                background: isActive ? '#FD752C' : '#fff',
+                color: isActive ? "#fff" : "#545e6f",
+                background: isActive ? "#FD752C" : "#fff",
               })}
             >
               <AiFillSetting className={classes.Sideicons} />
@@ -152,8 +151,8 @@ const Menubar = (props) => {
               to="/"
               className={classes.SideStyle}
               style={({ isActive }) => ({
-                color: isActive ? '#fff' : '#545e6f',
-                background: isActive ? '#FD752C' : '#fff',
+                color: isActive ? "#fff" : "#545e6f",
+                background: isActive ? "#FD752C" : "#fff",
               })}
             >
               <RiLogoutBoxRFill className={classes.Sideicons} />
@@ -163,7 +162,7 @@ const Menubar = (props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Menubar
+export default Menubar;
