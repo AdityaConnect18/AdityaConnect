@@ -59,7 +59,6 @@ const DashBoard = () => {
                     setFiveUsers(data.data.users.slice(0, 5))
                 }
                 else {
-
                     setFiveUsers(data.data.users)
                 }
             })
@@ -71,9 +70,10 @@ const DashBoard = () => {
             .then((data) => {
                 setAdminsCount(Object.keys(data.data.data).length)
                 if (Object.keys(data.data.data).length >= 5) {
-                    setFiveAdmins(Array.prototype.slice.call(data.data.data, 5))
+                    setFiveAdmins(data.data.data.slice(0, 5))
                 }
                 else {
+                    console.log(data.data.data)
                     setFiveAdmins(data.data.data)
                 }
 

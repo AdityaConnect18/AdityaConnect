@@ -151,7 +151,7 @@ const AddForm = (props) => {
                         <label for="Category">Email</label>
                         <input value={allValues.email} type="email" name="email" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                         <label for="Category">ID</label>
-                        <input value={allValues.empId} type="text" maxlength="10" minlength="10" name="empId" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
+                        <input value={allValues.empId} type="text" maxlength="10" minlength="3" name="empId" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                         <label for="Category">Mobile</label>
                         <input value={allValues.mobileNumber} type="text" minlength="10" maxlength="10" name="mobileNumber" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                         <label for="Category">Designation</label>
@@ -216,7 +216,7 @@ const AddForm = (props) => {
                         <label for="Category">Email</label>
                         <input value={allValues.email} type="email" name="email" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                         <label for="Category">ID</label>
-                        <input value={allValues.empId} type="text" maxlength="10" minlength="10" name="empId" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
+                        <input value={allValues.empId} type="text" maxlength="10" minlength="3" name="empId" required onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                         <label for="Category">Mobile</label>
                         <input value={allValues.mobileNumber} type="text" minlength="10" maxlength="10" name="mobileNumber" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} />
                         <label for="Category">Designation</label>

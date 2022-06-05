@@ -125,7 +125,7 @@ const NewsFeed = (props) => {
   }
 
   const handlAllCheck = () => {
-    if (allCheck) { // make eveything false
+    if (allCheck) { 
       let falseDict = {}
       let falseDict2 = {}
       Object.keys(coursesDict).forEach(key => {
@@ -303,7 +303,6 @@ const NewsFeed = (props) => {
               type="file"
               id="upload"
               name="selectedFile"
-              accept="image/*"
               onChange={handleFileSubmit}
               required ></input>
           </div>
