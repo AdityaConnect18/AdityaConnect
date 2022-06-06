@@ -15,14 +15,15 @@ const EditPost = (props) => {
   const [courses, setCourses] = React.useState([]);
   const [coursesDict, setCoursesDict] = React.useState({});
   const [allCheck, setAllCheck] = React.useState(false)
-  const [file, setFile] = React.useState({});
+  const [file, setFile] = React.useState(undefined);
   const { state } = useLocation();
   let post = undefined;
-  var fileName; 
-    if (state && state.post) {
-        post = state.post;
-        fileName = post.mediaId.split("---")[1]
-    }
+  var fileName;
+  if (state && state.post) {
+    post = state.post;
+    fileName = post.mediaId.split("---")[1]
+  }
+  console.log(post)
 
   const [allValues, setAllValues] = useState({
     _id: post?._id,
@@ -44,7 +45,7 @@ const EditPost = (props) => {
     postedBy: userDetails?._id
   }
 
-  
+
 
   React.useEffect(() => {
     try {
@@ -61,9 +62,22 @@ const EditPost = (props) => {
       .then((data) => {
         setColleges(data.data.colleges)
         let dict = {}
-        data.data.colleges.forEach(college => {
-          dict[college._id] = false;
-        })
+        if (post) {
+          post.channelList.forEach(channel => {
+            dict[channel._id] = true;
+          })
+          data.data.colleges.forEach(college => {
+            if (!dict[college._id]) {
+              dict[college._id] = false
+            }
+          })
+          console.log(dict)
+        }
+        else {
+          data.data.colleges.forEach(college => {
+            dict[college._id] = false;
+          })
+        }
         setCollegeDict(dict)
       })
   }
@@ -89,7 +103,7 @@ const EditPost = (props) => {
 
 
   const handleCheck = (e) => {
-    e.preventDefault()
+    console.log(e.target.value)
     if (collegeDict[e.target.value] === true) {
       setAllCheck(false)
     }
@@ -100,42 +114,9 @@ const EditPost = (props) => {
 
   }
 
-  const handleCourseCheck = (e) => {
-    if (coursesDict[e.target.value] === true) {
-      setAllCheck(false)
-    }
-    setCoursesDict({
-      ...coursesDict,
-      [e.target.value]: !coursesDict[e.target.value]
-    })
-
-    let collegeIdsOfCourse = colleges
-      .filter(college => college.courseId?._id === e.target.value)
-      .map(college => college._id)
-    let trueDict = {}
-    collegeIdsOfCourse.forEach(collegeId => {
-      trueDict[collegeId] = !collegeDict[collegeId]
-    })
-    setCollegeDict({
-      ...collegeDict,
-      ...trueDict
-    })
-    
-
-  }
-
   const handlAllCheck = () => {
     if (allCheck) { // make eveything false
-      let falseDict = {}
       let falseDict2 = {}
-      Object.keys(coursesDict).forEach(key => {
-        falseDict[key] = false
-      })
-      setCoursesDict({
-        ...coursesDict,
-        ...falseDict
-      })
-
       Object.keys(collegeDict).forEach(key => {
         falseDict2[key] = false
       })
@@ -145,17 +126,7 @@ const EditPost = (props) => {
       })
     }
     else { // make everything true
-      console.log("in else")
-      let trueDict = {}
       let trueDict2 = {}
-      Object.keys(coursesDict).forEach(key => {
-        trueDict[key] = true
-      })
-      setCoursesDict({
-        ...coursesDict,
-        ...trueDict
-      })
-
       Object.keys(collegeDict).forEach(key => {
         trueDict2[key] = true
       })
@@ -174,7 +145,7 @@ const EditPost = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
+
     let channelIds = [];
     Object.keys(collegeDict).forEach(collegeId => {
       if (collegeDict[collegeId] === true) {
@@ -186,6 +157,7 @@ const EditPost = (props) => {
       channelList: channelIds
     }
     requestObject.selectedFile = file
+    console.log(requestObject)
     const formData = new FormData()
     formData.append("categoryId", requestObject.categoryId)
     formData.append("postTitle", requestObject.postTitle)
@@ -193,13 +165,15 @@ const EditPost = (props) => {
     formData.append("selectedFile", requestObject.selectedFile)
     formData.append("postedBy", requestObject.postedBy)
     formData.append("channelList", requestObject.channelList)
+    formData.append("mediaId", post.mediaId)
+    formData.append("id", post._id)
     console.log("FormData")
     console.log(formData)
     try {
       let postRes = await UpdatePost(formData)
       console.log("posreq")
       console.log(postRes)
-      if (postRes.data !== undefined) {
+      if (postRes.data) {
         navigate('/settings/myposts')
       }
     } catch (error) {
@@ -246,24 +220,6 @@ const EditPost = (props) => {
           <br />
           <div className={classes.Main}>
             <div>
-              {courses.map((course) => (
-                <span>
-                  <input
-                    type="checkbox"
-                    name="channels"
-                    value={course._id}
-                    onClick={handleCourseCheck}
-                    checked={coursesDict[course._id]}
-                  />
-                  <label>{course.courseName}</label>
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <br />
-          <div className={classes.Main}>
-            <div>
               {colleges.map((college) => (
                 <div className={classes.Element} >
                   <input
@@ -299,6 +255,13 @@ const EditPost = (props) => {
               onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })}
               required
             ></textarea>
+            {!file && <>
+              <label>Present Media : {fileName}</label>
+              <br></br>
+              <img style={{ width: '50%', height: '50%' }} src={post.mediaId} />
+              <br></br>
+              <br></br>
+            </>}
             <label for="upload">Upload Your Document</label>
             <input
               type="file"
@@ -307,7 +270,7 @@ const EditPost = (props) => {
               accept="image/*"
               value={allValues.selectedFile}
               onChange={handleFileSubmit}
-              required ></input>
+            ></input>
           </div>
           <input type="submit" value="Submit" />
         </form>
