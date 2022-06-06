@@ -1,4 +1,5 @@
 import * as React from "react";
+import classes from "./usersTable.module.css";
 
 export default function UsersTable(props) {
   if (props.data.createdAt !== undefined) {
@@ -11,7 +12,7 @@ export default function UsersTable(props) {
   return (
     <tr key={props.index}>
       <td>{props.index}</td>
-      <td>{props.data.fullName}</td>
+      <td className={classes.UserName}>{props.data.fullName}</td>
       <td>
         {props.data.collegeId ? props.data.collegeId["collegeName"] : null}
       </td>

@@ -33,4 +33,9 @@
   .scroll{
     overflow: scroll;
   }
+
+  .UserName
+  {
+    text-transform:capitalize;
+  }
   

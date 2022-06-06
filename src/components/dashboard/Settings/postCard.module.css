@@ -42,6 +42,7 @@ select{
     margin-top: 30px;
     margin-bottom: 30px;
     text-align: center;
+    border-radius: 20px;
 }
 .Img{
     padding-top: 5px;
@@ -54,7 +55,7 @@ select{
     margin: 10px 0px;
     font-size: 28px;
     font-weight: 200;
-    
+    text-transform:capitalize;
 }
 
 .Line{
