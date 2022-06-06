@@ -50,7 +50,6 @@ export default class Users extends Component {
     getUsers = () => {
         GetUSersData()
             .then(data => {
-                console.log(data.data.users)
                 this.setState({
                     users: data.data.users,
                     filteredUsers: data.data.users,
@@ -71,7 +70,7 @@ export default class Users extends Component {
 
     changeHandleRoleSelect = (role) => {
         this.setState({ roleSelect: role }, () => {
-            console.log(this.state.roleSelect)
+            //console.log(this.state.roleSelect)
             // call filterData
             this.filterData();
         })
@@ -79,9 +78,9 @@ export default class Users extends Component {
 
     changeHandleCourseSelect = (course) => {
         let { colleges } = this.state;
-        console.log(colleges)
+        //console.log(colleges)
         this.setState({ courseSelect: course }, () => {
-            console.log(this.state.courseSelect)
+            //console.log(this.state.courseSelect)
             let cols = colleges.filter(college => course === 'all' ? college.courseId._id.length > 1 : college.courseId._id === course)
             this.setState({ filteredColleges: cols })
             // call filterData
@@ -91,7 +90,7 @@ export default class Users extends Component {
 
     changeHandleCollegeSelect = (college) => {
         this.setState({ collegeSelect: college }, () => {
-            console.log(this.state.collegeSelect)
+            //console.log(this.state.collegeSelect)
             this.filterData();
         })
     }

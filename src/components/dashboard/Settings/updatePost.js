@@ -3,8 +3,11 @@ import classes from "./newsfeed.module.css";
 import { MdOutlineEditNote } from "react-icons/md";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { GetCollegesData, GetCategoriesData, GetCoursesData, UpdatePost } from '../../../SERVICES/service';
-
+import {
+  GetCollegesData,
+  GetCategoriesData,
+  UpdatePost,
+} from "../../../SERVICES/service";
 
 const EditPost = (props) => {
   const navigate = useNavigate();
@@ -12,8 +15,6 @@ const EditPost = (props) => {
   const [colleges, setColleges] = React.useState([{}]);
   const [categories, setCategories] = React.useState([{}]);
   const [collegeDict, setCollegeDict] = React.useState({});
-  const [courses, setCourses] = React.useState([]);
-  const [coursesDict, setCoursesDict] = React.useState({});
   const [allCheck, setAllCheck] = React.useState(false)
   const [file, setFile] = React.useState(undefined);
   const { state } = useLocation();
@@ -23,8 +24,6 @@ const EditPost = (props) => {
     post = state.post;
     fileName = post.mediaId.split("---")[1]
   }
-  console.log(post)
-
   const [allValues, setAllValues] = useState({
     _id: post?._id,
     postTitle: post?.postTitle,
@@ -32,14 +31,13 @@ const EditPost = (props) => {
     categoryId: post?.categoryId._id,
     channelList: post?.channelList,
     selectedFile: post?.selectedFile,
-    postedBy: post?.postedBy._id
+    postedBy: post?.postedBy._id,
   });
 
-
   const initState = {
-    postTitle: '',
-    postMessage: '',
-    categoryId: '',
+    postTitle: "",
+    postMessage: "",
+    categoryId: "",
     channelList: [],
     selectedFile: null,
     postedBy: userDetails?._id
@@ -51,11 +49,10 @@ const EditPost = (props) => {
     try {
       getColleges();
       getCategories();
-      getCourses();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }, [])
+  }, []);
 
   const getColleges = () => {
     GetCollegesData()
@@ -83,36 +80,21 @@ const EditPost = (props) => {
   }
 
   const getCategories = () => {
-    GetCategoriesData()
-      .then(data => {
-        setCategories(data.data.result)
-      })
-  }
-
-  const getCourses = () => {
-    GetCoursesData()
-      .then(data => {
-        setCourses(data.data.result)
-        let dict = {}
-        data.data.result.forEach(course => {
-          dict[course._id] = false;
-        })
-        setCoursesDict(dict)
-      })
-  }
-
+    GetCategoriesData().then((data) => {
+      setCategories(data.data.result);
+    });
+  };
 
   const handleCheck = (e) => {
     console.log(e.target.value)
     if (collegeDict[e.target.value] === true) {
-      setAllCheck(false)
+      setAllCheck(false);
     }
     setCollegeDict({
       ...collegeDict,
-      [e.target.value]: !collegeDict[e.target.value]
-    })
-
-  }
+      [e.target.value]: !collegeDict[e.target.value],
+    });
+  };
 
   const handlAllCheck = () => {
     if (allCheck) { // make eveything false
@@ -132,26 +114,25 @@ const EditPost = (props) => {
       })
       setCollegeDict({
         ...collegeDict,
-        ...trueDict2
-      })
+        ...trueDict2,
+      });
     }
-    setAllCheck(prevCheck => !prevCheck)
-  }
+    setAllCheck((prevCheck) => !prevCheck);
+  };
 
   const handleFileSubmit = (e) => {
-    setFile(e.target.files[0])
-    console.log(e.target.files[0])
-  }
+    setFile(e.target.files[0]);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     let channelIds = [];
-    Object.keys(collegeDict).forEach(collegeId => {
+    Object.keys(collegeDict).forEach((collegeId) => {
       if (collegeDict[collegeId] === true) {
-        channelIds.push(collegeId)
+        channelIds.push(collegeId);
       }
-    })
+    });
     let requestObject = {
       ...allValues,
       channelList: channelIds
@@ -176,18 +157,17 @@ const EditPost = (props) => {
       if (postRes.data) {
         navigate('/settings/myposts')
       }
-    } catch (error) {
-      console.log(error.message)
-      alert(error.message)
+      setAllValues({
+        ...allValues,
+        ...initState,
+      });
     }
-    setAllValues({
-      ...allValues,
-      ...initState
-    })
-  }
+    catch (e) {
+      console.error(e)
+    }
+  };
 
   return (
-
     <div className={classes.NewsFeed}>
       <div className={classes.Heading}>News Feed</div>
       <div className={classes.Buttons}>
@@ -197,31 +177,34 @@ const EditPost = (props) => {
       </div>
 
       <div className={classes.FormContainer}>
-        <form onSubmit={handleSubmit} >
+        <form onSubmit={handleSubmit}>
           <label for="category">Select Category</label>
-          <select value={allValues.categoryId} name="categoryId" onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })} required >
-            <option >--Select Category--</option>
-            {categories.length > 1 ? categories.map(category => (
-              <option value={category._id}>{category.categoryName}</option>
-            )) : null}
+          <select
+            value={allValues.categoryId}
+            name="categoryId"
+            onChange={(e) =>
+              setAllValues({ ...allValues, [e.target.name]: e.target.value })
+            }
+            required
+          >
+            <option>--Select Category--</option>
+            {categories.length > 1
+              ? categories.map((category) => (
+                <option value={category._id}>{category.categoryName}</option>
+              ))
+              : null}
           </select>
-
           <label for="channels">Select News Channels</label> &emsp;
-          <input
-            type="checkbox"
-            onChange={handlAllCheck}
-            checked={allCheck}
-          />
+          <input type="checkbox" onChange={handlAllCheck} checked={allCheck} />
           &ensp;
           <label for="all">All</label> &ensp;
           <MdOutlineEditNote />
-
           <br />
           <br />
           <div className={classes.Main}>
             <div>
               {colleges.map((college) => (
-                <div className={classes.Element} >
+                <div className={classes.Element}>
                   <input
                     type="checkbox"
                     name="channels"
@@ -229,14 +212,14 @@ const EditPost = (props) => {
                     checked={collegeDict[college._id]}
                     onClick={handleCheck}
                   />
-                  <label>{college.collegeName}    ({college.courseId?.courseName})</label>
+                  <label>
+                    {college.collegeName} ({college.courseId?.courseName})
+                  </label>
                 </div>
               ))}
             </div>
           </div>
-
           <br />
-
           <div>
             <label>Title</label>
             <input
@@ -244,15 +227,20 @@ const EditPost = (props) => {
               name="postTitle"
               placeholder="Enter Title"
               value={allValues.postTitle}
-              onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })}
-              required />
+              onChange={(e) =>
+                setAllValues({ ...allValues, [e.target.name]: e.target.value })
+              }
+              required
+            />
             <label>Message</label>
             <textarea
               id="subject"
               name="postMessage"
               placeholder="Write your message..."
               value={allValues.postMessage}
-              onChange={e => setAllValues({ ...allValues, [e.target.name]: e.target.value })}
+              onChange={(e) =>
+                setAllValues({ ...allValues, [e.target.name]: e.target.value })
+              }
               required
             ></textarea>
             {!file && <>

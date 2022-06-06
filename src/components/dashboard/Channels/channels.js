@@ -1,81 +1,74 @@
-import React from 'react';
-import classes from './channels.module.css';
-import { GetCollegesData, GetCategoriesData } from '../../../SERVICES/service';
-import CCBar from './Bar/ccbar';
-import CBar from './CBar/cbar';
+import React from "react";
+import classes from "./channels.module.css";
+import { GetCollegesData, GetCategoriesData } from "../../../SERVICES/service";
+import CCBar from "./Bar/ccbar";
+import CBar from "./CBar/cbar";
 import ClockLoader from "react-spinners/ClockLoader";
 import { css } from "@emotion/react";
-import { useState } from 'react';
-
+import { useState } from "react";
 
 const Channels = () => {
+  const [colleges, setColleges] = React.useState([{}]);
+  const [categories, setCategories] = React.useState([{}]);
+  const [loading, setLoading] = useState(true);
+  const [color, setColor] = useState("#FD752C");
 
-    const [colleges, setColleges] = React.useState([{}]);
-    const [categories, setCategories] = React.useState([{}]);
-    const [loading, setLoading] = useState(true);
-    const [color, setColor] = useState("#FD752C");
-
-    const override = css`
+  const override = css`
     display: block;
     margin: auto 0;
     top: 220px;
     left: 45%;
-    `;
+  `;
 
-    React.useEffect(() => {
-        try {
-            getColleges();
-            getCategories();
-        } catch (error) {
-            console.log(error)
-        }
-    }, [])
-
-    const getColleges = () => {
-        GetCollegesData()
-            .then((data) => {
-                setLoading(!loading)
-                setColleges(data.data.colleges)
-            })
+  React.useEffect(() => {
+    try {
+      getColleges();
+      getCategories();
+    } catch (error) {
+      console.log(error);
     }
+  }, []);
 
-    const getCategories = () => {
-        GetCategoriesData()
-            .then(data => {
-                setCategories(data.data.result)
-            })
-    }
+  const getColleges = () => {
+    GetCollegesData().then((data) => {
+      setLoading(!loading);
+      setColleges(data.data.colleges);
+    });
+  };
 
-    const ChannelsTable = () => {
-        return (
-            <CCBar data={colleges} />
-        )
-    }
+  const getCategories = () => {
+    GetCategoriesData().then((data) => {
+      setCategories(data.data.result);
+    });
+  };
 
-    const CategoriesTable = () => {
-        return (
-            <CBar data={categories} />
-        )
-    }
+  const ChannelsTable = () => {
+    return <CCBar data={colleges} />;
+  };
 
-    return (
-        <div>
-            {
-            (loading)? <ClockLoader css={override} color={color} loading={loading} size={100}  />
-            :
-                <div className={classes.MainContainer}>
-                    <div className={classes.Heading}>Messaging Channels & Categories</div>
-                    {
-                        colleges.length > 1 ? <ChannelsTable /> : null
-                    }
+  const CategoriesTable = () => {
+    return <CBar data={categories} />;
+  };
 
-                    {
-                        categories.length > 1 ? <CategoriesTable /> : null
-                    }
-                </div>
-            }
+  return (
+    <div>
+      {loading ? (
+        <ClockLoader
+          css={override}
+          color={color}
+          loading={loading}
+          size={100}
+        />
+      ) : (
+        <div className={classes.MainContainer}>
+          <div className={classes.Heading}>Messaging Channels & Categories</div>
+          {colleges.length > 1 ? <ChannelsTable /> : null}
+
+          {categories.length > 1 ? <CategoriesTable /> : null}
         </div>
-    );
-}
+      )}
+    </div>
+  );
+};
 
 export default Channels;

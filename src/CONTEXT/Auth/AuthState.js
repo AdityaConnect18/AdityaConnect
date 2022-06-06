@@ -2,7 +2,7 @@
 import React, { useReducer } from "react";
 import api from "../../API/api";
 import authContext from "./authContext";
-import { Login } from '../../SERVICES/service'
+import { Login } from "../../SERVICES/service";
 import { LOGIN_SUCCESS, AUTH_ERROR, USER_LOADED } from "../Types";
 
 const AuthState = (props) => {
@@ -14,39 +14,39 @@ const AuthState = (props) => {
 
   const loginReducer = (prevState, action) => {
     switch (action.type) {
-      case 'RETRIEVE_TOKEN':
+      case "RETRIEVE_TOKEN":
         return {
           ...prevState,
           userToken: action.token,
           isLoading: false,
         };
-      case 'LOGIN':
+      case "LOGIN":
         return {
           ...prevState,
           isAuthenticated: true,
           userName: action.id,
           userToken: action.token,
           isLoading: false,
-          newUser: action.newUser
+          newUser: action.newUser,
         };
-      case 'LOGOUT':
+      case "LOGOUT":
         return {
           ...prevState,
           userName: null,
           userToken: null,
           isLoading: false,
         };
-      case 'REGISTER':
+      case "REGISTER":
         return {
           ...prevState,
           userName: action.id,
           userToken: action.token,
           isLoading: false,
         };
-      case 'DETAILS_SUBMITTED':
+      case "DETAILS_SUBMITTED":
         return {
           ...prevState,
-          newUser: false
+          newUser: false,
         };
       default:
         return prevState;
@@ -59,7 +59,7 @@ const AuthState = (props) => {
   const loadUser = async () => {
     if (localStorage.getItem("token")) {
       dispatch({
-        type: 'LOGIN',
+        type: "LOGIN",
       });
     }
   };
@@ -69,13 +69,13 @@ const AuthState = (props) => {
     console.log(formData);
     const res = await Login(formData);
     if (!res.data.token) {
-      alert(res.data.message)
-      return
+      alert(res.data.message);
+      return;
     }
-    localStorage.setItem('payLoad', res.data.token);
+    localStorage.setItem("payLoad", res.data.token);
     console.log(res);
     dispatch({
-      type: 'LOGIN',
+      type: "LOGIN",
       token: res.data.token,
     });
     console.log(state);
@@ -99,14 +99,13 @@ const AuthState = (props) => {
 
   const signOut = async () => {
     try {
-      console.log("logging off user")
-      await localStorage.removeItem('payLoad');
+      console.log("logging off user");
+      await localStorage.removeItem("payLoad");
     } catch (e) {
       console.log(e);
     }
-    dispatch({ type: 'LOGOUT' });
+    dispatch({ type: "LOGOUT" });
   };
-
 
   return (
     <authContext.Provider
