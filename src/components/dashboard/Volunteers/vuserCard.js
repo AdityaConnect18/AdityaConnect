@@ -16,7 +16,7 @@ import Button from "react-bootstrap/Button";
 
 const VUserCard = (props) => {
   return (
-    <div className={classes.Userbox}>
+    <div className={classes.Userbox} key={props.data._id}>
       <div className={classes.Mainbox}>
         <CgProfile className={classes.MainIcon} />
         <a className={classes.Maintitle}>{props.data.adminName}</a>
@@ -76,7 +76,7 @@ const VUserCard = (props) => {
           </div>
         </div>
       </div>
-
+      {(props.hideVol) ? null:
       <div className={classes.BelowButton}>
         <Button className={classes.Edit} onClick={props.edit}>
           <MdModeEditOutline className={classes.Buttonicon1} />
@@ -91,6 +91,7 @@ const VUserCard = (props) => {
           Remove
         </Button>
       </div>
+      }
     </div>
   );
 };

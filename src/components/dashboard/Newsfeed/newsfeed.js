@@ -329,7 +329,6 @@ const NewsFeed = (props) => {
                 id="upload"
                 name="selectedFile"
                 onChange={handleFileSubmit}
-                required
               ></input>
             </div>
             <input type="submit" value="Submit" />

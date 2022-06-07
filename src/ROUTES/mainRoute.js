@@ -65,7 +65,7 @@ const MainRoute = () => {
           ></Route>
           <Route path="/news/newsfeed" element={<PostCard />}></Route>
           <Route path="/users" element={<Users />}></Route>
-          <Route path="/volunteers" element={<Volunteers />}></Route>
+          <Route path="/volunteers" element={<Volunteers userDetails={userDetails} />}></Route>
           <Route path="/volunteers/add" element={<AddForm />}></Route>
           <Route path="/courses" element={<Courses />}></Route>
           <Route path="/channels" element={<Channels />}></Route>

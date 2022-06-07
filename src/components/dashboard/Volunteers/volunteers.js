@@ -13,6 +13,7 @@ const Volunteers = (props) => {
   const [singleUser, setSingleUser] = useState([{}]);
   const [loading, setLoading] = useState(true);
   const [color, setColor] = useState("#FD752C");
+  let { userDetails } = props;
 
   const override = css`
     display: block;
@@ -24,13 +25,23 @@ const Volunteers = (props) => {
   React.useEffect(() => {
     GetAdminsData()
       .then((data) => {
-        setLoading(!loading);
+        setLoading(false);
         setadmins(data.data.data);
         setSingleUser(data.data.data[0]);
       })
       .catch((error) => console.error(error));
   }, []);
 
+  var hideVol = true
+  var ans = admins.filter((admin)=>{
+     if(admin._id===userDetails._id)
+     {
+       if(admin.roleId.roleName==="Admin"){
+          hideVol = false
+       }
+     }
+  })
+   
   const navigate = useNavigate();
   const { state } = useLocation();
   const [userIndex, setUserIndex] = useState(0);
@@ -103,9 +114,12 @@ const Volunteers = (props) => {
         <NavLink exact to="/volunteers" className={classes.Button}>
           <span>Volunteers</span>
         </NavLink>
-        <NavLink exact to="/volunteers/add" className={classes.Button}>
-          <span>Add Volunteers</span>
-        </NavLink>
+        {
+          (hideVol) ? null:
+          <NavLink exact to="/volunteers/add" className={classes.Button}>
+            <span>Add Volunteers</span>
+          </NavLink>
+        }
       </div>
       {loading ? (
         <ClockLoader
@@ -122,13 +136,15 @@ const Volunteers = (props) => {
               del={deleteUser}
               edit={editUser}
               password={updatePassword}
+              hideVol={hideVol} 
             />
           </div>
 
           <div className={classes.Listcards}>
             {admins.map((userObj, index) => (
-              <div onClick={(e) => updateUserData(userObj, index)}>
+              <div onClick={(e) => updateUserData(userObj, index)} key={userObj._id}>
                 <VListCard
+                  id={index}
                   timeStamp={userObj.createdAt}
                   college={
                     userObj.collegeId ? userObj.collegeId["collegeName"] : null

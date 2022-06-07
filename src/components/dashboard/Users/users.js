@@ -22,6 +22,8 @@ export default class Users extends Component {
         }
     }
 
+    
+
     componentDidMount() {
         this.getColleges();
         this.getCourses();
@@ -105,7 +107,7 @@ export default class Users extends Component {
         //     .then((user) => { console.log(user) })
         //     .catch((error) => { console.log(error) })
     //}
-
+    
 
     render() {
         let { filteredUsers, singleUser, filteredColleges, courses } = this.state;
@@ -147,6 +149,7 @@ export default class Users extends Component {
                             </select>
                         </form>
                     </div>
+                    {console.log(filteredUsers.length)}
                 </div>
 
                 <div className={classes.Details}>

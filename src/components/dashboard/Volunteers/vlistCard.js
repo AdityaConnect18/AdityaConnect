@@ -6,7 +6,7 @@ const VListCard = (props) => {
     var time = props.timeStamp.slice(0, 10);
   }
   return (
-    <div className={classes.Listbox}>
+    <div className={classes.Listbox} key={props.id}>
       <p className={classes.Title}>{props.admin.adminName}</p>
       <div className={classes.Belowcontent}>
         <p className={classes.College}>{props.college}</p>

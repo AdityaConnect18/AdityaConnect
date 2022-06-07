@@ -116,7 +116,7 @@ const AddForm = (props) => {
       alert("Please enter valid Mobile Number");
     } else if (allValues.designation.trim().length === 0) {
       alert("Please enter valid Designation");
-    } else if (allValues.password.trim().length === 0) {
+    } else if (allValues.password.trim().length === 0 && allValues.password.length > 0 ) {
       alert("Please enter valid Password");
     } else if (allValues.password != allValues.cpassword) {
       alert("Password you entered is not matching");
